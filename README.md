@@ -7,17 +7,14 @@
 
 ## Your Tasks
 Please complete the following tasks. You may consult with Google and friends, **but you are responsioble for your own code** - you should be able to explain each and every line of code you add.
-- The file manager will have two main display options (Thumbnail and list)
-- The file manager will support drag and drop to move files
-- The file manager will support create new folder
-- The file manager will support uploading new files. all of the images will have thumbnails. anyother file type will just show the name. files will not be uploaded actually but displayed in the view.
-- The file manager will support delete, edit & rename files, folders.
-
-![design](https://cdn.dribbble.com/users/135218/screenshots/5166928/dri_storage.png)
+- Implement the homepage (home.jpg)
+- Implement the signle product page (product.jpg)
+- Implement add to card functionality and card page (card.jpg)
+- Card deatils must be saved locally on the computer (cookies, localstorage)
 
 ## API
 use this endpint to get the list of initial files and folders: 
-http://demo2653115.mockable.io/api/files
+http://demo2653115.mockable.io/products
 
 ## Required libs
 Using all of these is a must:
