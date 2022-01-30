@@ -10,39 +10,39 @@ function MainNavigation() {
           <li>
             <NavLink
               to='/'
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              className={({ isActive }) => (isActive ? `${styles.active}` : '')}
             >
               HOME
             </NavLink>
           </li>
           <li>
             <NavLink
-              to='/'
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              to='/shop'
+              className={({ isActive }) => (isActive ? `${styles.active}` : '')}
             >
               SHOP
             </NavLink>
           </li>
           <li>
             <NavLink
-              to='/'
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              to='/pages'
+              className={({ isActive }) => (isActive ? `${styles.active}` : '')}
             >
               PAGES
             </NavLink>
           </li>
           <li>
             <NavLink
-              to='/'
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              to='/lookbook'
+              className={({ isActive }) => (isActive ? `${styles.active}` : '')}
             >
               LOOKBOOK
             </NavLink>
           </li>
           <li>
             <NavLink
-              to='/'
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              to='/brands'
+              className={({ isActive }) => (isActive ? `${styles.active}` : '')}
             >
               BRANDS
             </NavLink>
