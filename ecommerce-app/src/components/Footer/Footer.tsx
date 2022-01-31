@@ -1,18 +1,20 @@
-import styles from './Footer.module.scss';
+import { Link } from 'react-router-dom';
+
+import { IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
-import visa from '../images/visa.png';
-import mastercard from '../images/master.png';
-import stripe from '../images/stripe.png';
-import paypal from '../images/paypal.png';
-import discover from '../images/discover.png';
 
-import { IconButton } from '@mui/material';
-import { Link } from 'react-router-dom';
+import styles from './Footer.module.scss';
+
+import visa from '../../images/visa.png';
+import mastercard from '../../images/master.png';
+import stripe from '../../images/stripe.png';
+import paypal from '../../images/paypal.png';
+import discover from '../../images/discover.png';
 
 function Footer() {
   return (

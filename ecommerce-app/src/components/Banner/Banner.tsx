@@ -1,9 +1,11 @@
-import styles from './Banner.module.scss';
-import logo from '../images/logo.svg';
 import { IconButton, Badge } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+
+import styles from './Banner.module.scss';
+
+import logo from '../../images/logo.svg';
 
 function Banner() {
   return (
@@ -12,17 +14,17 @@ function Banner() {
       <div className={styles.box}>
         <IconButton className={styles.icon}>
           <Badge badgeContent={0} color='error' showZero>
-            <AutorenewIcon fontSize="large"/>
+            <AutorenewIcon fontSize='large' />
           </Badge>
         </IconButton>
         <IconButton className={styles.icon}>
           <Badge badgeContent={0} color='error' showZero>
-            <FavoriteBorderIcon fontSize="large"/>
+            <FavoriteBorderIcon fontSize='large' />
           </Badge>
         </IconButton>
         <IconButton className={styles.icon}>
           <Badge badgeContent={0} color='error' showZero>
-            <ShoppingCartOutlinedIcon fontSize="large"/>
+            <ShoppingCartOutlinedIcon fontSize='large' />
           </Badge>
         </IconButton>
         <div className={styles.cartinfo}>
