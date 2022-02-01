@@ -25,7 +25,7 @@ function Carousel(props: Prop) {
   ) {
     pageNumbers.push(i);
   }
-
+  let paginateInterval: NodeJS.Timer;
   const paginate = (pageNumber: number) => {
     if (currentPage === pageNumber) {
       currentPageRef.current!.classList.remove(`${styles.next_animation}`);
@@ -36,18 +36,17 @@ function Carousel(props: Prop) {
       currentPageRef.current!.classList.add(`${styles.next_animation}`);
     }
     setCurrentPage(pageNumber);
+    clearInterval(paginateInterval);
   };
-  let interval: NodeJS.Timer;
+
   if (currentPage != pageNumbers[pageNumbers.length - 1]) {
     console.log(currentPage + ' - ' + pageNumbers[pageNumbers.length - 1]);
-    interval = setInterval(() => {
+    paginateInterval = setInterval(() => {
       paginate(currentPage + 1);
-      clearInterval(interval);
     }, 5000);
   } else {
-    interval = setInterval(() => {
+    paginateInterval = setInterval(() => {
       paginate(1);
-      clearInterval(interval);
     }, 5000);
   }
   return (

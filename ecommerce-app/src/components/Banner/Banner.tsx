@@ -1,38 +1,62 @@
-import { IconButton, Badge } from '@mui/material';
+import { IconButton, Badge, Box, Typography } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-
-import styles from './Banner.module.scss';
 
 import logo from '../../images/logo.svg';
 
 function Banner() {
   return (
-    <div className={styles.container}>
-      <img className={styles.logo} src={logo} alt='Logo'></img>
-      <div className={styles.box}>
-        <IconButton className={styles.icon}>
+    <Box
+      sx={{
+        width: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0 9%',
+      }}
+    >
+      <img src={logo} alt='Logo'></img>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <IconButton>
           <Badge badgeContent={0} color='error' showZero>
-            <AutorenewIcon fontSize='large' />
+            <AutorenewIcon fontSize='large' style={{ color: 'black' }} />
           </Badge>
         </IconButton>
-        <IconButton className={styles.icon}>
+        <IconButton>
           <Badge badgeContent={0} color='error' showZero>
-            <FavoriteBorderIcon fontSize='large' />
+            <FavoriteBorderIcon fontSize='large' style={{ color: 'black' }} />
           </Badge>
         </IconButton>
-        <IconButton className={styles.icon}>
+        <IconButton>
           <Badge badgeContent={0} color='error' showZero>
-            <ShoppingCartOutlinedIcon fontSize='large' />
+            <ShoppingCartOutlinedIcon
+              fontSize='large'
+              style={{ color: 'black' }}
+            />
           </Badge>
         </IconButton>
-        <div className={styles.cartinfo}>
-          <span>Your Cart</span>
-          <span className={styles.cartinfo__money}>$0.00</span>
-        </div>
-      </div>
-    </div>
+        <Box
+          sx={{
+            display: 'inline-flex',
+            flexDirection: 'column',
+            textAlign: 'center',
+            marginLeft: 2,
+          }}
+        >
+          <Typography variant='body1' sx={{ fontWeight: 700 }}>
+            Your Cart
+          </Typography>
+          <Typography variant='body2'>$0.00</Typography>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

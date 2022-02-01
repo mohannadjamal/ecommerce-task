@@ -1,17 +1,25 @@
 import { Routes, Route } from 'react-router-dom';
 
 import Homepage from './pages/Homepage';
-import Layout from './components/Layout/Layout';
+import Newsletter from './components/Newsletter/Newsletter';
+import Footer from './components/Footer/Footer';
+import Banner from './components/Banner/Banner';
+import MainNavigation from './components/MainNavigation/MainNavigation';
 
 import './App.scss';
+import { Container } from '@mui/material';
 
 function App() {
   return (
-    <Layout>
+    <div className='App'>
+      <Banner />
+      <MainNavigation />
       <Routes>
         <Route path='/' element={<Homepage />} />
       </Routes>
-    </Layout>
+      <Newsletter />
+      <Footer />
+    </div>
   );
 }
 
