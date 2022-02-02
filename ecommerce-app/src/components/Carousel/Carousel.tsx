@@ -39,8 +39,7 @@ function Carousel(props: Prop) {
     clearInterval(paginateInterval);
   };
 
-  if (currentPage != pageNumbers[pageNumbers.length - 1]) {
-    console.log(currentPage + ' - ' + pageNumbers[pageNumbers.length - 1]);
+  if (currentPage !== pageNumbers[pageNumbers.length - 1]) {
     paginateInterval = setInterval(() => {
       paginate(currentPage + 1);
     }, 5000);

@@ -7,7 +7,6 @@ import Banner from './components/Banner/Banner';
 import MainNavigation from './components/MainNavigation/MainNavigation';
 
 import './App.scss';
-import { Container } from '@mui/material';
 
 function App() {
   return (

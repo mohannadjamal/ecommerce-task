@@ -1,3 +1,4 @@
+import { makeStyles } from '@mui/styles';
 import { IconButton, Badge, Box, Typography } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -5,7 +6,13 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import logo from '../../images/logo.svg';
 
+const useStyles = makeStyles({
+  icon: {
+    color: 'black',
+  },
+});
 function Banner() {
+  const classes = useStyles();
   return (
     <Box
       sx={{
@@ -26,19 +33,19 @@ function Banner() {
       >
         <IconButton>
           <Badge badgeContent={0} color='error' showZero>
-            <AutorenewIcon fontSize='large' style={{ color: 'black' }} />
+            <AutorenewIcon fontSize='large' className={classes.icon} />
           </Badge>
         </IconButton>
         <IconButton>
           <Badge badgeContent={0} color='error' showZero>
-            <FavoriteBorderIcon fontSize='large' style={{ color: 'black' }} />
+            <FavoriteBorderIcon fontSize='large' className={classes.icon} />
           </Badge>
         </IconButton>
         <IconButton>
           <Badge badgeContent={0} color='error' showZero>
             <ShoppingCartOutlinedIcon
               fontSize='large'
-              style={{ color: 'black' }}
+              className={classes.icon}
             />
           </Badge>
         </IconButton>
