@@ -20,7 +20,7 @@ function Banner() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 9%',
+        padding: '0 10%',
       }}
     >
       <img src={logo} alt='Logo'></img>
