@@ -52,13 +52,13 @@ const componentTheme = createTheme({
 const useStyles = makeStyles({
   header1: {
     color: '#a9a9a9',
-    marginBottom: '1rem',
+    marginBottom: '1rem !important',
   },
   icon: {
     color: '#dedede',
   },
   header2: {
-    marginBottom: '2rem',
+    marginBottom: '2rem !important',
   },
   infoContainer: {
     minWidth: '11rem',
@@ -124,23 +124,23 @@ function Footer() {
               </Box>
             </Box>
             <Box>
-              <IconButton className={classes.icon}>
-                <FacebookIcon />
+              <IconButton>
+                <FacebookIcon className={classes.icon} />
               </IconButton>
-              <IconButton className={classes.icon}>
-                <TwitterIcon />
+              <IconButton>
+                <TwitterIcon className={classes.icon} />
               </IconButton>
-              <IconButton className={classes.icon}>
-                <PinterestIcon />
+              <IconButton>
+                <PinterestIcon className={classes.icon} />
               </IconButton>
-              <IconButton className={classes.icon}>
-                <GoogleIcon />
+              <IconButton>
+                <GoogleIcon className={classes.icon} />
               </IconButton>
-              <IconButton className={classes.icon}>
-                <InstagramIcon />
+              <IconButton>
+                <InstagramIcon className={classes.icon} />
               </IconButton>
-              <IconButton className={classes.icon}>
-                <RssFeedIcon />
+              <IconButton>
+                <RssFeedIcon className={classes.icon} />
               </IconButton>
             </Box>
           </Box>
@@ -158,38 +158,38 @@ function Footer() {
                 Our Stores
               </Typography>
               <List>
-                <ListItem disablePadding>
-                  <Typography variant='body2' className={classes.locationItem}>
+                <ListItem disablePadding className={classes.locationItem}>
+                  <Typography variant='body2'>
                     501 Floor, Nguyen Ngoc Vu, Cau Glay, Ha Noi
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding>
-                  <Typography variant='body2' className={classes.locationItem}>
+                <ListItem disablePadding className={classes.locationItem}>
+                  <Typography variant='body2'>
                     741 - 11A Sandiago, L.A City, USA
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding>
-                  <Typography variant='body2' className={classes.locationItem}>
+                <ListItem disablePadding className={classes.locationItem}>
+                  <Typography variant='body2'>
                     1st Floor BrickHouse, 250 Wall Street, C.A City, UK
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding>
-                  <Typography variant='body2' className={classes.locationItem}>
+                <ListItem disablePadding className={classes.locationItem}>
+                  <Typography variant='body2'>
                     5th Floor, 169 Green Lakes, WestBrown, Liverpool City
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding>
-                  <Typography variant='body2' className={classes.locationItem}>
+                <ListItem disablePadding className={classes.locationItem}>
+                  <Typography variant='body2'>
                     628 Brooklyn Streen, Fullham District, Wales
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding>
-                  <Typography variant='body2' className={classes.locationItem}>
+                <ListItem disablePadding className={classes.locationItem}>
+                  <Typography variant='body2'>
                     10001 Street, WinLow District, Mexico
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding>
-                  <Typography variant='body2' className={classes.locationItem}>
+                <ListItem disablePadding className={classes.locationItem}>
+                  <Typography variant='body2'>
                     1st Floor BrickHouse, 250 Wall Street, C.A City, UK
                   </Typography>
                 </ListItem>
@@ -200,30 +200,45 @@ function Footer() {
                 My Account
               </Typography>
               <List>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    My Cart
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>My Cart</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Check Out
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Check Out</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Wishlist
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Wishlist</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Term & Policy
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Term & Policy</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Your Account
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Your Account</Typography>
                 </ListItem>
               </List>
             </Box>
@@ -232,30 +247,45 @@ function Footer() {
                 Information
               </Typography>
               <List>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Shipping & Return
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Shipping & Return</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Giftcards
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Giftcards</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Track My Order
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Track My Order</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Term & Policy
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Term & Policy</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    FAQs
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>FAQs</Typography>
                 </ListItem>
               </List>
             </Box>
@@ -264,30 +294,45 @@ function Footer() {
                 How to Buy
               </Typography>
               <List>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Making Payments
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Making Payments</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Delivery Options
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Delivery Options</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Buyer Protection
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Buyer Protection</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    New User Guide
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>New User Guide</Typography>
                 </ListItem>
-                <ListItem component={Link} to='/' disablePadding>
-                  <Typography variant='body2' className={classes.linkItem}>
-                    Partner Ship
-                  </Typography>
+                <ListItem
+                  component={Link}
+                  to='/'
+                  disablePadding
+                  className={classes.linkItem}
+                >
+                  <Typography variant='body2'>Partner Ship</Typography>
                 </ListItem>
               </List>
             </Box>

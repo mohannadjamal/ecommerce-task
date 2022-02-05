@@ -1,6 +1,10 @@
-import { Card, CardActionArea, CardMedia } from '@mui/material';
-
-import styles from './CarouselItem.module.scss';
+import {
+  Card,
+  CardActionArea,
+  CardMedia,
+  Box,
+  Typography,
+} from '@mui/material';
 
 type Prop = {
   id: string;
@@ -11,13 +15,33 @@ type Prop = {
 
 function CarouselItem(props: Prop) {
   return (
-    <Card sx={{boxShadow: 0 }}>
+    <Card elevation={0}>
       <CardActionArea>
-        <div className={styles.card}>
-          <CardMedia component='img' image={props.image} alt={props.title} />
-          <h4>{props.title}</h4>
-          <span>${props.price.toFixed(2)}</span>
-        </div>
+        <Box
+          sx={{
+            display: 'inline-flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <CardMedia
+            component='img'
+            image={props.image}
+            alt={props.title}
+            sx={{
+              minHeight: '300px',
+            }}
+          />
+          <Typography variant='body2' sx={{ color: '#646464' }}>
+            {props.title}
+          </Typography>
+          <Typography
+            variant='subtitle1'
+            sx={{ fontWeight: 700, color: '#b1203c' }}
+          >
+            ${props.price.toFixed(2)}
+          </Typography>
+        </Box>
       </CardActionArea>
     </Card>
   );
