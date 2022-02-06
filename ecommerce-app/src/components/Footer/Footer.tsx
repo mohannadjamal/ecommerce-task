@@ -358,31 +358,31 @@ function Footer() {
               className={classes.paymentItem}
               src={visa}
               alt='Visa'
-            ></Box>
+            />
             <Box
               component='img'
               src={mastercard}
               alt='MasterCard'
               className={classes.paymentItem}
-            ></Box>
+            />
             <Box
               component='img'
               src={paypal}
               alt='PayPal'
               className={classes.paymentItem}
-            ></Box>
+            />
             <Box
               component='img'
               src={stripe}
               alt='Stripe'
               className={classes.paymentItem}
-            ></Box>
+            />
             <Box
               component='img'
               src={discover}
               alt='Discrover'
               className={classes.paymentItem}
-            ></Box>
+            />
           </Box>
         </Box>
       </ThemeProvider>

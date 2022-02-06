@@ -74,7 +74,7 @@ function Carousel(props: Prop) {
   ) {
     pageNumbers.push(i);
   }
-  
+
   let paginateInterval: NodeJS.Timer;
   const paginate = (pageNumber: number) => {
     if (currentPage === pageNumber) {
@@ -88,7 +88,7 @@ function Carousel(props: Prop) {
     setCurrentPage(pageNumber);
     clearInterval(paginateInterval);
   };
-  
+
   if (currentPage !== pageNumbers[pageNumbers.length - 1]) {
     paginateInterval = setInterval(() => {
       paginate(currentPage + 1);
@@ -138,13 +138,13 @@ function Carousel(props: Prop) {
         }}
       >
         {currentItems.map((item) => (
-          <Grid item xs={gridSpace} className={classes.cardContainer}>
+          <Grid item key={item.id} xs={gridSpace} className={classes.cardContainer}>
             <CarouselItem
-              key={item.id}
               id={item.id}
               title={item.title}
-              image={item.image}
+              image={item.images[0]}
               price={item.price}
+              discount={item.discount}
             />
           </Grid>
         ))}

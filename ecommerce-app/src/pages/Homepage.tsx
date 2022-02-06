@@ -1,28 +1,67 @@
-import { Box, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+
+import { Box, Grid, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 import Carousel from '../components/Carousel/Carousel';
-
-import styles from './Homepage.module.scss';
+import Grouped from '../components/Grouped/Grouped';
 
 import ad from '../images/JBLAd.png';
-import { width } from '@mui/system';
-import { ForkLeft } from '@mui/icons-material';
+import startupSocks from '../images/startupsocks.png';
+import hp from '../images/hp.png';
+import swatch from '../images/swatch.png';
+import asus from '../images/asus.png';
+import dell from '../images/dell.png';
+import toshiba from '../images/toshiba.png';
 
+const useStyles = makeStyles({
+  logo: {
+    width: 150,
+    height: 50,
+    objectFit: 'contain',
+  },
+});
 function Homepage() {
-  const item = {
-    id: 'AASDFD',
-    title: 'Asus Zenbook 14',
-    image:
-      'https://eilat.payngo.co.il/media/catalog/product/cache/6b2f4d2b8c238597c4864fc429fa65dd/z/e/zenbook-14_ux425_icl_product-photo_2g_pine-grey_05_touchpad.jpg',
-    price: 999,
-  };
-  const item2 = {
-    id: 'AASDFD',
-    title: 'HP Omen',
-    image: 'https://www.notebookcheck.net/uploads/tx_nbc2/HPOmen15-dh__1_.jpg',
-    price: 999,
-  };
-  const items = [item, item, item, item, item, item2, item2, item, item];
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedProducts, setLoadedProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(
+      'https://ecommerce-app-57402-default-rtdb.europe-west1.firebasedatabase.app/product.json'
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const products: any[] = [];
+
+        for (const key in data) {
+          const product = {
+            id: key,
+            ...data[key],
+          };
+          products.push(product);
+        }
+
+        setIsLoading(false);
+        setLoadedProducts(products);
+      });
+  }, []);
+  const laptopProducts = loadedProducts.filter(
+    (product) => product.catalog === 'Laptop'
+  );
+  const audioProducts = loadedProducts.filter(
+    (product) => product.catalog === 'Audio'
+  );
+  const cameraProducts = loadedProducts.filter(
+    (product) => product.catalog === 'Camera'
+  );
+  const classes = useStyles();
+
+  if (isLoading) {
+    return <Box></Box>;
+  }
   return (
     <Box>
       <Box
@@ -34,12 +73,12 @@ function Homepage() {
         <Carousel
           title={'Smartphones & Tablets'}
           itemsPerPage={6}
-          items={items}
+          items={laptopProducts}
         />
       </Box>
       <Box
         sx={{
-          padding: '3rem 10%',
+          paddingX: '10%',
         }}
       >
         <Box
@@ -47,10 +86,15 @@ function Homepage() {
             width: 1,
             display: 'inline-flex',
             justifyContent: 'space-between',
+            paddingY: '3rem',
           }}
         >
           <Box sx={{ flexGrow: 1 }}>
-            <Carousel title={'Audio & Sound'} itemsPerPage={4} items={items} />
+            <Carousel
+              title={'Audio & Sound'}
+              itemsPerPage={4}
+              items={audioProducts}
+            />
           </Box>
           <img src={ad} alt='JBL Bluetooth Speaker'></img>
         </Box>
@@ -105,7 +149,59 @@ function Homepage() {
             </Typography>
           </Box>
         </Box>
-        
+        <Box>
+          <Grouped title='Camera & Lens' items={cameraProducts} />
+        </Box>
+        <Grid container sx={{ paddingY: '5rem', textAlign: 'center' }}>
+          <Grid item xs={2}>
+            <Box
+              component='img'
+              className={classes.logo}
+              src={startupSocks}
+              alt='Starup Socks logo'
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <Box
+              component='img'
+              className={classes.logo}
+              src={hp}
+              alt='HP logo'
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <Box
+              component='img'
+              className={classes.logo}
+              src={swatch}
+              alt='Swatch logo'
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <Box
+              component='img'
+              className={classes.logo}
+              src={asus}
+              alt='Asus logo'
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <Box
+              component='img'
+              className={classes.logo}
+              src={toshiba}
+              alt='Toshiba logo'
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <Box
+              component='img'
+              className={classes.logo}
+              src={dell}
+              alt='Dell logo'
+            />
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );
