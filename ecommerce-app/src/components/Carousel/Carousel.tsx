@@ -1,17 +1,44 @@
 import React, { useState, useRef } from 'react';
 
-import { Box, Divider, Grid, List, ListItem, Typography } from '@mui/material';
+import {
+  Box,
+  Divider,
+  FormControlLabel,
+  Grid,
+  Grow,
+  List,
+  ListItem,
+  Paper,
+  Switch,
+  Theme,
+  Typography,
+  Zoom,
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 import CarouselItem from './CarouselItem';
-
-import styles from './Carousel.module.scss';
-import { makeStyles } from '@mui/styles';
+import { TransitionGroup } from 'react-transition-group';
 
 type Prop = {
   title: string;
   itemsPerPage: number;
   items: any[];
 };
+const icon = (
+  <Paper sx={{ m: 1 }} elevation={4}>
+    <Box component='svg' sx={{ width: 100, height: 100 }}>
+      <Box
+        component='polygon'
+        sx={{
+          fill: (theme: Theme) => theme.palette.common.white,
+          stroke: (theme) => theme.palette.divider,
+          strokeWidth: 1,
+        }}
+        points='0,100 50,00, 100,100'
+      />
+    </Box>
+  </Paper>
+);
 
 const useStyles = makeStyles({
   cardContainer: {
@@ -55,12 +82,12 @@ const useStyles = makeStyles({
 });
 
 function Carousel(props: Prop) {
+  const [checked, setChecked] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const classes = useStyles();
 
   const gridSpace = Math.floor(12 / props.itemsPerPage);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  let currentPageRef = useRef<any>(null);
 
   const indexOfLastItem = currentPage * props.itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - props.itemsPerPage;
@@ -77,14 +104,6 @@ function Carousel(props: Prop) {
 
   let paginateInterval: NodeJS.Timer;
   const paginate = (pageNumber: number) => {
-    if (currentPage === pageNumber) {
-      currentPageRef.current!.classList.remove(`${classes.next_animation}`);
-      currentPageRef.current!.classList.remove(`${classes.prev_animation}`);
-    } else if (currentPage > pageNumber) {
-      currentPageRef.current!.classList.add(`${classes.prev_animation}`);
-    } else {
-      currentPageRef.current!.classList.add(`${classes.next_animation}`);
-    }
     setCurrentPage(pageNumber);
     clearInterval(paginateInterval);
   };
@@ -129,26 +148,23 @@ function Carousel(props: Prop) {
         {props.title}
       </Typography>
       <Divider />
-      <Grid
-        container
-        ref={currentPageRef}
-        onAnimationEnd={() => {
-          currentPageRef.current!.classList.remove(`${classes.next_animation}`);
-          currentPageRef.current!.classList.remove(`${classes.prev_animation}`);
-        }}
-      >
-        {currentItems.map((item) => (
-          <Grid item key={item.id} xs={gridSpace} className={classes.cardContainer}>
-            <CarouselItem
-              id={item.id}
-              title={item.title}
-              image={item.images[0]}
-              price={item.price}
-              discount={item.discount}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      <TransitionGroup>
+        <Grid container sx={{ marginY: '1rem' }}>
+          {currentItems.map((item) => (
+            <Grow in={checked} key={item.id}>
+              <Grid item xs={gridSpace} className={classes.cardContainer}>
+                <CarouselItem
+                  id={item.id}
+                  title={item.title}
+                  image={item.images[0]}
+                  price={item.price}
+                  discount={item.discount}
+                />
+              </Grid>
+            </Grow>
+          ))}
+        </Grid>
+      </TransitionGroup>
       <Box>
         <List
           sx={{

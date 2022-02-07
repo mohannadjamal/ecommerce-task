@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import {
   Card,
   CardActionArea,
@@ -17,7 +19,7 @@ type Prop = {
 function CarouselItem(props: Prop) {
   return (
     <Card elevation={0}>
-      <CardActionArea>
+      <CardActionArea component={Link} to={`/product/${props.id}`}>
         <Box
           sx={{
             display: 'inline-flex',

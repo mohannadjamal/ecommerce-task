@@ -17,6 +17,7 @@ const useStyles = makeStyles({
     '&:nth-child(3n)': {
       borderRight: 'none !important',
     },
+    paddingY: '1rem',
   },
 });
 function Grouped(props: Prop) {
@@ -57,7 +58,13 @@ function Grouped(props: Prop) {
       <Divider />
       <Grid container>
         {selectedItems.map((item) => (
-          <Grid item key={item.id} xs={4} className={classes.cardContainer}>
+          <Grid
+            item
+            key={item.id}
+            xs={4}
+            className={classes.cardContainer}
+            sx={{ marginY: '1rem' }}
+          >
             <GroupedItem
               id={item.id}
               title={item.title}

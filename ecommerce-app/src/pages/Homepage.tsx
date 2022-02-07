@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     objectFit: 'contain',
   },
 });
+
 function Homepage() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedProducts, setLoadedProducts] = useState<any[]>([]);
@@ -48,6 +49,7 @@ function Homepage() {
         setLoadedProducts(products);
       });
   }, []);
+
   const laptopProducts = loadedProducts.filter(
     (product) => product.catalog === 'Laptop'
   );
@@ -59,9 +61,7 @@ function Homepage() {
   );
   const classes = useStyles();
 
-  if (isLoading) {
-    return <Box></Box>;
-  }
+  if (isLoading) return <Box></Box>;
   return (
     <Box>
       <Box

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import {
   Card,
   CardActionArea,
@@ -15,8 +17,8 @@ type Prop = {
 };
 function GroupedItem(props: Prop) {
   return (
-    <Card elevation={0} sx={{}}>
-      <CardActionArea>
+    <Card elevation={0}>
+      <CardActionArea component={Link} to={`/product/${props.id}`}>
         <Box
           sx={{
             display: 'inline-flex',
