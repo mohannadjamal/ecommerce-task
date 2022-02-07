@@ -17,6 +17,7 @@ import {
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { makeStyles } from '@mui/styles';
+import { relative } from 'node:path/win32';
 
 type Product = {
   catalog: string;
@@ -42,6 +43,19 @@ const useStyles = makeStyles({
   iconBtn: {
     borderRadius: 0,
     border: 'thin solid #cdcdcd',
+  },
+  active: {
+    borderColor: '#b1203c',
+    position: 'relative',
+    '&:after': {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      width: 1,
+      height: 1,
+      display: 'inline-block',
+      background: 'linear-gradient(to bottom, rgba(0,47,75,0.5) 0%,rgba(220, 66, 37, 0.5) 100%)',
+    },
   },
 });
 
@@ -83,7 +97,7 @@ function ProductDetails() {
   const { productId } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [currentImage, setCurrentImage] = useState('');
+  const [currentImage, setCurrentImage] = useState(0);
   const [loadedProduct, setLoadedProduct] = useState<Product>({
     catalog: '',
     description: '',
@@ -105,7 +119,7 @@ function ProductDetails() {
         const product: Product = data;
         setIsLoading(false);
         setLoadedProduct(product);
-        setCurrentImage(product.images[0]);
+        setCurrentImage(0);
       });
   }, []);
 
@@ -124,6 +138,10 @@ function ProductDetails() {
     setValue(newValue);
   };
 
+  function clickImage(num: number) {
+    setCurrentImage(num);
+  }
+
   if (isLoading) return <Box></Box>;
   return (
     <Box sx={{ padding: '3rem 10%' }}>
@@ -135,6 +153,8 @@ function ProductDetails() {
               elevation={0}
               variant='outlined'
               component='img'
+              onClick={() => clickImage(index)}
+              className={currentImage === index ? `${classes.active}` : ''}
               src={image}
               sx={{
                 height: 150,
@@ -154,7 +174,7 @@ function ProductDetails() {
             alignItems: 'center',
           }}
         >
-          <Box component='img' src={currentImage} />
+          <Box component='img' src={loadedProduct.images[currentImage]} />
         </Grid>
         <Grid item xs={5}>
           <Breadcrumbs aria-label='breadcrumb' className={classes.crumbFont}>
