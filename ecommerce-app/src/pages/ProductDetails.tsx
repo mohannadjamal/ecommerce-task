@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { useParams } from 'react-router-dom';
 
@@ -17,9 +17,11 @@ import {
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { makeStyles } from '@mui/styles';
-import { relative } from 'node:path/win32';
+
+import CartContext from '../store/cart-context';
 
 type Product = {
+  id: string | undefined;
   catalog: string;
   description: string;
   discount: number;
@@ -54,7 +56,8 @@ const useStyles = makeStyles({
       width: 1,
       height: 1,
       display: 'inline-block',
-      background: 'linear-gradient(to bottom, rgba(0,47,75,0.5) 0%,rgba(220, 66, 37, 0.5) 100%)',
+      background:
+        'linear-gradient(to bottom, rgba(0,47,75,0.5) 0%,rgba(220, 66, 37, 0.5) 100%)',
     },
   },
 });
@@ -99,6 +102,7 @@ function ProductDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentImage, setCurrentImage] = useState(0);
   const [loadedProduct, setLoadedProduct] = useState<Product>({
+    id: '',
     catalog: '',
     description: '',
     discount: 0,
@@ -117,19 +121,20 @@ function ProductDetails() {
       })
       .then((data) => {
         const product: Product = data;
+        product.id = productId;
         setIsLoading(false);
         setLoadedProduct(product);
         setCurrentImage(0);
       });
-  }, []);
+  }, [productId]);
 
-  const [quantity, setQuantity] = useState(1);
+  const [amount, setAmount] = useState(1);
 
   function handleDecrement() {
-    if (quantity > 1) setQuantity(quantity - 1);
+    if (amount > 1) setAmount(amount - 1);
   }
   function handleIncrement() {
-    setQuantity(quantity + 1);
+    setAmount(amount + 1);
   }
 
   const [value, setValue] = useState(0);
@@ -142,6 +147,11 @@ function ProductDetails() {
     setCurrentImage(num);
   }
 
+  const cartCtx = useContext(CartContext);
+
+  function addToCart() {
+    cartCtx.addProduct({ ...loadedProduct, amount: amount });
+  }
   if (isLoading) return <Box></Box>;
   return (
     <Box sx={{ padding: '3rem 10%' }}>
@@ -200,12 +210,38 @@ function ProductDetails() {
           >
             {loadedProduct.title}
           </Typography>
-          <Typography
-            variant='h6'
-            sx={{ fontWeight: 700, color: '#b1203c', marginBottom: '1rem' }}
-          >
-            ${loadedProduct.price.toFixed(2)}
-          </Typography>
+          {loadedProduct.discount > 0 ? (
+            <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
+              <Typography
+                variant='h6'
+                sx={{ fontWeight: 700, color: '#b1203c', marginBottom: '1rem' }}
+              >
+                $
+                {(
+                  loadedProduct.price -
+                  loadedProduct.price * loadedProduct.discount
+                ).toFixed(2)}
+              </Typography>
+              <Typography
+                variant='subtitle2'
+                sx={{
+                  color: '#c4c4c4',
+                  fontWeight: 700,
+                  textDecoration: 'line-through',
+                  marginLeft: '1rem',
+                }}
+              >
+                ${loadedProduct.price.toFixed(2)}
+              </Typography>
+            </Box>
+          ) : (
+            <Typography
+              variant='h6'
+              sx={{ fontWeight: 700, color: '#b1203c', marginBottom: '1rem' }}
+            >
+              ${loadedProduct.price.toFixed(2)}
+            </Typography>
+          )}
           <Typography variant='body1' sx={{ height: '25vh' }}>
             {loadedProduct.description}
           </Typography>
@@ -234,7 +270,7 @@ function ProductDetails() {
               >
                 -
               </Button>
-              <Box>{quantity}</Box>
+              <Box>{amount}</Box>
               <Button
                 variant='text'
                 className={classes.quantityBtn}
@@ -253,6 +289,7 @@ function ProductDetails() {
 
           <Button
             variant='contained'
+            onClick={addToCart}
             sx={{
               width: 1,
               height: '3rem',

@@ -69,7 +69,7 @@ function CarouselItem(props: Prop) {
                 variant='subtitle1'
                 sx={{ color: '#b1203c', fontWeight: 700 }}
               >
-                ${(props.price * props.discount).toFixed(2)}
+                ${(props.price - (props.price * props.discount)).toFixed(2)}
               </Typography>
               <Typography
                 variant='subtitle2'

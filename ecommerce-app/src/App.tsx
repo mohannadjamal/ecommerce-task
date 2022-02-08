@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 
 import Homepage from './pages/Homepage';
 import ProductDetails from './pages/ProductDetails';
+import Cart from './pages/Cart';
 
 import Newsletter from './components/Newsletter/Newsletter';
 import Footer from './components/Footer/Footer';
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/product/:productId' element={<ProductDetails />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
       <Newsletter />
       <Footer />

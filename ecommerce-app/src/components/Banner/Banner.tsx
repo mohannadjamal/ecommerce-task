@@ -1,8 +1,14 @@
+import { useContext } from 'react';
+
+import { Link } from 'react-router-dom';
+
 import { makeStyles } from '@mui/styles';
 import { IconButton, Badge, Box, Typography } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+
+import CartContext from '../../store/cart-context';
 
 import logo from '../../images/logo.svg';
 
@@ -11,8 +17,12 @@ const useStyles = makeStyles({
     color: 'black',
   },
 });
+
 function Banner() {
+  const cartCtx = useContext(CartContext);
+
   const classes = useStyles();
+
   return (
     <Box
       sx={{
@@ -41,8 +51,8 @@ function Banner() {
             <FavoriteBorderIcon fontSize='large' className={classes.icon} />
           </Badge>
         </IconButton>
-        <IconButton>
-          <Badge badgeContent={0} color='error' showZero>
+        <IconButton component={Link} to='/cart'>
+          <Badge badgeContent={cartCtx.totalProducts} color='error' showZero>
             <ShoppingCartOutlinedIcon
               fontSize='large'
               className={classes.icon}
@@ -60,7 +70,9 @@ function Banner() {
           <Typography variant='body1' sx={{ fontWeight: 700 }}>
             Your Cart
           </Typography>
-          <Typography variant='body2'>$0.00</Typography>
+          <Typography variant='body2'>
+            ${cartCtx.totalPrice.toFixed(2)}
+          </Typography>
         </Box>
       </Box>
     </Box>
