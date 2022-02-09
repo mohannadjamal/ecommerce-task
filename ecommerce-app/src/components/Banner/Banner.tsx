@@ -2,7 +2,6 @@ import { useContext } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { makeStyles } from '@mui/styles';
 import { IconButton, Badge, Box, Typography } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -12,16 +11,8 @@ import CartContext from '../../store/cart-context';
 
 import logo from '../../images/logo.svg';
 
-const useStyles = makeStyles({
-  icon: {
-    color: 'black',
-  },
-});
-
 function Banner() {
   const cartCtx = useContext(CartContext);
-
-  const classes = useStyles();
 
   return (
     <Box
@@ -30,10 +21,22 @@ function Banner() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 10%',
+        padding: { sm: ' 0 1rem', md: '0 10%' },
       }}
     >
-      <img src={logo} alt='Logo'></img>
+      <Box
+        component='img'
+        src={logo}
+        alt='Logo'
+        sx={{
+          height: 'auto',
+          width: {
+            xs: 100,
+            sm: 200,
+            md: 'initial',
+          },
+        }}
+      />
       <Box
         sx={{
           display: 'flex',
@@ -43,19 +46,22 @@ function Banner() {
       >
         <IconButton>
           <Badge badgeContent={0} color='error' showZero>
-            <AutorenewIcon fontSize='large' className={classes.icon} />
+            <AutorenewIcon
+              sx={{ color: 'black', fontSize: { xs: 16, sm: 24, md: 32 } }}
+            />
           </Badge>
         </IconButton>
         <IconButton>
           <Badge badgeContent={0} color='error' showZero>
-            <FavoriteBorderIcon fontSize='large' className={classes.icon} />
+            <FavoriteBorderIcon
+              sx={{ color: 'black', fontSize: { xs: 16, sm: 24, md: 32 } }}
+            />
           </Badge>
         </IconButton>
         <IconButton component={Link} to='/cart'>
           <Badge badgeContent={cartCtx.totalProducts} color='error' showZero>
             <ShoppingCartOutlinedIcon
-              fontSize='large'
-              className={classes.icon}
+              sx={{ color: 'black', fontSize: { xs: 16, sm: 24, md: 32 } }}
             />
           </Badge>
         </IconButton>
@@ -67,10 +73,16 @@ function Banner() {
             marginLeft: 2,
           }}
         >
-          <Typography variant='body1' sx={{ fontWeight: 700 }}>
+          <Typography
+            variant='body1'
+            sx={{ fontWeight: 700, fontSize: { xs: 8, sm: 12, md: 18 } }}
+          >
             Your Cart
           </Typography>
-          <Typography variant='body2'>
+          <Typography
+            variant='body2'
+            sx={{ fontSize: { xs: 6, sm: 10, md: 16 } }}
+          >
             ${cartCtx.totalPrice.toFixed(2)}
           </Typography>
         </Box>

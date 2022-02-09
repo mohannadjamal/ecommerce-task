@@ -1,14 +1,8 @@
-import { Link } from 'react-router-dom';
-
-import { Box, List, ListItem } from '@mui/material';
+import { Box, List, ListItem, Link } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
-  link: {
-    textDecoration: 'none',
-    fontWeight: 700,
-    color: '#ffffff',
-  },
+  link: {},
 });
 
 function MainNavigation() {
@@ -20,7 +14,7 @@ function MainNavigation() {
         width: 1,
         height: '3rem',
         backgroundColor: '#1c252e',
-        padding: '0 10%',
+        padding: { xs: ' 0 1rem', md: '0 10%' },
         display: 'flex',
         alignItems: 'center',
       }}
@@ -32,28 +26,123 @@ function MainNavigation() {
           alignItems: 'baseline',
         }}
       >
-        <ListItem>
-          <Link to='/' className={classes.link}>
+        <ListItem
+          sx={{
+            padding: {
+              sm: '4px 8px',
+              md: 'intial',
+            },
+          }}
+        >
+          <Link
+            href='/'
+            sx={{
+              textDecoration: 'none',
+              fontWeight: 700,
+              color: '#ffffff',
+              fontSize: {
+                xs: 12,
+                sm: 16,
+                md: 'intial',
+              },
+            }}
+          >
             HOME
           </Link>
         </ListItem>
-        <ListItem>
-          <Link to='/shop' className={classes.link}>
+        <ListItem
+          sx={{
+            padding: {
+              sm: '4px 8px',
+              md: 'intial',
+            },
+          }}
+        >
+          <Link
+            href='/shop'
+            sx={{
+              textDecoration: 'none',
+              fontWeight: 700,
+              color: '#ffffff',
+              fontSize: {
+                xs: 12,
+                sm: 16,
+                md: 'intial',
+              },
+            }}
+          >
             SHOP
           </Link>
         </ListItem>
-        <ListItem>
-          <Link to='/pages' className={classes.link}>
+        <ListItem
+          sx={{
+            padding: {
+              sm: '4px 8px',
+              md: 'intial',
+            },
+          }}
+        >
+          <Link
+            href='/pages'
+            sx={{
+              textDecoration: 'none',
+              fontWeight: 700,
+              color: '#ffffff',
+              fontSize: {
+                xs: 12,
+                sm: 16,
+                md: 'intial',
+              },
+            }}
+          >
             PAGES
           </Link>
         </ListItem>
-        <ListItem>
-          <Link to='/lookbook' className={classes.link}>
+        <ListItem
+          sx={{
+            padding: {
+              sm: '4px 8px',
+              md: 'intial',
+            },
+          }}
+        >
+          <Link
+            href='/lookbook'
+            sx={{
+              textDecoration: 'none',
+              fontWeight: 700,
+              color: '#ffffff',
+              fontSize: {
+                xs: 12,
+                sm: 16,
+                md: 'intial',
+              },
+            }}
+          >
             LOOKBOOK
           </Link>
         </ListItem>
-        <ListItem>
-          <Link to='/brands' className={classes.link}>
+        <ListItem
+          sx={{
+            padding: {
+              sm: '4px 8px',
+              md: 'intial',
+            },
+          }}
+        >
+          <Link
+            href='/brands'
+            sx={{
+              textDecoration: 'none',
+              fontWeight: 700,
+              color: '#ffffff',
+              fontSize: {
+                xs: 12,
+                sm: 16,
+                md: 'intial',
+              },
+            }}
+          >
             BRANDS
           </Link>
         </ListItem>

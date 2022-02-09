@@ -29,11 +29,11 @@ function GroupedItem(props: Prop) {
             <Box
               sx={{
                 position: 'absolute',
-                top: 20,
+                top: '20%',
                 left: 0,
                 backgroundColor: '#ec1835',
-                width: 50,
-                height: 30,
+                width: '10%',
+                height: '15%',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -41,7 +41,16 @@ function GroupedItem(props: Prop) {
             >
               <Typography
                 variant='body2'
-                sx={{ color: '#ffffff', fontWeight: 500 }}
+                sx={{
+                  color: '#ffffff',
+                  fontWeight: 500,
+                  fontSize: {
+                    xs: 8,
+                    sm: 12,
+                    md: 'inital',
+                    lg: 'intial',
+                  },
+                }}
               >
                 -{props.discount * 100}%
               </Typography>
@@ -51,7 +60,11 @@ function GroupedItem(props: Prop) {
             component='img'
             image={props.image}
             alt={props.title}
-            sx={{ height: 150, width: 150, objectFit: 'contain' }}
+            sx={{
+              height: { xs: 50, sm: 50, md: 75, lg: 150 },
+              width: { xs: 50, sm: 50, md: 75, lg: 150 },
+              objectFit: 'contain',
+            }}
           />
           <Box
             sx={{
@@ -61,14 +74,32 @@ function GroupedItem(props: Prop) {
               marginLeft: '1rem',
             }}
           >
-            <Typography variant='body2' sx={{ fontWeight: 700 }}>
+            <Typography
+              variant='body2'
+              sx={{
+                fontWeight: 700,
+                fontSize: {
+                  xs: 8,
+                  sm: 12,
+                  lg: 18,
+                },
+              }}
+            >
               {props.title}
             </Typography>
             {props.discount > 0 ? (
               <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
                 <Typography
                   variant='subtitle1'
-                  sx={{ color: '#b1203c', fontWeight: 700 }}
+                  sx={{
+                    color: '#b1203c',
+                    fontWeight: 700,
+                    fontSize: {
+                      xs: 8,
+                      sm: 12,
+                      lg: 18,
+                    },
+                  }}
                 >
                   ${(props.price - props.price * props.discount).toFixed(2)}
                 </Typography>
@@ -79,13 +110,29 @@ function GroupedItem(props: Prop) {
                     fontWeight: 700,
                     textDecoration: 'line-through',
                     marginLeft: '1rem',
+                    fontSize: {
+                      xs: 6,
+                      sm: 10,
+                      lg: 16,
+                    },
                   }}
                 >
                   ${props.price.toFixed(2)}
                 </Typography>
               </Box>
             ) : (
-              <Typography variant='subtitle1' sx={{ color: '#b1203c' }}>
+              <Typography
+                variant='subtitle1'
+                sx={{
+                  color: '#b1203c',
+                  fontSize: {
+                    xs: 8,
+                    sm: 12,
+                    md: 'initial',
+                    lg: 'intial',
+                  },
+                }}
+              >
                 ${props.price.toFixed(2)}
               </Typography>
             )}

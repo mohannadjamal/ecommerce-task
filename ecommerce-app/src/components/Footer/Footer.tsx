@@ -9,7 +9,6 @@ import {
   ListItem,
   Typography,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { ThemeProvider } from '@emotion/react';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -49,38 +48,7 @@ const componentTheme = createTheme({
   },
 });
 
-const useStyles = makeStyles({
-  header1: {
-    color: '#a9a9a9',
-    marginBottom: '1rem !important',
-  },
-  icon: {
-    color: '#dedede',
-  },
-  header2: {
-    marginBottom: '2rem !important',
-  },
-  infoContainer: {
-    minWidth: '11rem',
-  },
-  locationItem: {
-    color: '#5d5d5d',
-    marginBottom: '1.2rem',
-  },
-  linkItem: {
-    color: '#a9a9a9',
-    marginBottom: '0.5rem',
-  },
-  paymentItem: {
-    marginLeft: '1rem',
-    opacity: 0.5,
-    width: '2.5rem',
-    borderRadius: '2.5px',
-    filter: 'grayscale(100%)',
-  },
-});
 function Footer() {
-  const classes = useStyles();
   return (
     <Box>
       <ThemeProvider theme={componentTheme}>
@@ -89,7 +57,7 @@ function Footer() {
             width: 1,
             backgroundColor: '#252525',
             color: '#dedede',
-            padding: '0 10%',
+            padding: { xs: '0 1rem', md: '0 10%' },
           }}
         >
           <Box
@@ -109,7 +77,10 @@ function Footer() {
               }}
             >
               <Box>
-                <Typography variant='body2' className={classes.header1}>
+                <Typography
+                  variant='body2'
+                  sx={{ color: '#a9a9a9', marginBottom: '1rem !important' }}
+                >
                   Our office Address
                 </Typography>
                 <Typography variant='subtitle1'>
@@ -117,7 +88,10 @@ function Footer() {
                 </Typography>
               </Box>
               <Box>
-                <Typography variant='body2' className={classes.header1}>
+                <Typography
+                  variant='body2'
+                  sx={{ color: '#a9a9a9', marginBottom: '1rem !important' }}
+                >
                   Please call Us:
                 </Typography>
                 <Typography variant='subtitle1'>(+84) 1234 686 9669</Typography>
@@ -125,22 +99,22 @@ function Footer() {
             </Box>
             <Box>
               <IconButton>
-                <FacebookIcon className={classes.icon} />
+                <FacebookIcon sx={{ color: '#dedede' }} />
               </IconButton>
               <IconButton>
-                <TwitterIcon className={classes.icon} />
+                <TwitterIcon sx={{ color: '#dedede' }} />
               </IconButton>
               <IconButton>
-                <PinterestIcon className={classes.icon} />
+                <PinterestIcon sx={{ color: '#dedede' }} />
               </IconButton>
               <IconButton>
-                <GoogleIcon className={classes.icon} />
+                <GoogleIcon sx={{ color: '#dedede' }} />
               </IconButton>
               <IconButton>
-                <InstagramIcon className={classes.icon} />
+                <InstagramIcon sx={{ color: '#dedede' }} />
               </IconButton>
               <IconButton>
-                <RssFeedIcon className={classes.icon} />
+                <RssFeedIcon sx={{ color: '#dedede' }} />
               </IconButton>
             </Box>
           </Box>
@@ -153,50 +127,71 @@ function Footer() {
               paddingBottom: 3,
             }}
           >
-            <Box className={classes.infoContainer}>
-              <Typography variant='h6' className={classes.header2}>
+            <Box sx={{ minWidth: { sm: 0, md: '11rem' } }}>
+              <Typography variant='h6' sx={{ marginBottom: '2rem !important' }}>
                 Our Stores
               </Typography>
               <List>
-                <ListItem disablePadding className={classes.locationItem}>
+                <ListItem
+                  disablePadding
+                  sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
+                >
                   <Typography variant='body2'>
                     501 Floor, Nguyen Ngoc Vu, Cau Glay, Ha Noi
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding className={classes.locationItem}>
+                <ListItem
+                  disablePadding
+                  sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
+                >
                   <Typography variant='body2'>
                     741 - 11A Sandiago, L.A City, USA
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding className={classes.locationItem}>
+                <ListItem
+                  disablePadding
+                  sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
+                >
                   <Typography variant='body2'>
                     1st Floor BrickHouse, 250 Wall Street, C.A City, UK
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding className={classes.locationItem}>
+                <ListItem
+                  disablePadding
+                  sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
+                >
                   <Typography variant='body2'>
                     5th Floor, 169 Green Lakes, WestBrown, Liverpool City
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding className={classes.locationItem}>
+                <ListItem
+                  disablePadding
+                  sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
+                >
                   <Typography variant='body2'>
                     628 Brooklyn Streen, Fullham District, Wales
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding className={classes.locationItem}>
+                <ListItem
+                  disablePadding
+                  sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
+                >
                   <Typography variant='body2'>
                     10001 Street, WinLow District, Mexico
                   </Typography>
                 </ListItem>
-                <ListItem disablePadding className={classes.locationItem}>
+                <ListItem
+                  disablePadding
+                  sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
+                >
                   <Typography variant='body2'>
                     1st Floor BrickHouse, 250 Wall Street, C.A City, UK
                   </Typography>
                 </ListItem>
               </List>
             </Box>
-            <Box className={classes.infoContainer}>
-              <Typography variant='h6' className={classes.header2}>
+            <Box sx={{ minWidth: { sm: 0, md: '11rem' } }}>
+              <Typography variant='h6' sx={{ marginBottom: '2rem !important' }}>
                 My Account
               </Typography>
               <List>
@@ -204,7 +199,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>My Cart</Typography>
                 </ListItem>
@@ -212,7 +207,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Check Out</Typography>
                 </ListItem>
@@ -220,7 +215,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Wishlist</Typography>
                 </ListItem>
@@ -228,7 +223,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Term & Policy</Typography>
                 </ListItem>
@@ -236,14 +231,14 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Your Account</Typography>
                 </ListItem>
               </List>
             </Box>
-            <Box className={classes.infoContainer}>
-              <Typography variant='h6' className={classes.header2}>
+            <Box sx={{ minWidth: { sm: 0, md: '11rem' } }}>
+              <Typography variant='h6' sx={{ marginBottom: '2rem !important' }}>
                 Information
               </Typography>
               <List>
@@ -251,7 +246,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Shipping & Return</Typography>
                 </ListItem>
@@ -259,7 +254,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Giftcards</Typography>
                 </ListItem>
@@ -267,7 +262,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Track My Order</Typography>
                 </ListItem>
@@ -275,7 +270,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Term & Policy</Typography>
                 </ListItem>
@@ -283,14 +278,14 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>FAQs</Typography>
                 </ListItem>
               </List>
             </Box>
-            <Box className={classes.infoContainer}>
-              <Typography variant='h6' className={classes.header2}>
+            <Box sx={{ minWidth: { sm: 0, md: '11rem' } }}>
+              <Typography variant='h6' sx={{ marginBottom: '2rem !important' }}>
                 How to Buy
               </Typography>
               <List>
@@ -298,7 +293,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Making Payments</Typography>
                 </ListItem>
@@ -306,7 +301,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Delivery Options</Typography>
                 </ListItem>
@@ -314,7 +309,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Buyer Protection</Typography>
                 </ListItem>
@@ -322,7 +317,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>New User Guide</Typography>
                 </ListItem>
@@ -330,7 +325,7 @@ function Footer() {
                   component={Link}
                   to='/'
                   disablePadding
-                  className={classes.linkItem}
+                  sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
                 >
                   <Typography variant='body2'>Partner Ship</Typography>
                 </ListItem>
@@ -355,7 +350,13 @@ function Footer() {
           <Box component='footer'>
             <Box
               component='img'
-              className={classes.paymentItem}
+              sx={{
+                marginLeft: '1rem',
+                opacity: 0.5,
+                width: '2.5rem',
+                borderRadius: '2.5px',
+                filter: 'grayscale(100%)',
+              }}
               src={visa}
               alt='Visa'
             />
@@ -363,25 +364,49 @@ function Footer() {
               component='img'
               src={mastercard}
               alt='MasterCard'
-              className={classes.paymentItem}
+              sx={{
+                marginLeft: '1rem',
+                opacity: 0.5,
+                width: '2.5rem',
+                borderRadius: '2.5px',
+                filter: 'grayscale(100%)',
+              }}
             />
             <Box
               component='img'
               src={paypal}
               alt='PayPal'
-              className={classes.paymentItem}
+              sx={{
+                marginLeft: '1rem',
+                opacity: 0.5,
+                width: '2.5rem',
+                borderRadius: '2.5px',
+                filter: 'grayscale(100%)',
+              }}
             />
             <Box
               component='img'
               src={stripe}
               alt='Stripe'
-              className={classes.paymentItem}
+              sx={{
+                marginLeft: '1rem',
+                opacity: 0.5,
+                width: '2.5rem',
+                borderRadius: '2.5px',
+                filter: 'grayscale(100%)',
+              }}
             />
             <Box
               component='img'
               src={discover}
               alt='Discrover'
-              className={classes.paymentItem}
+              sx={{
+                marginLeft: '1rem',
+                opacity: 0.5,
+                width: '2.5rem',
+                borderRadius: '2.5px',
+                filter: 'grayscale(100%)',
+              }}
             />
           </Box>
         </Box>

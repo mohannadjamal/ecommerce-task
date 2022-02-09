@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { Box, Grid, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 import Carousel from '../components/Carousel/Carousel';
 import Grouped from '../components/Grouped/Grouped';
@@ -13,14 +12,6 @@ import swatch from '../images/swatch.png';
 import asus from '../images/asus.png';
 import dell from '../images/dell.png';
 import toshiba from '../images/toshiba.png';
-
-const useStyles = makeStyles({
-  logo: {
-    width: 150,
-    height: 50,
-    objectFit: 'contain',
-  },
-});
 
 function Homepage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -59,50 +50,77 @@ function Homepage() {
   const cameraProducts = loadedProducts.filter(
     (product) => product.catalog === 'Camera'
   );
-  const classes = useStyles();
-
+  function firstCarouselQuery(): number {
+    if (window.innerWidth < 600) {
+      return 3;
+    } else if (window.innerWidth > 600 && window.innerWidth < 900) return 4;
+    return 6;
+  }
+  function secondCarouselQuery(): number {
+    if (window.innerWidth < 600) return 2;
+    else if (window.innerWidth > 600 && window.innerWidth < 900) return 3;
+    return 4;
+  }
+  const firstCarouselItems = firstCarouselQuery();
+  const secondCarouselItems = secondCarouselQuery();
   if (isLoading) return <Box></Box>;
   return (
     <Box>
       <Box
         sx={{
-          padding: '3rem 10%',
+          padding: {
+            xs: '1rem 0',
+            md: '3rem 10%',
+          },
           backgroundColor: '#ebebeb',
         }}
       >
         <Carousel
           title={'Smartphones & Tablets'}
-          itemsPerPage={6}
+          itemsPerPage={firstCarouselItems}
           items={laptopProducts}
         />
       </Box>
       <Box
         sx={{
-          paddingX: '10%',
+          paddingX: { xs: '0', md: '10%' },
         }}
       >
         <Box
           sx={{
             width: 1,
-            display: 'inline-flex',
+            display: 'flex',
             justifyContent: 'space-between',
-            paddingY: '3rem',
+            alignItems: 'center',
+            paddingY: {
+              xs: '1rem',
+              md: '3rem',
+            },
           }}
         >
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{ width: 1 }}>
             <Carousel
               title={'Audio & Sound'}
-              itemsPerPage={4}
+              itemsPerPage={secondCarouselItems}
               items={audioProducts}
             />
           </Box>
-          <img src={ad} alt='JBL Bluetooth Speaker'></img>
+          <Box
+            component='img'
+            src={ad}
+            alt='JBL Bluetooth Speaker'
+            sx={{
+              height: 'auto',
+              width: {
+                xs: '30%',
+              },
+            }}
+          ></Box>
         </Box>
         <Box
           sx={{
             height: 50,
-            marginY: '2rem',
-            display: 'inline-flex',
+            display: 'flex',
             width: 1,
           }}
         >
@@ -110,15 +128,19 @@ function Homepage() {
             sx={{
               backgroundColor: '#1c252e',
               height: 1,
-              display: 'inline-flex',
+              display: 'flex',
               alignItems: 'center',
+              justifyContent: 'center',
               clipPath: ' polygon(0 0, 100% 0%, 95% 100%, 0 100%)',
               flex: '1 0 70%',
             }}
           >
             <Typography
               variant='subtitle1'
-              sx={{ color: '#ffffff', paddingLeft: '7rem' }}
+              sx={{
+                color: '#ffffff',
+                fontSize: { xs: 8, sm: 12, md: 'initial' },
+              }}
             >
               Save your money with super promotion, available every Sunday in
               the weekend!
@@ -130,19 +152,29 @@ function Homepage() {
             sx={{
               height: 1,
               backgroundColor: '#ab1d2b',
-              flex: '0 0 30%',
-              marginLeft: '-12rem',
-              display: 'inline-flex',
+              flex: '1 0 30%',
+              marginLeft: {
+                xs: '-2rem',
+                md: '-5rem',
+                lg: '-8rem',
+              },
+              display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-end',
               textDecoration: 'none',
+              textAlign: 'center',
             }}
           >
             <Typography
               variant='body2'
               sx={{
                 color: '#ffffff',
-                marginRight: '8rem',
+                paddingRight: '1rem',
+                fontSize: {
+                  xs: 10,
+                  sm: 12,
+                  md: 'initial',
+                },
               }}
             >
               Learn More →
@@ -156,7 +188,11 @@ function Homepage() {
           <Grid item xs={2}>
             <Box
               component='img'
-              className={classes.logo}
+              sx={{
+                width: { xs: 50, sm: 100, md: 150 },
+                height: { xs: 25, sm: 50, md: 75 },
+                objectFit: 'contain',
+              }}
               src={startupSocks}
               alt='Starup Socks logo'
             />
@@ -164,7 +200,11 @@ function Homepage() {
           <Grid item xs={2}>
             <Box
               component='img'
-              className={classes.logo}
+              sx={{
+                width: { xs: 30, sm: 100, md: 150 },
+                height: { xs: 15, sm: 50, md: 75 },
+                objectFit: 'contain',
+              }}
               src={hp}
               alt='HP logo'
             />
@@ -172,7 +212,11 @@ function Homepage() {
           <Grid item xs={2}>
             <Box
               component='img'
-              className={classes.logo}
+              sx={{
+                width: { xs: 30, sm: 100, md: 150 },
+                height: { xs: 15, sm: 50, md: 75 },
+                objectFit: 'contain',
+              }}
               src={swatch}
               alt='Swatch logo'
             />
@@ -180,7 +224,11 @@ function Homepage() {
           <Grid item xs={2}>
             <Box
               component='img'
-              className={classes.logo}
+              sx={{
+                width: { xs: 30, sm: 100, md: 150 },
+                height: { xs: 15, sm: 50, md: 75 },
+                objectFit: 'contain',
+              }}
               src={asus}
               alt='Asus logo'
             />
@@ -188,7 +236,11 @@ function Homepage() {
           <Grid item xs={2}>
             <Box
               component='img'
-              className={classes.logo}
+              sx={{
+                width: { xs: 30, sm: 100, md: 150 },
+                height: { xs: 15, sm: 50, md: 75 },
+                objectFit: 'contain',
+              }}
               src={toshiba}
               alt='Toshiba logo'
             />
@@ -196,7 +248,11 @@ function Homepage() {
           <Grid item xs={2}>
             <Box
               component='img'
-              className={classes.logo}
+              sx={{
+                width: { xs: 30, sm: 100, md: 150 },
+                height: { xs: 15, sm: 50, md: 75 },
+                objectFit: 'contain',
+              }}
               src={dell}
               alt='Dell logo'
             />

@@ -1,20 +1,14 @@
-import React, { useState, useRef } from 'react';
+import { useState } from 'react';
 
 import {
   Box,
   Divider,
-  FormControlLabel,
   Grid,
   Grow,
   List,
   ListItem,
-  Paper,
-  Switch,
-  Theme,
   Typography,
-  Zoom,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 import CarouselItem from './CarouselItem';
 import { TransitionGroup } from 'react-transition-group';
@@ -24,68 +18,9 @@ type Prop = {
   itemsPerPage: number;
   items: any[];
 };
-const icon = (
-  <Paper sx={{ m: 1 }} elevation={4}>
-    <Box component='svg' sx={{ width: 100, height: 100 }}>
-      <Box
-        component='polygon'
-        sx={{
-          fill: (theme: Theme) => theme.palette.common.white,
-          stroke: (theme) => theme.palette.divider,
-          strokeWidth: 1,
-        }}
-        points='0,100 50,00, 100,100'
-      />
-    </Box>
-  </Paper>
-);
-
-const useStyles = makeStyles({
-  cardContainer: {
-    borderRight: '1px solid',
-    borderImageSlice: 1,
-    borderImageSource:
-      'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
-    '&:last-child': {
-      borderRight: 'none !important',
-    },
-  },
-  active: {
-    borderBottom: '3px solid gray',
-  },
-  next_animation: {
-    animation: `$nextPage .5s forwards`,
-  },
-  prev_animation: {
-    animation: `$prevPage .5s forwards`,
-  },
-  '@keyframes nextPage': {
-    '0%': {
-      opacity: 0,
-      transform: 'translate(2rem, 0)',
-    },
-    '100%': {
-      opacity: 1,
-      transform: 'translate(0, 0)',
-    },
-  },
-  '@keyframes prevPage': {
-    '0%': {
-      opacity: 0,
-      transform: 'translate(-2rem, 0)',
-    },
-    '100%': {
-      opacity: 1,
-      transform: 'translate(0, 0)',
-    },
-  },
-});
 
 function Carousel(props: Prop) {
-  const [checked, setChecked] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-
-  const classes = useStyles();
 
   const gridSpace = Math.floor(12 / props.itemsPerPage);
 
@@ -107,7 +42,7 @@ function Carousel(props: Prop) {
     setCurrentPage(pageNumber);
     clearInterval(paginateInterval);
   };
-
+  /*
   if (currentPage !== pageNumbers[pageNumbers.length - 1]) {
     paginateInterval = setInterval(() => {
       paginate(currentPage + 1);
@@ -117,7 +52,7 @@ function Carousel(props: Prop) {
       paginate(1);
     }, 5000);
   }
-
+*/
   return (
     <Box
       sx={{
@@ -151,8 +86,20 @@ function Carousel(props: Prop) {
       <TransitionGroup>
         <Grid container sx={{ marginY: '1rem' }}>
           {currentItems.map((item) => (
-            <Grow in={checked} key={item.id}>
-              <Grid item xs={gridSpace} className={classes.cardContainer}>
+            <Grow in={true} key={item.id}>
+              <Grid
+                item
+                xs={gridSpace}
+                sx={{
+                  borderRight: '1px solid',
+                  borderImageSlice: 1,
+                  borderImageSource:
+                    'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
+                  '&:last-child': {
+                    borderRight: 'none !important',
+                  },
+                }}
+              >
                 <CarouselItem
                   id={item.id}
                   title={item.title}
@@ -185,7 +132,11 @@ function Carousel(props: Prop) {
             >
               <Box
                 component='a'
-                className={currentPage === number ? `${classes.active}` : ''}
+                sx={
+                  currentPage === number
+                    ? { borderBottom: '3px solid gray' }
+                    : {}
+                }
                 onClick={() => {
                   paginate(number);
                 }}

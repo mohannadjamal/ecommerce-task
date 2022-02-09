@@ -1,12 +1,5 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 
-/*
-const TextBox = styled(TextField)(() => ({
-  '& fieldset': {
-    borderRadius: '0px',
-  },
-}));
-*/
 function Newsletter() {
   return (
     <Box
@@ -66,9 +59,13 @@ function Newsletter() {
           sx={{
             fontWeight: 700,
             width: '10rem',
-            height: '2.6rem',
+            height: '3rem',
             borderRadius: 0,
             backgroundColor: '#ab1d2b',
+            boxShadow: 0,
+            '&:hover': {
+              backgroundColor: '#d92121',
+            },
           }}
         >
           SUBSCRIBE

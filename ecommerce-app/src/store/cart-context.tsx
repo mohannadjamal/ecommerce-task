@@ -6,8 +6,8 @@ const CartContext = createContext({
   totalPrice: 0,
   addProduct: (product: any): any => {},
   removeProduct: (productId: string): any => {},
-  //incrementAmount: (productId: string): any => {},
-  //decrementAmount: (productId: string): any => {},
+  incrementAmount: (productId: string): any => {},
+  decrementAmount: (productId: string): any => {},
 });
 
 type Prop = {
@@ -51,29 +51,46 @@ export function CartContextProvider(props: Prop) {
     });
   }
   function removeProductHandler(productId: string) {
-    setCartItems((previousCartItems) => {
-      return previousCartItems.filter((item) => item.id !== productId);
+    setCartItems((prev) => {
+      return prev.filter((item) => item.id !== productId);
     });
   }
   function getTotalProductsHandler(): number {
     return cartItems.reduce((ack: number, item) => ack + item.amount, 0);
   }
   function getTotalPriceHandler() {
-    let sum = 0;
-    cartItems.forEach((item) => {
-      item.discount === 0
-        ? (sum += item.amount * item.price)
-        : (sum += item.amount * (item.price - item.discount * item.price));
-    });
-    return sum;
+    return cartItems.reduce(
+      (ack: number, item) =>
+        item.discount === 0
+          ? ack + item.price * item.amount
+          : ack + item.amount * (item.price - item.discount * item.price),
+      0
+    );
   }
-
+  const handleIncrement = (productId: string) => {
+    setCartItems((prev) => {
+      return prev.map((item) =>
+        item.id === productId ? { ...item, amount: item.amount + 1 } : item
+      );
+    });
+  };
+  const handleDecrement = (productId: string) => {
+    setCartItems((prev) => {
+      return prev.map((item) =>
+        item.id === productId && item.amount > 1
+          ? { ...item, amount: item.amount - 1 }
+          : item
+      );
+    });
+  };
   const context = {
     products: cartItems,
     totalProducts: getTotalProductsHandler(),
     totalPrice: getTotalPriceHandler(),
     addProduct: addProductHandler,
     removeProduct: removeProductHandler,
+    incrementAmount: handleIncrement,
+    decrementAmount: handleDecrement,
   };
 
   return (

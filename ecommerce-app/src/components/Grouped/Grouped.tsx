@@ -1,5 +1,4 @@
 import { Box, Divider, Grid, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 import GroupedItem from './GroupedItem';
 
@@ -8,21 +7,7 @@ type Prop = {
   items: any[];
 };
 
-const useStyles = makeStyles({
-  cardContainer: {
-    borderRight: '1px solid',
-    borderImageSlice: 1,
-    borderImageSource:
-      'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
-    '&:nth-child(3n)': {
-      borderRight: 'none !important',
-    },
-    paddingY: '1rem',
-  },
-});
 function Grouped(props: Prop) {
-  const classes = useStyles();
-
   const shuffledItems = props.items.sort(() => 0.5 - Math.random());
   let selectedItems = shuffledItems.slice(0, 6);
 
@@ -62,8 +47,16 @@ function Grouped(props: Prop) {
             item
             key={item.id}
             xs={4}
-            className={classes.cardContainer}
-            sx={{ marginY: '1rem' }}
+            sx={{
+              borderRight: '1px solid',
+              borderImageSlice: 1,
+              borderImageSource:
+                'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
+              '&:nth-child(3n)': {
+                borderRight: 'none !important',
+              },
+              marginY: '1rem',
+            }}
           >
             <GroupedItem
               id={item.id}

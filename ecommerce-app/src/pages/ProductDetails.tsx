@@ -16,7 +16,6 @@ import {
 } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { makeStyles } from '@mui/styles';
 
 import CartContext from '../store/cart-context';
 
@@ -30,37 +29,6 @@ type Product = {
   sku: string;
   title: string;
 };
-
-const useStyles = makeStyles({
-  crumbFont: {
-    fontSize: 14,
-    fontWeight: 400,
-    color: '#cdcdcd',
-  },
-  quantityBtn: {
-    fontWeight: 200,
-    fontSize: '1.5rem',
-    color: '#cdcdcd',
-  },
-  iconBtn: {
-    borderRadius: 0,
-    border: 'thin solid #cdcdcd',
-  },
-  active: {
-    borderColor: '#b1203c',
-    position: 'relative',
-    '&:after': {
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      width: 1,
-      height: 1,
-      display: 'inline-block',
-      background:
-        'linear-gradient(to bottom, rgba(0,47,75,0.5) 0%,rgba(220, 66, 37, 0.5) 100%)',
-    },
-  },
-});
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -95,8 +63,6 @@ function a11yProps(index: number) {
   };
 }
 function ProductDetails() {
-  const classes = useStyles();
-
   const { productId } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -164,14 +130,23 @@ function ProductDetails() {
               variant='outlined'
               component='img'
               onClick={() => clickImage(index)}
-              className={currentImage === index ? `${classes.active}` : ''}
               src={image}
-              sx={{
-                height: 150,
-                width: 150,
-                objectFit: 'contain',
-                borderRadius: 0,
-              }}
+              sx={
+                currentImage === index
+                  ? {
+                      borderColor: '#b1203c',
+                      height: 150,
+                      width: 150,
+                      objectFit: 'contain',
+                      borderRadius: 0,
+                    }
+                  : {
+                      height: 150,
+                      width: 150,
+                      objectFit: 'contain',
+                      borderRadius: 0,
+                    }
+              }
             />
           ))}
         </Grid>
@@ -187,19 +162,30 @@ function ProductDetails() {
           <Box component='img' src={loadedProduct.images[currentImage]} />
         </Grid>
         <Grid item xs={5}>
-          <Breadcrumbs aria-label='breadcrumb' className={classes.crumbFont}>
+          <Breadcrumbs
+            aria-label='breadcrumb'
+            sx={{ fontSize: 14, fontWeight: 400, color: '#cdcdcd' }}
+          >
             <Link
               underline='hover'
               color='inherit'
               href='/'
-              className={classes.crumbFont}
-              sx={{ paddingRight: '1rem' }}
+              sx={{
+                paddingRight: '1rem',
+                fontSize: 14,
+                fontWeight: 400,
+                color: '#cdcdcd',
+              }}
             >
               Home
             </Link>
             <Typography
-              className={classes.crumbFont}
-              sx={{ paddingLeft: '1rem' }}
+              sx={{
+                paddingLeft: '1rem',
+                fontSize: 14,
+                fontWeight: 400,
+                color: '#cdcdcd',
+              }}
             >
               {loadedProduct.title}
             </Typography>
@@ -265,7 +251,7 @@ function ProductDetails() {
             >
               <Button
                 variant='text'
-                className={classes.quantityBtn}
+                sx={{ fontWeight: 200, fontSize: '1.5rem', color: '#cdcdcd' }}
                 onClick={handleDecrement}
               >
                 -
@@ -273,16 +259,16 @@ function ProductDetails() {
               <Box>{amount}</Box>
               <Button
                 variant='text'
-                className={classes.quantityBtn}
+                sx={{ fontWeight: 200, fontSize: '1.5rem', color: '#cdcdcd' }}
                 onClick={handleIncrement}
               >
                 +
               </Button>
             </Box>
-            <IconButton className={classes.iconBtn}>
+            <IconButton sx={{ borderRadius: 0, border: 'thin solid #cdcdcd' }}>
               <AutorenewIcon />
             </IconButton>
-            <IconButton className={classes.iconBtn}>
+            <IconButton sx={{ borderRadius: 0, border: 'thin solid #cdcdcd' }}>
               <FavoriteBorderIcon />
             </IconButton>
           </Box>
