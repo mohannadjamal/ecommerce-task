@@ -120,9 +120,28 @@ function ProductDetails() {
   }
   if (isLoading) return <Box></Box>;
   return (
-    <Box sx={{ padding: '3rem 10%' }}>
+    <Box
+      sx={{
+        padding: {
+          xs: '1rem 1rem',
+          sm: '2rem 1rem',
+          md: '3rem 1rem',
+          lg: '3rem 10%',
+        },
+      }}
+    >
       <Grid container>
-        <Grid item xs={2}>
+        <Grid
+          item
+          xs={6}
+          sm={2}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            alignItems: { xs: 'flex-start', lg: 'center' },
+          }}
+        >
           {loadedProduct.images.map((image: string, index: number) => (
             <Paper
               key={index}
@@ -135,14 +154,14 @@ function ProductDetails() {
                 currentImage === index
                   ? {
                       borderColor: '#b1203c',
-                      height: 150,
-                      width: 150,
+                      height: { xs: 40, sm: 40, md: 75, lg: 150 },
+                      width: { xs: 40, sm: 40, md: 75, lg: 150 },
                       objectFit: 'contain',
                       borderRadius: 0,
                     }
                   : {
-                      height: 150,
-                      width: 150,
+                      height: { xs: 40, sm: 40, md: 75, lg: 150 },
+                      width: { xs: 40, sm: 40, md: 75, lg: 150 },
                       objectFit: 'contain',
                       borderRadius: 0,
                     }
@@ -152,19 +171,41 @@ function ProductDetails() {
         </Grid>
         <Grid
           item
-          xs={5}
+          xs={6}
+          sm={5}
           sx={{
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: { xs: 'flex-start', lg: 'center' },
             alignItems: 'center',
           }}
         >
-          <Box component='img' src={loadedProduct.images[currentImage]} />
+          <Box
+            component='img'
+            src={loadedProduct.images[currentImage]}
+            sx={{
+              height: 'auto',
+              width: { xs: 100, sm: 200, md: 300, lg: 435 },
+            }}
+          />
         </Grid>
-        <Grid item xs={5}>
+        <Grid
+          item
+          xs={12}
+          sm={5}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: { xs: 'center', lg: 'flex-start' },
+          }}
+        >
           <Breadcrumbs
             aria-label='breadcrumb'
-            sx={{ fontSize: 14, fontWeight: 400, color: '#cdcdcd' }}
+            sx={{
+              fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+              fontWeight: 400,
+              color: '#cdcdcd',
+            }}
           >
             <Link
               underline='hover'
@@ -172,7 +213,7 @@ function ProductDetails() {
               href='/'
               sx={{
                 paddingRight: '1rem',
-                fontSize: 14,
+                fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 fontWeight: 400,
                 color: '#cdcdcd',
               }}
@@ -182,7 +223,7 @@ function ProductDetails() {
             <Typography
               sx={{
                 paddingLeft: '1rem',
-                fontSize: 14,
+                fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 fontWeight: 400,
                 color: '#cdcdcd',
               }}
@@ -192,7 +233,12 @@ function ProductDetails() {
           </Breadcrumbs>
           <Typography
             variant='h4'
-            sx={{ fontWeight: 700, marginTop: '1rem', marginBottom: '2rem' }}
+            sx={{
+              fontWeight: 700,
+              marginTop: '1rem',
+              marginBottom: '2rem',
+              fontSize: { xs: 14, sm: 18, md: 24, lg: 34 },
+            }}
           >
             {loadedProduct.title}
           </Typography>
@@ -200,7 +246,12 @@ function ProductDetails() {
             <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
               <Typography
                 variant='h6'
-                sx={{ fontWeight: 700, color: '#b1203c', marginBottom: '1rem' }}
+                sx={{
+                  fontWeight: 700,
+                  color: '#b1203c',
+                  marginBottom: '1rem',
+                  fontSize: { xs: 12, sm: 14, md: 18, lg: 20 },
+                }}
               >
                 $
                 {(
@@ -215,6 +266,7 @@ function ProductDetails() {
                   fontWeight: 700,
                   textDecoration: 'line-through',
                   marginLeft: '1rem',
+                  fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 }}
               >
                 ${loadedProduct.price.toFixed(2)}
@@ -223,12 +275,23 @@ function ProductDetails() {
           ) : (
             <Typography
               variant='h6'
-              sx={{ fontWeight: 700, color: '#b1203c', marginBottom: '1rem' }}
+              sx={{
+                fontWeight: 700,
+                color: '#b1203c',
+                marginBottom: '1rem',
+                fontSize: { xs: 12, sm: 14, md: 18, lg: 20 },
+              }}
             >
               ${loadedProduct.price.toFixed(2)}
             </Typography>
           )}
-          <Typography variant='body1' sx={{ height: '25vh' }}>
+          <Typography
+            variant='body1'
+            sx={{
+              marginBottom: '2rem',
+              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+            }}
+          >
             {loadedProduct.description}
           </Typography>
           <Box
@@ -237,7 +300,7 @@ function ProductDetails() {
               justifyContent: 'space-between',
               width: 1,
               height: '3rem',
-              marginBottom: '1.5rem',
+              marginBottom: '1rem',
             }}
           >
             <Box
@@ -245,21 +308,33 @@ function ProductDetails() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '82%',
+                width: '80%',
                 border: 'thin solid #cdcdcd',
               }}
             >
               <Button
                 variant='text'
-                sx={{ fontWeight: 200, fontSize: '1.5rem', color: '#cdcdcd' }}
+                sx={{
+                  fontWeight: 200,
+                  minWidth: 30,
+                  fontSize: { xs: 12, sm: 16, md: 20, lg: 24 },
+                  color: '#cdcdcd',
+                }}
                 onClick={handleDecrement}
               >
                 -
               </Button>
-              <Box>{amount}</Box>
+              <Box sx={{ fontSize: { xs: 12, sm: 16, md: 20, lg: 24 } }}>
+                {amount}
+              </Box>
               <Button
                 variant='text'
-                sx={{ fontWeight: 200, fontSize: '1.5rem', color: '#cdcdcd' }}
+                sx={{
+                  fontWeight: 200,
+                  minWidth: 30,
+                  fontSize: { xs: 12, sm: 16, md: 20, lg: 24 },
+                  color: '#cdcdcd',
+                }}
                 onClick={handleIncrement}
               >
                 +
@@ -294,20 +369,28 @@ function ProductDetails() {
 
           <Typography
             variant='subtitle2'
-            sx={{ color: '#7a7a7a', marginBottom: '3rem' }}
+            sx={{
+              color: '#7a7a7a',
+              marginBottom: '3rem',
+              fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+            }}
           >
             {loadedProduct.title} is available to buy in increments of 1
           </Typography>
 
           <Typography
             variant='body1'
-            sx={{ fontWeight: 500, color: '#9c9c9c' }}
+            sx={{
+              fontWeight: 500,
+              color: '#9c9c9c',
+              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+            }}
           >
             SKU: {loadedProduct.sku}
           </Typography>
         </Grid>
       </Grid>
-      <Box sx={{ width: '100%', padding: '10%' }}>
+      <Box sx={{ width: '100%', padding: { md: '5%', lg: '10%' } }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
             value={value}
@@ -321,19 +404,46 @@ function ProductDetails() {
               },
             }}
           >
-            <Tab label='DETAILS' {...a11yProps(0)} />
-            <Tab label='MORE INFORMATION' {...a11yProps(1)} />
-            <Tab label='REVIEWS' {...a11yProps(2)} />
+            <Tab
+              sx={{ fontSize: { xs: 8, sm: 10, md: 12, lg: 14 } }}
+              label='DETAILS'
+              {...a11yProps(0)}
+            />
+            <Tab
+              sx={{ fontSize: { xs: 8, sm: 10, md: 12, lg: 14 } }}
+              label='MORE INFORMATION'
+              {...a11yProps(1)}
+            />
+            <Tab
+              sx={{ fontSize: { xs: 8, sm: 10, md: 12, lg: 14 } }}
+              label='REVIEWS'
+              {...a11yProps(2)}
+            />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          {loadedProduct.description}
+          <Typography
+            variant='body1'
+            sx={{ fontSize: { xs: 10, sm: 12, md: 14, lg: 16 } }}
+          >
+            {loadedProduct.description}
+          </Typography>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Unimplemented
+          <Typography
+            variant='body1'
+            sx={{ fontSize: { xs: 10, sm: 12, md: 14, lg: 16 } }}
+          >
+            Unimplemented
+          </Typography>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Unimplemented
+          <Typography
+            variant='body1'
+            sx={{ fontSize: { xs: 10, sm: 12, md: 14, lg: 16 } }}
+          >
+            Unimplemented
+          </Typography>
         </TabPanel>
       </Box>
     </Box>

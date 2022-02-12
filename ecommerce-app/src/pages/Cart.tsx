@@ -32,54 +32,75 @@ function Cart() {
   return (
     <Box
       sx={{
-        padding: '3rem 10%',
+        padding: { xs: '3rem 1rem', lg: '3rem 10%' },
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
-      <Typography variant='h2' sx={{ fontWeight: 400, marginY: '3rem' }}>
+      <Typography
+        variant='h2'
+        sx={{
+          fontWeight: 400,
+          marginY: '3rem',
+          fontSize: { xs: 24, sm: 32, md: 48, lg: 60 },
+        }}
+      >
         Shopping Cart
       </Typography>
       <Grid container>
-        <Grid item xs={8} sx={{ paddingRight: '5rem' }}>
+        <Grid item xs={12} lg={8} sx={{ paddingRight: { xs: 0, lg: '3rem' } }}>
           <TableContainer component={Paper} elevation={0}>
             <Table size='small' aria-label='a dense table'>
-              <TableHead
-                sx={{ borderTop: 'thin solid #dedede', fontSize: 200 }}
-              >
+              <TableHead sx={{ borderTop: 'thin solid #dedede' }}>
                 <TableRow>
                   <TableCell
-                    sx={{ width: '90%', color: '#808080', fontWeight: 700 }}
+                    sx={{
+                      width: '90%',
+                      color: '#808080',
+                      fontWeight: 700,
+                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                    }}
                   >
                     Product Name
                   </TableCell>
                   <TableCell
                     align='center'
-                    sx={{ color: '#808080', fontWeight: 700 }}
+                    sx={{
+                      color: '#808080',
+                      fontWeight: 700,
+                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                    }}
                   >
                     Price
                   </TableCell>
                   <TableCell
                     align='center'
-                    sx={{ color: '#808080', fontWeight: 700 }}
+                    sx={{
+                      color: '#808080',
+                      fontWeight: 700,
+                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                    }}
                   >
                     Quantity
                   </TableCell>
                   <TableCell
                     align='center'
-                    sx={{ color: '#808080', fontWeight: 700 }}
+                    sx={{
+                      color: '#808080',
+                      fontWeight: 700,
+                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                    }}
                   >
                     Total
                   </TableCell>
-                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {cartCtx.products.map((row) => (
                   <TableRow key={row.id}>
-                    <TableCell sx={{ width: '80%' }}>
+                    <TableCell>
                       <Box
                         sx={{
                           display: 'flex',
@@ -90,12 +111,29 @@ function Cart() {
                         <Box
                           component='img'
                           src={row.images[0]}
-                          sx={{ width: 100, height: 100, objectFit: 'contain' }}
+                          sx={{
+                            width: { xs: 50, sm: 60, md: 75, lg: 100 },
+                            height: { xs: 50, sm: 60, md: 75, lg: 100 },
+                            objectFit: 'contain',
+                          }}
                         />
-                        <Box sx={{ marginLeft: '5rem' }}>
+                        <Box
+                          sx={{
+                            marginLeft: {
+                              xs: '0.5rem',
+                              sm: '1.5rem',
+                              md: '3rem',
+                              lg: '5rem',
+                            },
+                          }}
+                        >
                           <Typography
                             variant='subtitle1'
-                            sx={{ color: '#808080', fontWeight: 200 }}
+                            sx={{
+                              color: '#808080',
+                              fontWeight: 200,
+                              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                            }}
                           >
                             {row.title}
                           </Typography>
@@ -105,7 +143,10 @@ function Cart() {
                             >
                               <Typography
                                 variant='body1'
-                                sx={{ fontWeight: 500 }}
+                                sx={{
+                                  fontWeight: 500,
+                                  fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                                }}
                               >
                                 $
                                 {calculatePrice(
@@ -120,6 +161,7 @@ function Cart() {
                                   fontWeight: 700,
                                   textDecoration: 'line-through',
                                   marginLeft: '1rem',
+                                  fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                                 }}
                               >
                                 ${row.price.toFixed(2)}
@@ -128,7 +170,10 @@ function Cart() {
                           ) : (
                             <Typography
                               variant='body1'
-                              sx={{ fontWeight: 500 }}
+                              sx={{
+                                fontWeight: 500,
+                                fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                              }}
                             >
                               ${row.price.toFixed(2)}
                             </Typography>
@@ -137,7 +182,13 @@ function Cart() {
                       </Box>
                     </TableCell>
                     <TableCell align='center'>
-                      <Typography variant='body1' sx={{ fontWeight: 500 }}>
+                      <Typography
+                        variant='body1'
+                        sx={{
+                          fontWeight: 500,
+                          fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                        }}
+                      >
                         ${calculatePrice(row.price, row.discount).toFixed(2)}
                       </Typography>
                     </TableCell>
@@ -154,20 +205,26 @@ function Cart() {
                           variant='text'
                           sx={{
                             fontWeight: 200,
-                            minWidth: 30,
+                            minWidth: 10,
                             color: '#cdcdcd',
+                            fontSize: { xs: 12, sm: 16, md: 20, lg: 24 },
                           }}
                           onClick={() => cartCtx.decrementAmount(row.id)}
                         >
                           -
                         </Button>
-                        <Box>{row.amount}</Box>
+                        <Box
+                          sx={{ fontSize: { xs: 8, sm: 12, md: 16, lg: 20 } }}
+                        >
+                          {row.amount}
+                        </Box>
                         <Button
                           variant='text'
                           sx={{
                             fontWeight: 200,
-                            minWidth: 30,
+                            minWidth: 10,
                             color: '#cdcdcd',
+                            fontSize: { xs: 12, sm: 16, md: 20, lg: 24 },
                           }}
                           onClick={() => cartCtx.incrementAmount(row.id)}
                         >
@@ -176,17 +233,29 @@ function Cart() {
                       </Box>
                     </TableCell>
                     <TableCell align='center'>
-                      <Typography variant='body1' sx={{ fontWeight: 500 }}>
-                        $
-                        {(
-                          calculatePrice(row.price, row.discount) * row.amount
-                        ).toFixed(2)}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <IconButton onClick={() => cartCtx.removeProduct(row.id)}>
-                        <CloseIcon />
-                      </IconButton>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography
+                          variant='body1'
+                          sx={{
+                            fontWeight: 500,
+                            fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                          }}
+                        >
+                          $
+                          {(
+                            calculatePrice(row.price, row.discount) * row.amount
+                          ).toFixed(2)}
+                        </Typography>
+                        <IconButton
+                          onClick={() => cartCtx.removeProduct(row.id)}
+                        >
+                          <CloseIcon
+                            sx={{
+                              fontSize: { xs: 12, sm: 16, md: 24, lg: 32 },
+                            }}
+                          />
+                        </IconButton>
+                      </Box>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -196,7 +265,8 @@ function Cart() {
         </Grid>
         <Grid
           item
-          xs={4}
+          xs={12}
+          lg={4}
           sx={{
             border: 'thin solid #dedede',
             backgroundColor: '#ebebeb',
@@ -212,7 +282,12 @@ function Cart() {
               <TableHead>
                 <TableRow>
                   <TableCell
-                    sx={{ paddingY: '1rem', color: '#808080', fontWeight: 700 }}
+                    sx={{
+                      paddingY: '1rem',
+                      color: '#808080',
+                      fontWeight: 700,
+                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                    }}
                   >
                     Summary
                   </TableCell>
@@ -222,36 +297,72 @@ function Cart() {
               <TableBody>
                 <TableRow>
                   <TableCell>
-                    <Typography variant='body2' sx={{ color: '#8f8f8f' }}>
+                    <Typography
+                      variant='body2'
+                      sx={{
+                        color: '#8f8f8f',
+                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      }}
+                    >
                       Subtotal
                     </Typography>
                   </TableCell>
                   <TableCell align='right'>
-                    <Typography variant='body1' sx={{ fontWeight: 500 }}>
+                    <Typography
+                      variant='body1'
+                      sx={{
+                        fontWeight: 500,
+                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      }}
+                    >
                       ${cartCtx.totalPrice.toFixed(2)}
                     </Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>
-                    <Typography variant='body2' sx={{ color: '#8f8f8f' }}>
+                    <Typography
+                      variant='body2'
+                      sx={{
+                        color: '#8f8f8f',
+                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      }}
+                    >
                       Shipping (Flat Rate - Fixed)
                     </Typography>
                   </TableCell>
                   <TableCell align='right'>
-                    <Typography variant='body1' sx={{ fontWeight: 500 }}>
+                    <Typography
+                      variant='body1'
+                      sx={{
+                        fontWeight: 500,
+                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      }}
+                    >
                       $5.00
                     </Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell sx={{ border: 0 }}>
-                    <Typography variant='body2' sx={{ color: '#8f8f8f' }}>
+                    <Typography
+                      variant='body2'
+                      sx={{
+                        color: '#8f8f8f',
+                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      }}
+                    >
                       Order Total
                     </Typography>
                   </TableCell>
                   <TableCell align='right' sx={{ border: 0 }}>
-                    <Typography variant='body1' sx={{ fontWeight: 500 }}>
+                    <Typography
+                      variant='body1'
+                      sx={{
+                        fontWeight: 500,
+                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      }}
+                    >
                       ${(cartCtx.totalPrice + 5).toFixed(2)}
                     </Typography>
                   </TableCell>
@@ -284,7 +395,12 @@ function Cart() {
             >
               GO TO CHECKOUT
             </Button>
-            <Typography variant='subtitle1'>
+            <Typography
+              variant='subtitle1'
+              sx={{
+                fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+              }}
+            >
               Check Out with Multiple Addresses
             </Typography>
           </Box>

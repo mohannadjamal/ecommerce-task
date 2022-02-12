@@ -1,43 +1,22 @@
 import { useState } from 'react';
 
 import {
-  Box,
+  Drawer,
   List,
   ListItem,
   ListItemText,
   Link,
-  useTheme,
-  useMediaQuery,
+  IconButton,
 } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-import DrawerComponent from '../DrawerComponent/DrawerComponent';
-
-function MainNavigation() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+function DrawerComponent() {
+  const [openDrawer, setOpenDrawer] = useState(false);
   return (
-    <Box
-      component='nav'
-      sx={{
-        width: 1,
-        height: '3rem',
-        backgroundColor: '#1c252e',
-        padding: { xs: ' 0 1rem', md: '0 10%' },
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
-      {isMobile ? (
-        <DrawerComponent />
-      ) : (
-        <List
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'baseline',
-          }}
-        >
-          <ListItem>
+    <>
+      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
+        <List sx={{ backgroundColor: '#1c252e', height: 1 }}>
+          <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
               <Link
                 href='/'
@@ -51,7 +30,7 @@ function MainNavigation() {
               </Link>
             </ListItemText>
           </ListItem>
-          <ListItem>
+          <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
               <Link
                 href='/shop'
@@ -65,7 +44,7 @@ function MainNavigation() {
               </Link>
             </ListItemText>
           </ListItem>
-          <ListItem>
+          <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
               <Link
                 href='/pages'
@@ -79,7 +58,7 @@ function MainNavigation() {
               </Link>
             </ListItemText>
           </ListItem>
-          <ListItem>
+          <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
               <Link
                 href='/lookbook'
@@ -93,7 +72,7 @@ function MainNavigation() {
               </Link>
             </ListItemText>
           </ListItem>
-          <ListItem>
+          <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
               <Link
                 href='/brands'
@@ -108,8 +87,11 @@ function MainNavigation() {
             </ListItemText>
           </ListItem>
         </List>
-      )}
-    </Box>
+      </Drawer>
+      <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+        <MenuIcon sx={{ color: '#ffffff' }} />
+      </IconButton>
+    </>
   );
 }
-export default MainNavigation;
+export default DrawerComponent;

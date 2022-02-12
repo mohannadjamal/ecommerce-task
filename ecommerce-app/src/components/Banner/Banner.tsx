@@ -1,8 +1,6 @@
 import { useContext } from 'react';
 
-import { Link } from 'react-router-dom';
-
-import { IconButton, Badge, Box, Typography } from '@mui/material';
+import { IconButton, Badge, Box, Typography, Link } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -21,22 +19,24 @@ function Banner() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: { sm: ' 0 1rem', md: '0 10%' },
+        padding: { xs: ' 0 1rem', md: '0 10%' },
       }}
     >
-      <Box
-        component='img'
-        src={logo}
-        alt='Logo'
-        sx={{
-          height: 'auto',
-          width: {
-            xs: 100,
-            sm: 200,
-            md: 'initial',
-          },
-        }}
-      />
+      <Link href='/'>
+        <Box
+          component='img'
+          src={logo}
+          alt='Logo'
+          sx={{
+            height: 'auto',
+            width: {
+              xs: 100,
+              sm: 200,
+              md: 'initial',
+            },
+          }}
+        />
+      </Link>
       <Box
         sx={{
           display: 'flex',
@@ -58,7 +58,7 @@ function Banner() {
             />
           </Badge>
         </IconButton>
-        <IconButton component={Link} to='/cart'>
+        <IconButton component={Link} href='/cart'>
           <Badge badgeContent={cartCtx.totalProducts} color='error' showZero>
             <ShoppingCartOutlinedIcon
               sx={{ color: 'black', fontSize: { xs: 16, sm: 24, md: 32 } }}
