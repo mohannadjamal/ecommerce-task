@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import {
   Box,
@@ -8,10 +8,14 @@ import {
   List,
   ListItem,
   Typography,
+  useTheme,
 } from '@mui/material';
 
-import CarouselItem from './CarouselItem';
 import { TransitionGroup } from 'react-transition-group';
+
+import CarouselItem from './CarouselItem';
+
+import ThemeContext from '../../theme/theme-context';
 
 type Prop = {
   title: string;
@@ -20,6 +24,9 @@ type Prop = {
 };
 
 function Carousel(props: Prop) {
+  const themeCtx = useContext(ThemeContext);
+  const theme = useTheme();
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const gridSpace = Math.floor(12 / props.itemsPerPage);
@@ -42,7 +49,7 @@ function Carousel(props: Prop) {
     setCurrentPage(pageNumber);
     clearInterval(paginateInterval);
   };
-  /*
+
   if (currentPage !== pageNumbers[pageNumbers.length - 1]) {
     paginateInterval = setInterval(() => {
       paginate(currentPage + 1);
@@ -52,17 +59,18 @@ function Carousel(props: Prop) {
       paginate(1);
     }, 5000);
   }
-*/
+
   return (
     <Box
       sx={{
-        backgroundColor: '#ffffff',
+        backgroundColor: theme.palette.background.default,
         padding: '0.5rem 1.5rem',
       }}
     >
       <Typography
         variant='h6'
         sx={{
+          color: theme.palette.primary.light,
           position: 'relative',
           width: 1,
           margin: 0,
@@ -82,23 +90,35 @@ function Carousel(props: Prop) {
       >
         {props.title}
       </Typography>
-      <Divider />
+      <Divider sx={{ backgroundColor: theme.palette.divider }} />
       <TransitionGroup>
         <Grid container sx={{ marginY: '1rem' }}>
           {currentItems.map((item) => (
-            <Grow in={true} key={item.id}>
+            <Grow in key={item.id}>
               <Grid
                 item
                 xs={gridSpace}
-                sx={{
-                  borderRight: '1px solid',
-                  borderImageSlice: 1,
-                  borderImageSource:
-                    'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
-                  '&:last-child': {
-                    borderRight: 'none !important',
-                  },
-                }}
+                sx={
+                  themeCtx.currentMode === 'light'
+                    ? {
+                        borderRight: '1px solid',
+                        borderImageSlice: 1,
+                        borderImageSource:
+                          'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
+                        '&:last-child': {
+                          borderRight: 'none !important',
+                        },
+                      }
+                    : {
+                        borderRight: '1px solid',
+                        borderImageSlice: 1,
+                        borderImageSource:
+                          'linear-gradient(to bottom,#121212 25%, #e4e4e4 50%, #121212 75%)',
+                        '&:last-child': {
+                          borderRight: 'none !important',
+                        },
+                      }
+                }
               >
                 <CarouselItem
                   id={item.id}

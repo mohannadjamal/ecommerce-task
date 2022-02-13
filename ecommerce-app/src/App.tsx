@@ -1,6 +1,9 @@
+import { useContext } from 'react';
+
 import { Routes, Route } from 'react-router-dom';
 
 import { Box } from '@mui/material';
+import { ThemeProvider } from '@mui/styles';
 
 import Homepage from './pages/Homepage';
 import ProductDetails from './pages/ProductDetails';
@@ -11,11 +14,19 @@ import Footer from './components/Footer/Footer';
 import Banner from './components/Banner/Banner';
 import MainNavigation from './components/MainNavigation/MainNavigation';
 
+import lightTheme from './theme/light-theme';
+import darkTheme from './theme/dark-theme';
+import ThemeContext from './theme/theme-context';
+
 import './App.scss';
 
 function App() {
+  const themeCtx = useContext(ThemeContext);
+
   return (
-    <Box>
+    <ThemeProvider
+      theme={themeCtx.currentMode === 'light' ? lightTheme : darkTheme}
+    >
       <Banner />
       <MainNavigation />
       <Routes>
@@ -25,7 +36,7 @@ function App() {
       </Routes>
       <Newsletter />
       <Footer />
-    </Box>
+    </ThemeProvider>
   );
 }
 

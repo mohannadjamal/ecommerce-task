@@ -1,16 +1,29 @@
 import { useContext } from 'react';
 
-import { IconButton, Badge, Box, Typography, Link } from '@mui/material';
+import {
+  IconButton,
+  Badge,
+  Box,
+  Typography,
+  Link,
+  useTheme,
+} from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import CartContext from '../../store/cart-context';
 
 import logo from '../../images/logo.svg';
+import logoDark from '../../images/logo-dark.png';
+import ThemeContext from '../../theme/theme-context';
 
 function Banner() {
+  const theme = useTheme();
   const cartCtx = useContext(CartContext);
+  const themeCtx = useContext(ThemeContext);
 
   return (
     <Box
@@ -18,6 +31,7 @@ function Banner() {
         width: 1,
         display: 'flex',
         alignItems: 'center',
+        backgroundColor: theme.palette.background.default,
         justifyContent: 'space-between',
         padding: { xs: ' 0 1rem', md: '0 10%' },
       }}
@@ -25,7 +39,7 @@ function Banner() {
       <Link href='/'>
         <Box
           component='img'
-          src={logo}
+          src={themeCtx.currentMode === 'light' ? logo : logoDark}
           alt='Logo'
           sx={{
             height: 'auto',
@@ -44,24 +58,40 @@ function Banner() {
           alignItems: 'center',
         }}
       >
+        <IconButton onClick={() => themeCtx.toggleMode()}>
+          {theme.palette.mode === 'dark' ? (
+            <Brightness7Icon sx={{ color: theme.palette.primary.main }} />
+          ) : (
+            <Brightness4Icon sx={{ color: theme.palette.primary.main }} />
+          )}
+        </IconButton>
         <IconButton>
           <Badge badgeContent={0} color='error' showZero>
             <AutorenewIcon
-              sx={{ color: 'black', fontSize: { xs: 16, sm: 24, md: 32 } }}
+              sx={{
+                color: theme.palette.primary.main,
+                fontSize: { xs: 16, sm: 24, md: 32 },
+              }}
             />
           </Badge>
         </IconButton>
         <IconButton>
           <Badge badgeContent={0} color='error' showZero>
             <FavoriteBorderIcon
-              sx={{ color: 'black', fontSize: { xs: 16, sm: 24, md: 32 } }}
+              sx={{
+                color: theme.palette.primary.main,
+                fontSize: { xs: 16, sm: 24, md: 32 },
+              }}
             />
           </Badge>
         </IconButton>
         <IconButton component={Link} href='/cart'>
           <Badge badgeContent={cartCtx.totalProducts} color='error' showZero>
             <ShoppingCartOutlinedIcon
-              sx={{ color: 'black', fontSize: { xs: 16, sm: 24, md: 32 } }}
+              sx={{
+                color: theme.palette.primary.main,
+                fontSize: { xs: 16, sm: 24, md: 32 },
+              }}
             />
           </Badge>
         </IconButton>
@@ -75,13 +105,20 @@ function Banner() {
         >
           <Typography
             variant='body1'
-            sx={{ fontWeight: 700, fontSize: { xs: 8, sm: 12, md: 18 } }}
+            sx={{
+              color: theme.palette.primary.main,
+              fontWeight: 700,
+              fontSize: { xs: 8, sm: 12, md: 18 },
+            }}
           >
             Your Cart
           </Typography>
           <Typography
             variant='body2'
-            sx={{ fontSize: { xs: 6, sm: 10, md: 16 } }}
+            sx={{
+              color: theme.palette.primary.main,
+              fontSize: { xs: 6, sm: 10, md: 16 },
+            }}
           >
             ${cartCtx.totalPrice.toFixed(2)}
           </Typography>

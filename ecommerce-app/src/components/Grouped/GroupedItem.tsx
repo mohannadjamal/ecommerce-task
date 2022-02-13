@@ -6,6 +6,7 @@ import {
   Box,
   CardMedia,
   Typography,
+  useTheme,
 } from '@mui/material';
 
 type Prop = {
@@ -16,8 +17,13 @@ type Prop = {
   discount: number;
 };
 function GroupedItem(props: Prop) {
+  const theme = useTheme();
+
   return (
-    <Card elevation={0}>
+    <Card
+      elevation={0}
+      sx={{ backgroundColor: theme.palette.background.default }}
+    >
       <CardActionArea component={Link} to={`/product/${props.id}`}>
         <Box
           sx={{
@@ -32,8 +38,6 @@ function GroupedItem(props: Prop) {
                 top: '20%',
                 left: 0,
                 backgroundColor: '#ec1835',
-                width: '10%',
-                height: '15%',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -47,8 +51,8 @@ function GroupedItem(props: Prop) {
                   fontSize: {
                     xs: 8,
                     sm: 12,
-                    md: 'inital',
-                    lg: 'intial',
+                    md: 14,
+                    lg: 16,
                   },
                 }}
               >
@@ -83,6 +87,7 @@ function GroupedItem(props: Prop) {
                   sm: 12,
                   lg: 18,
                 },
+                color: theme.palette.primary.main,
               }}
             >
               {props.title}
@@ -92,7 +97,7 @@ function GroupedItem(props: Prop) {
                 <Typography
                   variant='subtitle1'
                   sx={{
-                    color: '#b1203c',
+                    color: theme.palette.secondary.main,
                     fontWeight: 700,
                     fontSize: {
                       xs: 8,
@@ -106,7 +111,7 @@ function GroupedItem(props: Prop) {
                 <Typography
                   variant='subtitle2'
                   sx={{
-                    color: '#c4c4c4',
+                    color: theme.palette.grey[500],
                     fontWeight: 700,
                     textDecoration: 'line-through',
                     marginLeft: '1rem',
@@ -124,7 +129,7 @@ function GroupedItem(props: Prop) {
               <Typography
                 variant='subtitle1'
                 sx={{
-                  color: '#b1203c',
+                  color: theme.palette.secondary.main,
                   fontSize: {
                     xs: 8,
                     sm: 12,

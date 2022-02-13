@@ -6,6 +6,7 @@ import {
   CardMedia,
   Box,
   Typography,
+  useTheme,
 } from '@mui/material';
 
 type Prop = {
@@ -17,8 +18,12 @@ type Prop = {
 };
 
 function CarouselItem(props: Prop) {
+  const theme = useTheme();
   return (
-    <Card elevation={0}>
+    <Card
+      elevation={0}
+      sx={{ backgroundColor: theme.palette.background.default }}
+    >
       <CardActionArea component={Link} to={`/product/${props.id}`}>
         <Box
           sx={{
@@ -34,11 +39,9 @@ function CarouselItem(props: Prop) {
             <Box
               sx={{
                 position: 'absolute',
-                top: '10%',
+                top: '20%',
                 left: 0,
                 backgroundColor: '#ec1835',
-                width: '20%',
-                height: '15%',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -52,7 +55,8 @@ function CarouselItem(props: Prop) {
                   fontSize: {
                     xs: 8,
                     sm: 12,
-                    md: 'inital',
+                    md: 14,
+                    lg: 16,
                   },
                 }}
               >
@@ -62,7 +66,7 @@ function CarouselItem(props: Prop) {
           )}
           <CardMedia
             component='img'
-            image={props.image}
+            src={props.image}
             alt={props.title}
             sx={{
               height: {
@@ -70,13 +74,21 @@ function CarouselItem(props: Prop) {
                 sm: 150,
                 md: 300,
               },
-              width: 1,
-              objectFit: 'contain',
+              width: {
+                xs: 50,
+                sm: 150,
+                md: 300,
+              },
+              objectFit: 'scale-down',
             }}
           />
           <Typography
             variant='body2'
-            sx={{ fontWeight: 700, fontSize: { xs: 8, sm: 12, md: 'initial' } }}
+            sx={{
+              fontWeight: 700,
+              fontSize: { xs: 8, sm: 12, md: 14, lg: 16 },
+              color: theme.palette.primary.main,
+            }}
           >
             {props.title}
           </Typography>
@@ -85,9 +97,9 @@ function CarouselItem(props: Prop) {
               <Typography
                 variant='subtitle1'
                 sx={{
-                  color: '#b1203c',
+                  color: theme.palette.secondary.light,
                   fontWeight: 700,
-                  fontSize: { xs: 8, sm: 12, md: 'initial' },
+                  fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
                 }}
               >
                 ${(props.price - props.price * props.discount).toFixed(2)}
@@ -95,9 +107,9 @@ function CarouselItem(props: Prop) {
               <Typography
                 variant='subtitle2'
                 sx={{
-                  color: '#c4c4c4',
+                  color: theme.palette.grey[500],
                   fontWeight: 700,
-                  fontSize: { xs: 6, sm: 10, md: 'initial' },
+                  fontSize: { xs: 6, sm: 10, md: 12, lg: 14 },
                   textDecoration: 'line-through',
                   marginLeft: '0.5rem',
                 }}
@@ -110,8 +122,8 @@ function CarouselItem(props: Prop) {
               variant='subtitle1'
               sx={{
                 fontWeight: 700,
-                fontSize: { xs: 8, sm: 12, md: 'initial' },
-                color: '#b1203c',
+                fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                color: theme.palette.secondary.light,
               }}
             >
               ${props.price.toFixed(2)}

@@ -22,8 +22,6 @@ import stripe from '../../images/stripe.png';
 import paypal from '../../images/paypal.png';
 import discover from '../../images/discover.png';
 
-let theme = createTheme();
-
 function Footer() {
   return (
     <Box>

@@ -13,6 +13,7 @@ import {
   Paper,
   Button,
   IconButton,
+  useTheme,
 } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -20,6 +21,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import CartContext from '../store/cart-context';
 
 function Cart() {
+  const theme = useTheme();
+  
   const cartCtx = useContext(CartContext);
 
   const calculatePrice = (price: number, discount: number) => {
@@ -37,6 +40,7 @@ function Cart() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Typography
@@ -45,6 +49,7 @@ function Cart() {
           fontWeight: 400,
           marginY: '3rem',
           fontSize: { xs: 24, sm: 32, md: 48, lg: 60 },
+          color: theme.palette.primary.main,
         }}
       >
         Shopping Cart
@@ -268,9 +273,10 @@ function Cart() {
           xs={12}
           lg={4}
           sx={{
+            marginTop: { xs: '2rem', lg: '0rem' },
             border: 'thin solid #dedede',
             backgroundColor: '#ebebeb',
-            height: '35vh',
+            height: { xs: '300px', lg: '350px' },
           }}
         >
           <TableContainer

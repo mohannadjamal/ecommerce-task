@@ -6,12 +6,17 @@ import App from './App';
 import './index.scss';
 
 import { CartContextProvider } from './store/cart-context';
+import { ThemeContextProvider } from './theme/theme-context';
 
 ReactDOM.render(
-  <CartContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </CartContextProvider>,
+  <>
+    <ThemeContextProvider>
+      <CartContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </CartContextProvider>
+    </ThemeContextProvider>
+  </>,
   document.getElementById('root')
 );

@@ -1,4 +1,6 @@
-import { Box, Divider, Grid, Typography } from '@mui/material';
+import { Box, Divider, Grid, Typography, useTheme } from '@mui/material';
+import { useContext } from 'react';
+import ThemeContext from '../../theme/theme-context';
 
 import GroupedItem from './GroupedItem';
 
@@ -8,13 +10,16 @@ type Prop = {
 };
 
 function Grouped(props: Prop) {
+  const themeCtx = useContext(ThemeContext);
+  const theme = useTheme();
+
   const shuffledItems = props.items.sort(() => 0.5 - Math.random());
   let selectedItems = shuffledItems.slice(0, 6);
 
   return (
     <Box
       sx={{
-        backgroundColor: '#ffffff',
+        backgroundColor: theme.palette.background.default,
         padding: '0.5rem 1.5rem',
       }}
     >
@@ -26,6 +31,7 @@ function Grouped(props: Prop) {
           margin: 0,
           paddingTop: '1rem',
           paddingBottom: '0.5rem',
+          color: theme.palette.primary.light,
 
           '&::after': {
             content: '""',
@@ -40,23 +46,36 @@ function Grouped(props: Prop) {
       >
         {props.title}
       </Typography>
-      <Divider />
+      <Divider sx={{ backgroundColor: theme.palette.divider }} />
       <Grid container>
         {selectedItems.map((item) => (
           <Grid
             item
             key={item.id}
             xs={4}
-            sx={{
-              borderRight: '1px solid',
-              borderImageSlice: 1,
-              borderImageSource:
-                'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
-              '&:nth-child(3n)': {
-                borderRight: 'none !important',
-              },
-              marginY: '1rem',
-            }}
+            sx={
+              themeCtx.currentMode === 'light'
+                ? {
+                    borderRight: '1px solid',
+                    borderImageSlice: 1,
+                    borderImageSource:
+                      'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
+                    '&:nth-of-type(3n)': {
+                      borderRight: 'none !important',
+                    },
+                    marginY: '1rem',
+                  }
+                : {
+                    borderRight: '1px solid',
+                    borderImageSlice: 1,
+                    borderImageSource:
+                      'linear-gradient(to bottom,#121212 25%, #e4e4e4 50%, #121212 75%)',
+                    '&:nth-of-type(3n)': {
+                      borderRight: 'none !important',
+                    },
+                    marginY: '1rem',
+                  }
+            }
           >
             <GroupedItem
               id={item.id}

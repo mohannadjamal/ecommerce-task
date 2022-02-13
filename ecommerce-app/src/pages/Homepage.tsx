@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography, useTheme } from '@mui/material';
 
 import Carousel from '../components/Carousel/Carousel';
 import Grouped from '../components/Grouped/Grouped';
@@ -14,6 +14,7 @@ import dell from '../images/dell.png';
 import toshiba from '../images/toshiba.png';
 
 function Homepage() {
+  const theme = useTheme();
   const [isLoading, setIsLoading] = useState(true);
   const [loadedProducts, setLoadedProducts] = useState<any[]>([]);
 
@@ -65,14 +66,18 @@ function Homepage() {
   const secondCarouselItems = secondCarouselQuery();
   if (isLoading) return <Box></Box>;
   return (
-    <Box>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.default,
+      }}
+    >
       <Box
         sx={{
           padding: {
             xs: '1rem 0',
             md: '3rem 10%',
           },
-          backgroundColor: '#ebebeb',
+          backgroundColor: theme.palette.background.paper,
         }}
       >
         <Carousel
@@ -122,6 +127,7 @@ function Homepage() {
             height: 50,
             display: 'flex',
             width: 1,
+            marginBottom: '3rem',
           }}
         >
           <Box
@@ -138,8 +144,8 @@ function Homepage() {
             <Typography
               variant='subtitle1'
               sx={{
-                color: '#ffffff',
-                fontSize: { xs: 8, sm: 12, md: 'initial' },
+                color: theme.palette.common.white,
+                fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
               }}
             >
               Save your money with super promotion, available every Sunday in
@@ -168,12 +174,13 @@ function Homepage() {
             <Typography
               variant='body2'
               sx={{
-                color: '#ffffff',
+                color: theme.palette.common.white,
                 paddingRight: '1rem',
                 fontSize: {
                   xs: 10,
                   sm: 12,
-                  md: 'initial',
+                  md: 14,
+                  lg: 16,
                 },
               }}
             >
