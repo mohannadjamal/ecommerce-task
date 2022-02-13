@@ -74,12 +74,8 @@ function CarouselItem(props: Prop) {
                 sm: 150,
                 md: 300,
               },
-              width: {
-                xs: 50,
-                sm: 150,
-                md: 300,
-              },
-              objectFit: 'scale-down',
+              width: 1,
+              objectFit: 'contain',
             }}
           />
           <Typography
