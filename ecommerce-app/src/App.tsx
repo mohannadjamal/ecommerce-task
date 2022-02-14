@@ -2,8 +2,9 @@ import { useContext } from 'react';
 
 import { Routes, Route } from 'react-router-dom';
 
-import { Box } from '@mui/material';
-import { ThemeProvider } from '@mui/styles';
+import { ThemeProvider } from '@mui/material';
+
+import { useTranslation } from 'react-i18next';
 
 import Homepage from './pages/Homepage';
 import ProductDetails from './pages/ProductDetails';

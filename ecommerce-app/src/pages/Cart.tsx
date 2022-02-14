@@ -22,7 +22,7 @@ import CartContext from '../store/cart-context';
 
 function Cart() {
   const theme = useTheme();
-  
+
   const cartCtx = useContext(CartContext);
 
   const calculatePrice = (price: number, discount: number) => {
@@ -56,14 +56,18 @@ function Cart() {
       </Typography>
       <Grid container>
         <Grid item xs={12} lg={8} sx={{ paddingRight: { xs: 0, lg: '3rem' } }}>
-          <TableContainer component={Paper} elevation={0}>
+          <TableContainer
+            component={Paper}
+            elevation={0}
+            sx={{ backgroundColor: theme.palette.background.default }}
+          >
             <Table size='small' aria-label='a dense table'>
               <TableHead sx={{ borderTop: 'thin solid #dedede' }}>
                 <TableRow>
                   <TableCell
                     sx={{
                       width: '90%',
-                      color: '#808080',
+                      color: theme.palette.primary.main,
                       fontWeight: 700,
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
@@ -73,7 +77,7 @@ function Cart() {
                   <TableCell
                     align='center'
                     sx={{
-                      color: '#808080',
+                      color: theme.palette.primary.main,
                       fontWeight: 700,
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
@@ -83,7 +87,7 @@ function Cart() {
                   <TableCell
                     align='center'
                     sx={{
-                      color: '#808080',
+                      color: theme.palette.primary.main,
                       fontWeight: 700,
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
@@ -93,7 +97,7 @@ function Cart() {
                   <TableCell
                     align='center'
                     sx={{
-                      color: '#808080',
+                      color: theme.palette.primary.main,
                       fontWeight: 700,
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
@@ -135,7 +139,7 @@ function Cart() {
                           <Typography
                             variant='subtitle1'
                             sx={{
-                              color: '#808080',
+                              color: theme.palette.primary.main,
                               fontWeight: 200,
                               fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
                             }}
@@ -151,6 +155,7 @@ function Cart() {
                                 sx={{
                                   fontWeight: 500,
                                   fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                                  color: theme.palette.secondary.main,
                                 }}
                               >
                                 $
@@ -162,7 +167,7 @@ function Cart() {
                               <Typography
                                 variant='subtitle2'
                                 sx={{
-                                  color: '#c4c4c4',
+                                  color: theme.palette.primary.main,
                                   fontWeight: 700,
                                   textDecoration: 'line-through',
                                   marginLeft: '1rem',
@@ -178,6 +183,7 @@ function Cart() {
                               sx={{
                                 fontWeight: 500,
                                 fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                                color: theme.palette.secondary.main,
                               }}
                             >
                               ${row.price.toFixed(2)}
@@ -192,6 +198,7 @@ function Cart() {
                         sx={{
                           fontWeight: 500,
                           fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                          color: theme.palette.secondary.main,
                         }}
                       >
                         ${calculatePrice(row.price, row.discount).toFixed(2)}
@@ -219,7 +226,10 @@ function Cart() {
                           -
                         </Button>
                         <Box
-                          sx={{ fontSize: { xs: 8, sm: 12, md: 16, lg: 20 } }}
+                          sx={{
+                            fontSize: { xs: 8, sm: 12, md: 16, lg: 20 },
+                            color: theme.palette.primary.main,
+                          }}
                         >
                           {row.amount}
                         </Box>
@@ -244,6 +254,7 @@ function Cart() {
                           sx={{
                             fontWeight: 500,
                             fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                            color: theme.palette.secondary.main,
                           }}
                         >
                           $
@@ -257,6 +268,7 @@ function Cart() {
                           <CloseIcon
                             sx={{
                               fontSize: { xs: 12, sm: 16, md: 24, lg: 32 },
+                              color: theme.palette.primary.main,
                             }}
                           />
                         </IconButton>
@@ -275,14 +287,14 @@ function Cart() {
           sx={{
             marginTop: { xs: '2rem', lg: '0rem' },
             border: 'thin solid #dedede',
-            backgroundColor: '#ebebeb',
+            backgroundColor: theme.palette.background.paper,
             height: { xs: '300px', lg: '350px' },
           }}
         >
           <TableContainer
             component={Paper}
             elevation={0}
-            sx={{ backgroundColor: '#ebebeb' }}
+            sx={{ backgroundColor: theme.palette.background.paper }}
           >
             <Table size='small' aria-label='a dense table'>
               <TableHead>
@@ -290,7 +302,7 @@ function Cart() {
                   <TableCell
                     sx={{
                       paddingY: '1rem',
-                      color: '#808080',
+                      color: theme.palette.primary.main,
                       fontWeight: 700,
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
@@ -306,7 +318,7 @@ function Cart() {
                     <Typography
                       variant='body2'
                       sx={{
-                        color: '#8f8f8f',
+                        color: theme.palette.primary.main,
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                       }}
                     >
@@ -319,6 +331,7 @@ function Cart() {
                       sx={{
                         fontWeight: 500,
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                        color: theme.palette.primary.main,
                       }}
                     >
                       ${cartCtx.totalPrice.toFixed(2)}
@@ -330,7 +343,7 @@ function Cart() {
                     <Typography
                       variant='body2'
                       sx={{
-                        color: '#8f8f8f',
+                        color: theme.palette.primary.main,
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                       }}
                     >
@@ -343,6 +356,7 @@ function Cart() {
                       sx={{
                         fontWeight: 500,
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                        color: theme.palette.primary.main,
                       }}
                     >
                       $5.00
@@ -354,7 +368,7 @@ function Cart() {
                     <Typography
                       variant='body2'
                       sx={{
-                        color: '#8f8f8f',
+                        color: theme.palette.primary.main,
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                       }}
                     >
@@ -365,6 +379,7 @@ function Cart() {
                     <Typography
                       variant='body1'
                       sx={{
+                        color: theme.palette.primary.main,
                         fontWeight: 500,
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                       }}
@@ -405,6 +420,7 @@ function Cart() {
               variant='subtitle1'
               sx={{
                 fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                color: theme.palette.primary.main,
               }}
             >
               Check Out with Multiple Addresses

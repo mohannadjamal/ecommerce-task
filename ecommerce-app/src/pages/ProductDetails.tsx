@@ -9,10 +9,10 @@ import {
   Grid,
   IconButton,
   Link,
-  Paper,
   Typography,
   Tabs,
   Tab,
+  useTheme,
 } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -63,6 +63,8 @@ function a11yProps(index: number) {
   };
 }
 function ProductDetails() {
+  const theme = useTheme();
+
   const { productId } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -128,6 +130,7 @@ function ProductDetails() {
           md: '3rem 1rem',
           lg: '3rem 10%',
         },
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Grid container>
@@ -143,23 +146,24 @@ function ProductDetails() {
           }}
         >
           {loadedProduct.images.map((image: string, index: number) => (
-            <Paper
+            <Box
               key={index}
-              elevation={0}
-              variant='outlined'
               component='img'
               onClick={() => clickImage(index)}
               src={image}
               sx={
                 currentImage === index
                   ? {
-                      borderColor: '#b1203c',
+                      border: 'thin solid',
+                      borderColor: theme.palette.secondary.main,
                       height: { xs: 40, sm: 40, md: 75, lg: 150 },
                       width: { xs: 40, sm: 40, md: 75, lg: 150 },
                       objectFit: 'contain',
                       borderRadius: 0,
                     }
                   : {
+                      border: 'thin solid',
+                      borderColor: theme.palette.grey[400],
                       height: { xs: 40, sm: 40, md: 75, lg: 150 },
                       width: { xs: 40, sm: 40, md: 75, lg: 150 },
                       objectFit: 'contain',
@@ -183,8 +187,9 @@ function ProductDetails() {
             component='img'
             src={loadedProduct.images[currentImage]}
             sx={{
-              height: 'auto',
+              height: { xs: 100, sm: 200, md: 300, lg: 435 },
               width: { xs: 100, sm: 200, md: 300, lg: 435 },
+              objectFit: 'contain',
             }}
           />
         </Grid>
@@ -196,7 +201,7 @@ function ProductDetails() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            alignItems: { xs: 'center', lg: 'flex-start' },
+            alignItems: { xs: 'center',sm: 'flex-start' },
           }}
         >
           <Breadcrumbs
@@ -204,7 +209,7 @@ function ProductDetails() {
             sx={{
               fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
               fontWeight: 400,
-              color: '#cdcdcd',
+              color: theme.palette.grey[300],
             }}
           >
             <Link
@@ -215,7 +220,7 @@ function ProductDetails() {
                 paddingRight: '1rem',
                 fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 fontWeight: 400,
-                color: '#cdcdcd',
+                color: theme.palette.grey[300],
               }}
             >
               Home
@@ -225,7 +230,7 @@ function ProductDetails() {
                 paddingLeft: '1rem',
                 fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 fontWeight: 400,
-                color: '#cdcdcd',
+                color: theme.palette.grey[300],
               }}
             >
               {loadedProduct.title}
@@ -238,6 +243,7 @@ function ProductDetails() {
               marginTop: '1rem',
               marginBottom: '2rem',
               fontSize: { xs: 14, sm: 18, md: 24, lg: 34 },
+              color: theme.palette.primary.main,
             }}
           >
             {loadedProduct.title}
@@ -248,7 +254,7 @@ function ProductDetails() {
                 variant='h6'
                 sx={{
                   fontWeight: 700,
-                  color: '#b1203c',
+                  color: theme.palette.secondary.main,
                   marginBottom: '1rem',
                   fontSize: { xs: 12, sm: 14, md: 18, lg: 20 },
                 }}
@@ -262,7 +268,7 @@ function ProductDetails() {
               <Typography
                 variant='subtitle2'
                 sx={{
-                  color: '#c4c4c4',
+                  color: theme.palette.grey[100],
                   fontWeight: 700,
                   textDecoration: 'line-through',
                   marginLeft: '1rem',
@@ -277,7 +283,7 @@ function ProductDetails() {
               variant='h6'
               sx={{
                 fontWeight: 700,
-                color: '#b1203c',
+                color: theme.palette.secondary.main,
                 marginBottom: '1rem',
                 fontSize: { xs: 12, sm: 14, md: 18, lg: 20 },
               }}
@@ -290,6 +296,7 @@ function ProductDetails() {
             sx={{
               marginBottom: '2rem',
               fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+              color: theme.palette.primary.main,
             }}
           >
             {loadedProduct.description}
@@ -324,7 +331,12 @@ function ProductDetails() {
               >
                 -
               </Button>
-              <Box sx={{ fontSize: { xs: 12, sm: 16, md: 20, lg: 24 } }}>
+              <Box
+                sx={{
+                  fontSize: { xs: 12, sm: 16, md: 20, lg: 24 },
+                  color: theme.palette.primary.main,
+                }}
+              >
                 {amount}
               </Box>
               <Button
@@ -340,10 +352,22 @@ function ProductDetails() {
                 +
               </Button>
             </Box>
-            <IconButton sx={{ borderRadius: 0, border: 'thin solid #cdcdcd' }}>
+            <IconButton
+              sx={{
+                borderRadius: 0,
+                border: 'thin solid #cdcdcd',
+                color: theme.palette.primary.main,
+              }}
+            >
               <AutorenewIcon />
             </IconButton>
-            <IconButton sx={{ borderRadius: 0, border: 'thin solid #cdcdcd' }}>
+            <IconButton
+              sx={{
+                borderRadius: 0,
+                border: 'thin solid #cdcdcd',
+                color: theme.palette.primary.main,
+              }}
+            >
               <FavoriteBorderIcon />
             </IconButton>
           </Box>
@@ -400,22 +424,31 @@ function ProductDetails() {
             textColor='inherit'
             TabIndicatorProps={{
               style: {
-                backgroundColor: '#000000',
+                backgroundColor: theme.palette.primary.main,
               },
             }}
           >
             <Tab
-              sx={{ fontSize: { xs: 8, sm: 10, md: 12, lg: 14 } }}
+              sx={{
+                fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                color: theme.palette.primary.main,
+              }}
               label='DETAILS'
               {...a11yProps(0)}
             />
             <Tab
-              sx={{ fontSize: { xs: 8, sm: 10, md: 12, lg: 14 } }}
+              sx={{
+                fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                color: theme.palette.primary.main,
+              }}
               label='MORE INFORMATION'
               {...a11yProps(1)}
             />
             <Tab
-              sx={{ fontSize: { xs: 8, sm: 10, md: 12, lg: 14 } }}
+              sx={{
+                fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                color: theme.palette.primary.main,
+              }}
               label='REVIEWS'
               {...a11yProps(2)}
             />
@@ -424,7 +457,10 @@ function ProductDetails() {
         <TabPanel value={value} index={0}>
           <Typography
             variant='body1'
-            sx={{ fontSize: { xs: 10, sm: 12, md: 14, lg: 16 } }}
+            sx={{
+              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+              color: theme.palette.primary.main,
+            }}
           >
             {loadedProduct.description}
           </Typography>
@@ -432,7 +468,10 @@ function ProductDetails() {
         <TabPanel value={value} index={1}>
           <Typography
             variant='body1'
-            sx={{ fontSize: { xs: 10, sm: 12, md: 14, lg: 16 } }}
+            sx={{
+              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+              color: theme.palette.primary.main,
+            }}
           >
             Unimplemented
           </Typography>
@@ -440,7 +479,10 @@ function ProductDetails() {
         <TabPanel value={value} index={2}>
           <Typography
             variant='body1'
-            sx={{ fontSize: { xs: 10, sm: 12, md: 14, lg: 16 } }}
+            sx={{
+              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+              color: theme.palette.primary.main,
+            }}
           >
             Unimplemented
           </Typography>

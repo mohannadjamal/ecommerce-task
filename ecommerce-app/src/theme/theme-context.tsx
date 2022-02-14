@@ -1,14 +1,25 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext({
-  currentMode: '' as string,
+  currentMode: 'light' as 'light' | 'dark',
   toggleMode: () => {},
 });
 type Prop = {
   children?: JSX.Element;
 };
 export function ThemeContextProvider(props: Prop) {
-  const [mode, setMode] = useState<string>('');
+  const [mode, setMode] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    const themeData = JSON.parse(localStorage.getItem('mode') || '');
+    if (themeData) {
+      setMode(themeData);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('mode', JSON.stringify(mode));
+  }, [mode]);
 
   function toggleModeHandler() {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));

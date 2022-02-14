@@ -11,8 +11,6 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { TransitionGroup } from 'react-transition-group';
-
 import CarouselItem from './CarouselItem';
 
 import ThemeContext from '../../theme/theme-context';
@@ -91,47 +89,46 @@ function Carousel(props: Prop) {
         {props.title}
       </Typography>
       <Divider sx={{ backgroundColor: theme.palette.divider }} />
-      <TransitionGroup>
-        <Grid container sx={{ marginY: '1rem' }}>
-          {currentItems.map((item) => (
-            <Grow in key={item.id}>
-              <Grid
-                item
-                xs={gridSpace}
-                sx={
-                  themeCtx.currentMode === 'light'
-                    ? {
-                        borderRight: '1px solid',
-                        borderImageSlice: 1,
-                        borderImageSource:
-                          'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
-                        '&:last-child': {
-                          borderRight: 'none !important',
-                        },
-                      }
-                    : {
-                        borderRight: '1px solid',
-                        borderImageSlice: 1,
-                        borderImageSource:
-                          'linear-gradient(to bottom,#121212 25%, #e4e4e4 50%, #121212 75%)',
-                        '&:last-child': {
-                          borderRight: 'none !important',
-                        },
-                      }
-                }
-              >
-                <CarouselItem
-                  id={item.id}
-                  title={item.title}
-                  image={item.images[0]}
-                  price={item.price}
-                  discount={item.discount}
-                />
-              </Grid>
-            </Grow>
-          ))}
-        </Grid>
-      </TransitionGroup>
+      <Grid container sx={{ marginY: '1rem' }}>
+        {currentItems.map((item) => (
+          <Grow in key={item.id}>
+            <Grid
+              item
+              xs={gridSpace}
+              sx={
+                themeCtx.currentMode === 'light'
+                  ? {
+                      borderRight: '1px solid',
+                      borderImageSlice: 1,
+                      borderImageSource:
+                        'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
+                      '&:last-child': {
+                        borderRight: 'none !important',
+                      },
+                    }
+                  : {
+                      borderRight: '1px solid',
+                      borderImageSlice: 1,
+                      borderImageSource:
+                        'linear-gradient(to bottom,#121212 25%, #e4e4e4 50%, #121212 75%)',
+                      '&:last-child': {
+                        borderRight: 'none !important',
+                      },
+                    }
+              }
+            >
+              <CarouselItem
+                id={item.id}
+                title={item.title}
+                image={item.images[0]}
+                price={item.price}
+                discount={item.discount}
+              />
+            </Grid>
+          </Grow>
+        ))}
+      </Grid>
+
       <Box>
         <List
           sx={{
