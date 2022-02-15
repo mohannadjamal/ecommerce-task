@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   Box,
   Divider,
@@ -22,6 +24,8 @@ type Prop = {
 };
 
 function Carousel(props: Prop) {
+  const { i18n } = useTranslation();
+
   const themeCtx = useContext(ThemeContext);
   const theme = useTheme();
 
@@ -67,24 +71,45 @@ function Carousel(props: Prop) {
     >
       <Typography
         variant='h6'
-        sx={{
-          color: theme.palette.primary.light,
-          position: 'relative',
-          width: 1,
-          margin: 0,
-          paddingTop: '1rem',
-          paddingBottom: '0.5rem',
+        sx={
+          i18n.dir() === 'ltr'
+            ? {
+                color: theme.palette.primary.light,
+                position: 'relative',
+                width: 1,
+                margin: 0,
+                paddingTop: '1rem',
+                paddingBottom: '0.5rem',
 
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            backgroundColor: '#ab1d2b',
-            width: '7rem',
-            height: 3,
-            bottom: 0,
-            left: 0,
-          },
-        }}
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  backgroundColor: '#ab1d2b',
+                  width: '7rem',
+                  height: 3,
+                  bottom: 0,
+                  left: 0,
+                },
+              }
+            : {
+                color: theme.palette.primary.light,
+                position: 'relative',
+                width: 1,
+                margin: 0,
+                paddingTop: '1rem',
+                paddingBottom: '0.5rem',
+
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  backgroundColor: '#ab1d2b',
+                  width: '7rem',
+                  height: 3,
+                  bottom: 0,
+                  right: 0,
+                },
+              }
+        }
       >
         {props.title}
       </Typography>

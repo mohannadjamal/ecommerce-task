@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   Box,
   createTheme,
@@ -23,6 +25,7 @@ import paypal from '../../images/paypal.png';
 import discover from '../../images/discover.png';
 
 function Footer() {
+  const { t } = useTranslation();
   return (
     <Box>
       <Box
@@ -58,7 +61,7 @@ function Footer() {
                   fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 }}
               >
-                Our office Address
+                {t('footer.address.title')}
               </Typography>
               <Typography
                 variant='subtitle1'
@@ -76,9 +79,10 @@ function Footer() {
                   fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 }}
               >
-                Please call Us:
+                {t('footer.phone.title')}
               </Typography>
               <Typography
+                dir='ltr'
                 variant='subtitle1'
                 sx={{ fontSize: { xs: 10, sm: 12, md: 14, lg: 16 } }}
               >
@@ -154,7 +158,7 @@ function Footer() {
                 fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
               }}
             >
-              Our Stores
+              {t('footer.stores.title')}
             </Typography>
             <List>
               <ListItem
@@ -258,7 +262,7 @@ function Footer() {
                 fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
               }}
             >
-              My Account
+              {t('footer.account.title')}
             </Typography>
             <List>
               <ListItem
@@ -273,7 +277,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  My Cart
+                  {t('footer.account.cart')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -288,7 +292,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Check Out
+                  {t('footer.account.checkout')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -303,7 +307,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Wishlist
+                  {t('footer.account.wishlist')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -318,7 +322,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Term & Policy
+                  {t('footer.account.terms')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -333,7 +337,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Your Account
+                  {t('footer.account.account')}
                 </Typography>
               </ListItem>
             </List>
@@ -346,7 +350,7 @@ function Footer() {
                 fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
               }}
             >
-              Information
+              {t('footer.information.title')}
             </Typography>
             <List>
               <ListItem
@@ -361,7 +365,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Shipping & Return
+                  {t('footer.information.shipping')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -376,7 +380,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Giftcards
+                  {t('footer.information.giftcard')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -391,7 +395,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Track My Order
+                  {t('footer.information.track')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -406,7 +410,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Term & Policy
+                  {t('footer.information.terms')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -421,7 +425,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  FAQs
+                  {t('footer.information.faq')}
                 </Typography>
               </ListItem>
             </List>
@@ -434,7 +438,7 @@ function Footer() {
                 fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
               }}
             >
-              How to Buy
+              {t('footer.howto.title')}
             </Typography>
             <List>
               <ListItem
@@ -449,7 +453,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Making Payments
+                  {t('footer.howto.payments')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -464,7 +468,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Delivery Options
+                  {t('footer.howto.delivery')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -479,7 +483,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Buyer Protection
+                  {t('footer.howto.protection')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -494,7 +498,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  New User Guide
+                  {t('footer.howto.guide')}
                 </Typography>
               </ListItem>
               <ListItem
@@ -509,7 +513,7 @@ function Footer() {
                     fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                   }}
                 >
-                  Partner Ship
+                  {t('footer.howto.partnership')}
                 </Typography>
               </ListItem>
             </List>
@@ -531,7 +535,7 @@ function Footer() {
           variant='body2'
           sx={{ fontSize: { xs: 8, sm: 10, md: 12, lg: 14 } }}
         >
-          © 2022 Made by Mohannad Jamal. All Rights Reserved.
+          {t('footer.copyright')}
         </Typography>
         <Box component='footer'>
           <Box

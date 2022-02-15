@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   IconButton,
   Badge,
@@ -24,6 +26,8 @@ function Banner() {
   const theme = useTheme();
   const cartCtx = useContext(CartContext);
   const themeCtx = useContext(ThemeContext);
+
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -111,7 +115,7 @@ function Banner() {
               fontSize: { xs: 8, sm: 12, md: 18 },
             }}
           >
-            Your Cart
+            {t('banner.cart')}
           </Typography>
           <Typography
             variant='body2'

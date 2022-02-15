@@ -5,7 +5,7 @@ import cookies from 'js-cookie';
 import languages from './languages';
 
 const LocalizationContext = createContext({
-  currentLanguageCode: 'en' as 'en' | 'ar',
+  currentLanguageCode: 'en' as string,
   currentLanguageDir: 'ltr' as string,
   changeLanguage: (code: string): any => {},
 });
@@ -23,4 +23,21 @@ export function LocalizationContextProvider(props: Prop) {
     document.body.dir = currentLanguage?.dir || 'ltr';
     setDir(currentLanguage?.dir || 'ltr');
   }, [currentLanguage]);
+
+  function changeLanguageHandler(code: string) {
+    i18next.changeLanguage(code);
+  }
+
+  const context = {
+    currentLanguageCode: currentLanguageCode,
+    currentLanguageDir: dir,
+    changeLanguage: changeLanguageHandler,
+  };
+
+  return (
+    <LocalizationContext.Provider value={context}>
+      {props.children}
+    </LocalizationContext.Provider>
+  );
 }
+export default LocalizationContext;

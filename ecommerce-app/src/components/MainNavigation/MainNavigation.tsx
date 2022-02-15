@@ -1,3 +1,7 @@
+import { useState } from 'react';
+
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 import {
   Box,
@@ -7,13 +11,35 @@ import {
   Link,
   useTheme,
   useMediaQuery,
+  Select,
+  MenuItem,
+  FormControl,
+  SelectChangeEvent,
 } from '@mui/material';
 
 import DrawerComponent from '../DrawerComponent/DrawerComponent';
 
+import languages from '../../localization/languages';
+
 function MainNavigation() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const { t, i18n } = useTranslation();
+  document.body.dir = i18n.dir();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    document.body.dir = i18n.dir();
+    theme.direction = i18n.dir();
+    console.log(theme.direction);
+  };
+
+  const [language, setLanguage] = useState('');
+  const handleChange = (event: SelectChangeEvent) => {
+    setLanguage(event.target.value);
+  };
+
   return (
     <Box
       component='nav'
@@ -23,6 +49,7 @@ function MainNavigation() {
         backgroundColor: '#1c252e',
         padding: { xs: ' 0 1rem', md: '0 10%' },
         display: 'flex',
+        justifyContent: 'space-between',
         alignItems: 'center',
       }}
     >
@@ -46,7 +73,7 @@ function MainNavigation() {
                   color: '#ffffff',
                 }}
               >
-                HOME
+                {t('nav.home')}
               </Link>
             </ListItemText>
           </ListItem>
@@ -60,7 +87,7 @@ function MainNavigation() {
                   color: '#ffffff',
                 }}
               >
-                SHOP
+                {t('nav.shop')}
               </Link>
             </ListItemText>
           </ListItem>
@@ -74,7 +101,7 @@ function MainNavigation() {
                   color: '#ffffff',
                 }}
               >
-                PAGES
+                {t('nav.pages')}
               </Link>
             </ListItemText>
           </ListItem>
@@ -88,7 +115,7 @@ function MainNavigation() {
                   color: '#ffffff',
                 }}
               >
-                LOOKBOOK
+                {t('nav.lookbook')}
               </Link>
             </ListItemText>
           </ListItem>
@@ -102,12 +129,28 @@ function MainNavigation() {
                   color: '#ffffff',
                 }}
               >
-                BRANDS
+                {t('nav.brands')}
               </Link>
             </ListItemText>
           </ListItem>
         </List>
       )}
+      <FormControl
+        variant='standard'
+        sx={{ m: 1, minWidth: 120, backgroundColor: '#fff' }}
+      >
+        <Select onChange={handleChange} value={language}>
+          {languages.map(({ code, name }) => (
+            <MenuItem
+              key={code}
+              value={name}
+              onClick={() => changeLanguage(code)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </Box>
   );
 }

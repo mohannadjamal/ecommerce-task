@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from 'react';
 
 import { useParams } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   Box,
   Breadcrumbs,
@@ -63,6 +65,8 @@ function a11yProps(index: number) {
   };
 }
 function ProductDetails() {
+  const { t } = useTranslation();
+
   const theme = useTheme();
 
   const { productId } = useParams();
@@ -201,7 +205,7 @@ function ProductDetails() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            alignItems: { xs: 'center',sm: 'flex-start' },
+            alignItems: { xs: 'center', sm: 'flex-start' },
           }}
         >
           <Breadcrumbs
@@ -223,7 +227,7 @@ function ProductDetails() {
                 color: theme.palette.grey[300],
               }}
             >
-              Home
+              {t('product.breadcrumb')}
             </Link>
             <Typography
               sx={{
@@ -388,7 +392,7 @@ function ProductDetails() {
               boxShadow: 'none',
             }}
           >
-            ADD TO CART
+            {t('product.button')}
           </Button>
 
           <Typography
@@ -399,7 +403,7 @@ function ProductDetails() {
               fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
             }}
           >
-            {loadedProduct.title} is available to buy in increments of 1
+            {loadedProduct.title} {t('product.info')}
           </Typography>
 
           <Typography
@@ -433,7 +437,7 @@ function ProductDetails() {
                 fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 color: theme.palette.primary.main,
               }}
-              label='DETAILS'
+              label={t('product.tab.details')}
               {...a11yProps(0)}
             />
             <Tab
@@ -441,7 +445,7 @@ function ProductDetails() {
                 fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 color: theme.palette.primary.main,
               }}
-              label='MORE INFORMATION'
+              label={t('product.tab.info')}
               {...a11yProps(1)}
             />
             <Tab
@@ -449,13 +453,14 @@ function ProductDetails() {
                 fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 color: theme.palette.primary.main,
               }}
-              label='REVIEWS'
+              label={t('product.tab.reviews')}
               {...a11yProps(2)}
             />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
           <Typography
+            dir='ltr'
             variant='body1'
             sx={{
               fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
@@ -473,7 +478,7 @@ function ProductDetails() {
               color: theme.palette.primary.main,
             }}
           >
-            Unimplemented
+            {t('product.tab.unimplemented')}
           </Typography>
         </TabPanel>
         <TabPanel value={value} index={2}>
@@ -484,7 +489,7 @@ function ProductDetails() {
               color: theme.palette.primary.main,
             }}
           >
-            Unimplemented
+            {t('product.tab.unimplemented')}
           </Typography>
         </TabPanel>
       </Box>

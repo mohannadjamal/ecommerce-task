@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { Box, Grid, Typography, useTheme } from '@mui/material';
 
 import Carousel from '../components/Carousel/Carousel';
@@ -14,7 +16,9 @@ import dell from '../images/dell.png';
 import toshiba from '../images/toshiba.png';
 
 function Homepage() {
+  const { t } = useTranslation();
   const theme = useTheme();
+
   const [isLoading, setIsLoading] = useState(true);
   const [loadedProducts, setLoadedProducts] = useState<any[]>([]);
 
@@ -81,7 +85,7 @@ function Homepage() {
         }}
       >
         <Carousel
-          title={'Smartphones & Tablets'}
+          title={t('homepage.carouselOne')}
           itemsPerPage={firstCarouselItems}
           items={laptopProducts}
         />
@@ -105,7 +109,7 @@ function Homepage() {
         >
           <Box sx={{ width: 1 }}>
             <Carousel
-              title={'Audio & Sound'}
+              title={t('homepage.carouselTwo')}
               itemsPerPage={secondCarouselItems}
               items={audioProducts}
             />
@@ -189,7 +193,7 @@ function Homepage() {
           </Box>
         </Box>
         <Box>
-          <Grouped title='Camera & Lens' items={cameraProducts} />
+          <Grouped title={t('homepage.grouped')} items={cameraProducts} />
         </Box>
         <Grid container sx={{ paddingY: '5rem', textAlign: 'center' }}>
           <Grid item xs={2}>

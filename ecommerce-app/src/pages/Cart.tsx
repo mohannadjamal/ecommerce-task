@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   Box,
   Grid,
@@ -21,6 +23,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import CartContext from '../store/cart-context';
 
 function Cart() {
+  const { t } = useTranslation();
+
   const theme = useTheme();
 
   const cartCtx = useContext(CartContext);
@@ -52,7 +56,7 @@ function Cart() {
           color: theme.palette.primary.main,
         }}
       >
-        Shopping Cart
+        {t('cart.title')}
       </Typography>
       <Grid container>
         <Grid item xs={12} lg={8} sx={{ paddingRight: { xs: 0, lg: '3rem' } }}>
@@ -72,7 +76,7 @@ function Cart() {
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
                   >
-                    Product Name
+                    {t('cart.table.product')}
                   </TableCell>
                   <TableCell
                     align='center'
@@ -82,7 +86,7 @@ function Cart() {
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
                   >
-                    Price
+                    {t('cart.table.price')}
                   </TableCell>
                   <TableCell
                     align='center'
@@ -92,7 +96,7 @@ function Cart() {
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
                   >
-                    Quantity
+                    {t('cart.table.quantity')}
                   </TableCell>
                   <TableCell
                     align='center'
@@ -102,7 +106,7 @@ function Cart() {
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
                   >
-                    Total
+                    {t('cart.table.total')}
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -307,7 +311,7 @@ function Cart() {
                       fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                     }}
                   >
-                    Summary
+                    {t('cart.checkout.summary')}
                   </TableCell>
                   <TableCell align='right'></TableCell>
                 </TableRow>
@@ -322,7 +326,7 @@ function Cart() {
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                       }}
                     >
-                      Subtotal
+                      {t('cart.checkout.subtotal')}
                     </Typography>
                   </TableCell>
                   <TableCell align='right'>
@@ -347,7 +351,7 @@ function Cart() {
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                       }}
                     >
-                      Shipping (Flat Rate - Fixed)
+                      {t('cart.checkout.shipping')}
                     </Typography>
                   </TableCell>
                   <TableCell align='right'>
@@ -372,7 +376,7 @@ function Cart() {
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                       }}
                     >
-                      Order Total
+                      {t('cart.checkout.total')}
                     </Typography>
                   </TableCell>
                   <TableCell align='right' sx={{ border: 0 }}>
@@ -414,7 +418,7 @@ function Cart() {
                 },
               }}
             >
-              GO TO CHECKOUT
+              {t('cart.checkout.button')}
             </Button>
             <Typography
               variant='subtitle1'
@@ -423,7 +427,7 @@ function Cart() {
                 color: theme.palette.primary.main,
               }}
             >
-              Check Out with Multiple Addresses
+              {t('cart.checkout.subtitle')}
             </Typography>
           </Box>
         </Grid>

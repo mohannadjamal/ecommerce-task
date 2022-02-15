@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import { Suspense } from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -27,19 +28,22 @@ i18next
       order: ['path', 'cookie', 'htmlTag'],
       caches: ['cookie'],
     },
-    react: { useSuspense: false },
+    //react: { useSuspense: false },
     backend: {
       loadPath: '/assets/locales/{{lng}}/translation.json',
     },
   });
+const loadingMarkup = <></>;
 
 ReactDOM.render(
-  <ThemeContextProvider>
-    <CartContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </CartContextProvider>
-  </ThemeContextProvider>,
+  <Suspense fallback={loadingMarkup}>
+    <ThemeContextProvider>
+      <CartContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </CartContextProvider>
+    </ThemeContextProvider>
+  </Suspense>,
   document.getElementById('root')
 );

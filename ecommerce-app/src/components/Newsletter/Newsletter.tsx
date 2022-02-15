@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import {
   Box,
   Button,
@@ -9,6 +11,9 @@ import {
 
 function Newsletter() {
   const theme: Theme = useTheme();
+
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -26,7 +31,7 @@ function Newsletter() {
           fontWeight: 700,
         }}
       >
-        Newsletter
+        {t('newsletter.title')}
       </Typography>
 
       <Typography
@@ -36,7 +41,7 @@ function Newsletter() {
           marginBottom: 4,
         }}
       >
-        Subscribe to receive coupons and gift cards
+        {t('newsletter.subtitle')}
       </Typography>
       <Box
         component='form'
@@ -53,7 +58,7 @@ function Newsletter() {
       >
         <TextField
           size='small'
-          placeholder='Email address'
+          placeholder={t('newsletter.email')}
           sx={{
             '& fieldset': {
               borderRadius: '0px',
@@ -64,7 +69,7 @@ function Newsletter() {
             },
             backgroundColor: '#FFFFFF',
             width: '80%',
-            marginRight: '1rem',
+            marginX: '1rem',
           }}
         ></TextField>
         <Button
@@ -82,7 +87,7 @@ function Newsletter() {
             },
           }}
         >
-          SUBSCRIBE
+          {t('newsletter.button')}
         </Button>
       </Box>
     </Box>

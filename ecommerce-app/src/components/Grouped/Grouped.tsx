@@ -1,5 +1,6 @@
 import { Box, Divider, Grid, Typography, useTheme } from '@mui/material';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import ThemeContext from '../../theme/theme-context';
 
 import GroupedItem from './GroupedItem';
@@ -16,6 +17,8 @@ function Grouped(props: Prop) {
   const shuffledItems = props.items.sort(() => 0.5 - Math.random());
   let selectedItems = shuffledItems.slice(0, 6);
 
+  const { i18n } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -25,24 +28,45 @@ function Grouped(props: Prop) {
     >
       <Typography
         variant='h6'
-        sx={{
-          position: 'relative',
-          width: 1,
-          margin: 0,
-          paddingTop: '1rem',
-          paddingBottom: '0.5rem',
-          color: theme.palette.primary.light,
+        sx={
+          i18n.dir() === 'ltr'
+            ? {
+                color: theme.palette.primary.light,
+                position: 'relative',
+                width: 1,
+                margin: 0,
+                paddingTop: '1rem',
+                paddingBottom: '0.5rem',
 
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            backgroundColor: '#ab1d2b',
-            width: '7rem',
-            height: 3,
-            bottom: 0,
-            left: 0,
-          },
-        }}
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  backgroundColor: '#ab1d2b',
+                  width: '7rem',
+                  height: 3,
+                  bottom: 0,
+                  left: 0,
+                },
+              }
+            : {
+                color: theme.palette.primary.light,
+                position: 'relative',
+                width: 1,
+                margin: 0,
+                paddingTop: '1rem',
+                paddingBottom: '0.5rem',
+
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  backgroundColor: '#ab1d2b',
+                  width: '7rem',
+                  height: 3,
+                  bottom: 0,
+                  right: 0,
+                },
+              }
+        }
       >
         {props.title}
       </Typography>
