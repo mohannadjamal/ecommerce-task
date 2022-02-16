@@ -13,7 +13,7 @@ import {
   useTheme,
 } from '@mui/material';
 
-import CarouselItem from './CarouselItem';
+import ProductCarouselItem from './ProductCarouselItem';
 
 import ThemeContext from '../../theme/theme-context';
 
@@ -23,7 +23,7 @@ type Prop = {
   items: any[];
 };
 
-function Carousel(props: Prop) {
+function ProductCarousel(props: Prop) {
   const { i18n } = useTranslation();
 
   const themeCtx = useContext(ThemeContext);
@@ -71,45 +71,29 @@ function Carousel(props: Prop) {
     >
       <Typography
         variant='h6'
-        sx={
-          i18n.dir() === 'ltr'
-            ? {
-                color: theme.palette.primary.light,
-                position: 'relative',
-                width: 1,
-                margin: 0,
-                paddingTop: '1rem',
-                paddingBottom: '0.5rem',
+        sx={{
+          color: theme.palette.primary.light,
+          position: 'relative',
+          width: 1,
+          margin: 0,
+          paddingTop: '1rem',
+          paddingBottom: '0.5rem',
 
-                '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  backgroundColor: '#ab1d2b',
-                  width: '7rem',
-                  height: 3,
-                  bottom: 0,
-                  left: 0,
-                },
-              }
-            : {
-                color: theme.palette.primary.light,
-                position: 'relative',
-                width: 1,
-                margin: 0,
-                paddingTop: '1rem',
-                paddingBottom: '0.5rem',
-
-                '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  backgroundColor: '#ab1d2b',
-                  width: '7rem',
-                  height: 3,
-                  bottom: 0,
-                  right: 0,
-                },
-              }
-        }
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            backgroundColor: '#ab1d2b',
+            width: '7rem',
+            height: 3,
+            bottom: 0,
+            ...(i18n.dir() === 'ltr' && {
+              left: 0,
+            }),
+            ...(i18n.dir() === 'rtl' && {
+              right: 0,
+            }),
+          },
+        }}
       >
         {props.title}
       </Typography>
@@ -120,29 +104,35 @@ function Carousel(props: Prop) {
             <Grid
               item
               xs={gridSpace}
-              sx={
-                themeCtx.currentMode === 'light'
-                  ? {
-                      borderRight: '1px solid',
-                      borderImageSlice: 1,
-                      borderImageSource:
-                        'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
-                      '&:last-child': {
-                        borderRight: 'none !important',
-                      },
-                    }
-                  : {
-                      borderRight: '1px solid',
-                      borderImageSlice: 1,
-                      borderImageSource:
-                        'linear-gradient(to bottom,#121212 25%, #e4e4e4 50%, #121212 75%)',
-                      '&:last-child': {
-                        borderRight: 'none !important',
-                      },
-                    }
-              }
+              sx={{
+                ...(i18n.dir() === 'ltr' && {
+                  borderRight: '1px solid',
+                }),
+                ...(i18n.dir() === 'rtl' && {
+                  borderLeft: '1px solid',
+                }),
+                borderImageSlice: 1,
+                ...(themeCtx.currentMode === 'light' && {
+                  borderImageSource:
+                    'linear-gradient(to bottom,#ffffff 25%, #e4e4e4 50%, #ffffff 75%)',
+                }),
+                ...(themeCtx.currentMode === 'dark' && {
+                  borderImageSource:
+                    'linear-gradient(to bottom,#121212 25%, #e4e4e4 50%, #121212 75%)',
+                }),
+                ...(i18n.dir() === 'ltr' && {
+                  '&:last-child': {
+                    borderRight: 'none !important',
+                  },
+                }),
+                ...(i18n.dir() === 'rtl' && {
+                  '&:last-child': {
+                    borderLeft: 'none !important',
+                  },
+                }),
+              }}
             >
-              <CarouselItem
+              <ProductCarouselItem
                 id={item.id}
                 title={item.title}
                 image={item.images[0]}
@@ -199,4 +189,4 @@ function Carousel(props: Prop) {
     </Box>
   );
 }
-export default Carousel;
+export default ProductCarousel;

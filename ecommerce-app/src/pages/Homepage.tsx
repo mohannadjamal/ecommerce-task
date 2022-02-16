@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Box, Grid, Typography, useTheme } from '@mui/material';
 
-import Carousel from '../components/Carousel/Carousel';
-import Grouped from '../components/Grouped/Grouped';
+import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
+import GroupedProducts from '../components/GroupedProducts/GroupedProducts';
 
 import ad from '../images/JBLAd.png';
 import startupSocks from '../images/startupsocks.png';
@@ -23,6 +23,7 @@ function Homepage() {
   const [loadedProducts, setLoadedProducts] = useState<any[]>([]);
 
   useEffect(() => {
+    let mounted = true;
     setIsLoading(true);
     fetch(
       'https://ecommerce-app-57402-default-rtdb.europe-west1.firebasedatabase.app/product.json'
@@ -31,18 +32,21 @@ function Homepage() {
         return response.json();
       })
       .then((data) => {
-        const products: any[] = [];
+        if (mounted) {
+          const products: any[] = [];
 
-        for (const key in data) {
-          const product = {
-            id: key,
-            ...data[key],
-          };
-          products.push(product);
+          for (const key in data) {
+            const product = {
+              id: key,
+              ...data[key],
+            };
+            products.push(product);
+          }
+
+          setLoadedProducts(products);
         }
-
         setIsLoading(false);
-        setLoadedProducts(products);
+        return () => (mounted = false);
       });
   }, []);
 
@@ -84,7 +88,7 @@ function Homepage() {
           backgroundColor: theme.palette.background.paper,
         }}
       >
-        <Carousel
+        <ProductCarousel
           title={t('homepage.carouselOne')}
           itemsPerPage={firstCarouselItems}
           items={laptopProducts}
@@ -108,7 +112,7 @@ function Homepage() {
           }}
         >
           <Box sx={{ width: 1 }}>
-            <Carousel
+            <ProductCarousel
               title={t('homepage.carouselTwo')}
               itemsPerPage={secondCarouselItems}
               items={audioProducts}
@@ -127,6 +131,7 @@ function Homepage() {
           ></Box>
         </Box>
         <Box
+          dir='ltr'
           sx={{
             height: 50,
             display: 'flex',
@@ -141,7 +146,7 @@ function Homepage() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              clipPath: ' polygon(0 0, 100% 0%, 95% 100%, 0 100%)',
+              clipPath: 'polygon(0 0, 100% 0%, 95% 100%, 0 100%)',
               flex: '1 0 70%',
             }}
           >
@@ -152,8 +157,7 @@ function Homepage() {
                 fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
               }}
             >
-              Save your money with super promotion, available every Sunday in
-              the weekend!
+              {t('homepage.ad.promotion')}
             </Typography>
           </Box>
           <Box
@@ -188,12 +192,12 @@ function Homepage() {
                 },
               }}
             >
-              Learn More →
+              {t('homepage.ad.button')}
             </Typography>
           </Box>
         </Box>
         <Box>
-          <Grouped title={t('homepage.grouped')} items={cameraProducts} />
+          <GroupedProducts title={t('homepage.grouped')} items={cameraProducts} />
         </Box>
         <Grid container sx={{ paddingY: '5rem', textAlign: 'center' }}>
           <Grid item xs={2}>

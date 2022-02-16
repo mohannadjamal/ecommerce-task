@@ -55,7 +55,11 @@
   "homepage": {
     "carouselOne": "Smartphones & Tablets",
     "carouselTwo": "Audio & Sound",
-    "grouped": "Camera & Lens"
+    "grouped": "Camera & Lens",
+    "ad": {
+      "promotion": "Save your money with super promotion, available every Sunday in the weekend!",
+      "button": "Learn More →"
+    }
   },
   "cart": {
     "title": "Shopping Cart",

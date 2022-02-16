@@ -40,6 +40,7 @@ interface TabPanelProps {
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
+  const theme = useTheme();
 
   return (
     <div
@@ -51,7 +52,14 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+              color: theme.palette.primary.main,
+            }}
+          >
+            {children}
+          </Typography>
         </Box>
       )}
     </div>
@@ -85,6 +93,7 @@ function ProductDetails() {
   });
   useEffect(() => {
     setIsLoading(true);
+    
     fetch(
       `https://ecommerce-app-57402-default-rtdb.europe-west1.firebasedatabase.app/product/${productId}.json`
     )
@@ -94,10 +103,11 @@ function ProductDetails() {
       .then((data) => {
         const product: Product = data;
         product.id = productId;
-        setIsLoading(false);
         setLoadedProduct(product);
         setCurrentImage(0);
       });
+
+    setIsLoading(false);
   }, [productId]);
 
   const [amount, setAmount] = useState(1);
@@ -272,7 +282,7 @@ function ProductDetails() {
               <Typography
                 variant='subtitle2'
                 sx={{
-                  color: theme.palette.grey[100],
+                  color: theme.palette.grey[500],
                   fontWeight: 700,
                   textDecoration: 'line-through',
                   marginLeft: '1rem',
@@ -459,38 +469,13 @@ function ProductDetails() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Typography
-            dir='ltr'
-            variant='body1'
-            sx={{
-              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
-              color: theme.palette.primary.main,
-            }}
-          >
-            {loadedProduct.description}
-          </Typography>
+          {loadedProduct.description}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Typography
-            variant='body1'
-            sx={{
-              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
-              color: theme.palette.primary.main,
-            }}
-          >
-            {t('product.tab.unimplemented')}
-          </Typography>
+          {t('product.tab.unimplemented')}
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Typography
-            variant='body1'
-            sx={{
-              fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
-              color: theme.palette.primary.main,
-            }}
-          >
-            {t('product.tab.unimplemented')}
-          </Typography>
+          {t('product.tab.unimplemented')}
         </TabPanel>
       </Box>
     </Box>

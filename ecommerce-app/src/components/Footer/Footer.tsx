@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import {
   Box,
-  createTheme,
   Divider,
   IconButton,
   List,
@@ -26,6 +25,57 @@ import discover from '../../images/discover.png';
 
 function Footer() {
   const { t } = useTranslation();
+
+  const stores = [
+    '501 Floor, Nguyen Ngoc Vu, Cau Glay, Ha Noi',
+    '741 - 11A Sandiago, L.A City, USA',
+    '1st Floor BrickHouse, 250 Wall Street, C.A City, UK',
+    '5th Floor, 169 Green Lakes, WestBrown, Liverpool City',
+    '628 Brooklyn Streen, Fullham District, Wales',
+    '10001 Street, WinLow District, Mexico',
+  ];
+
+  const links = [
+    {
+      title: t('footer.account.title'),
+      links: [
+        t('footer.account.cart'),
+        t('footer.account.checkout'),
+        t('footer.account.wishlist'),
+        t('footer.account.terms'),
+        t('footer.account.account'),
+      ],
+    },
+    {
+      title: t('footer.information.title'),
+      links: [
+        t('footer.information.shipping'),
+        t('footer.information.giftcard'),
+        t('footer.information.track'),
+        t('footer.information.terms'),
+        t('footer.information.faq'),
+      ],
+    },
+    {
+      title: t('footer.howto.title'),
+      links: [
+        t('footer.howto.payments'),
+        t('footer.howto.delivery'),
+        t('footer.howto.protection'),
+        t('footer.howto.guide'),
+        t('footer.howto.partnership'),
+      ],
+    },
+  ];
+
+  const payments = [
+    { title: 'Visa', image: visa },
+    { title: 'Mastercard', image: mastercard },
+    { title: 'Stripe', image: stripe },
+    { title: 'Paypal', image: paypal },
+    { title: 'Discover', image: discover },
+  ];
+
   return (
     <Box>
       <Box
@@ -39,15 +89,17 @@ function Footer() {
         <Box
           sx={{
             display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
             justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingY: 4,
+            alignItems: { xs: 'flex-start', sm: 'center' },
+            paddingY: { xs: 1, sm: 4 },
           }}
         >
           <Box
             sx={{
               width: '50%',
               display: 'inline-flex',
+              flexDirection: { xs: 'column', sm: 'row' },
               justifyContent: 'space-between',
               alignItems: 'cetner',
             }}
@@ -57,7 +109,7 @@ function Footer() {
                 variant='body2'
                 sx={{
                   color: '#a9a9a9',
-                  marginBottom: '1rem',
+                  marginBottom: { xs: 0, sm: '1rem' },
                   fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 }}
               >
@@ -75,7 +127,7 @@ function Footer() {
                 variant='body2'
                 sx={{
                   color: '#a9a9a9',
-                  marginBottom: '1rem',
+                  marginBottom: { xs: 0, sm: '1rem' },
                   fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
                 }}
               >
@@ -146,6 +198,10 @@ function Footer() {
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
+            flexDirection: {
+              xs: 'column',
+              sm: 'row',
+            },
             paddingTop: 5,
             paddingBottom: 3,
           }}
@@ -161,363 +217,57 @@ function Footer() {
               {t('footer.stores.title')}
             </Typography>
             <List>
-              <ListItem
-                disablePadding
-                sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
+              {stores.map((item) => (
+                <ListItem
+                  key={item}
+                  disablePadding
+                  sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
                 >
-                  501 Floor, Nguyen Ngoc Vu, Cau Glay, Ha Noi
-                </Typography>
-              </ListItem>
-              <ListItem
-                disablePadding
-                sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  741 - 11A Sandiago, L.A City, USA
-                </Typography>
-              </ListItem>
-              <ListItem
-                disablePadding
-                sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  1st Floor BrickHouse, 250 Wall Street, C.A City, UK
-                </Typography>
-              </ListItem>
-              <ListItem
-                disablePadding
-                sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  5th Floor, 169 Green Lakes, WestBrown, Liverpool City
-                </Typography>
-              </ListItem>
-              <ListItem
-                disablePadding
-                sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  628 Brooklyn Streen, Fullham District, Wales
-                </Typography>
-              </ListItem>
-              <ListItem
-                disablePadding
-                sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  10001 Street, WinLow District, Mexico
-                </Typography>
-              </ListItem>
-              <ListItem
-                disablePadding
-                sx={{ color: '#5d5d5d', marginBottom: '1.2rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  1st Floor BrickHouse, 250 Wall Street, C.A City, UK
-                </Typography>
-              </ListItem>
+                  <Typography
+                    variant='body2'
+                    sx={{
+                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                    }}
+                  >
+                    {item}
+                  </Typography>
+                </ListItem>
+              ))}
             </List>
           </Box>
-          <Box>
-            <Typography
-              variant='h6'
-              sx={{
-                marginBottom: '2rem',
-                fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
-              }}
-            >
-              {t('footer.account.title')}
-            </Typography>
-            <List>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
+          {links.map((item) => (
+            <Box key={item.title}>
+              <Typography
+                variant='h6'
+                sx={{
+                  marginBottom: '2rem',
+                  fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
+                }}
               >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.account.cart')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.account.checkout')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.account.wishlist')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.account.terms')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.account.account')}
-                </Typography>
-              </ListItem>
-            </List>
-          </Box>
-          <Box>
-            <Typography
-              variant='h6'
-              sx={{
-                marginBottom: '2rem',
-                fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
-              }}
-            >
-              {t('footer.information.title')}
-            </Typography>
-            <List>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.information.shipping')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.information.giftcard')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.information.track')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.information.terms')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.information.faq')}
-                </Typography>
-              </ListItem>
-            </List>
-          </Box>
-          <Box>
-            <Typography
-              variant='h6'
-              sx={{
-                marginBottom: '2rem',
-                fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
-              }}
-            >
-              {t('footer.howto.title')}
-            </Typography>
-            <List>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.howto.payments')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.howto.delivery')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.howto.protection')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.howto.guide')}
-                </Typography>
-              </ListItem>
-              <ListItem
-                component={Link}
-                to='/'
-                disablePadding
-                sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
-              >
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
-                  }}
-                >
-                  {t('footer.howto.partnership')}
-                </Typography>
-              </ListItem>
-            </List>
-          </Box>
+                {item.title}
+              </Typography>
+              <List>
+                {item.links.map((l) => (
+                  <ListItem
+                    key={l}
+                    component={Link}
+                    to='/'
+                    disablePadding
+                    sx={{ color: '#a9a9a9', marginBottom: '0.5rem' }}
+                  >
+                    <Typography
+                      variant='body2'
+                      sx={{
+                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      }}
+                    >
+                      {l}
+                    </Typography>
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          ))}
         </Box>
       </Box>
       <Box
@@ -538,71 +288,22 @@ function Footer() {
           {t('footer.copyright')}
         </Typography>
         <Box component='footer'>
-          <Box
-            component='img'
-            sx={{
-              marginLeft: '0.5rem',
-              opacity: 0.5,
-              borderRadius: '2.5px',
-              filter: 'grayscale(100%)',
-              height: 'auto',
-              width: { xs: 15, sm: 20, md: 30, lg: 40 },
-            }}
-            src={visa}
-            alt='Visa'
-          />
-          <Box
-            component='img'
-            src={mastercard}
-            alt='MasterCard'
-            sx={{
-              marginLeft: '0.5rem',
-              opacity: 0.5,
-              borderRadius: '2.5px',
-              filter: 'grayscale(100%)',
-              height: 'auto',
-              width: { xs: 15, sm: 20, md: 30, lg: 40 },
-            }}
-          />
-          <Box
-            component='img'
-            src={paypal}
-            alt='PayPal'
-            sx={{
-              marginLeft: '0.5rem',
-              opacity: 0.5,
-              borderRadius: '2.5px',
-              filter: 'grayscale(100%)',
-              height: 'auto',
-              width: { xs: 15, sm: 20, md: 30, lg: 40 },
-            }}
-          />
-          <Box
-            component='img'
-            src={stripe}
-            alt='Stripe'
-            sx={{
-              marginLeft: '0.5rem',
-              opacity: 0.5,
-              borderRadius: '2.5px',
-              filter: 'grayscale(100%)',
-              height: 'auto',
-              width: { xs: 15, sm: 20, md: 30, lg: 40 },
-            }}
-          />
-          <Box
-            component='img'
-            src={discover}
-            alt='Discrover'
-            sx={{
-              marginLeft: '0.5rem',
-              opacity: 0.5,
-              borderRadius: '2.5px',
-              filter: 'grayscale(100%)',
-              height: 'auto',
-              width: { xs: 15, sm: 20, md: 30, lg: 40 },
-            }}
-          />
+          {payments.map((item) => (
+            <Box
+              key={item.title}
+              component='img'
+              sx={{
+                marginLeft: '0.5rem',
+                opacity: 0.5,
+                borderRadius: '2.5px',
+                filter: 'grayscale(100%)',
+                height: 'auto',
+                width: { xs: 15, sm: 20, md: 30, lg: 40 },
+              }}
+              src={item.image}
+              alt={item.title}
+            />
+          ))}
         </Box>
       </Box>
     </Box>

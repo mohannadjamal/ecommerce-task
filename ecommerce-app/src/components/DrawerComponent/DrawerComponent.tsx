@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   Drawer,
   List,
@@ -12,9 +14,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 function DrawerComponent() {
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  const { t, i18n } = useTranslation();
   return (
     <>
-      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
+      <Drawer
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        anchor={i18n.dir() === 'ltr' ? 'left' : 'right'}
+      >
         <List sx={{ backgroundColor: '#1c252e', height: 1 }}>
           <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
@@ -26,7 +34,7 @@ function DrawerComponent() {
                   color: '#ffffff',
                 }}
               >
-                HOME
+                {t('nav.home')}
               </Link>
             </ListItemText>
           </ListItem>
@@ -40,7 +48,7 @@ function DrawerComponent() {
                   color: '#ffffff',
                 }}
               >
-                SHOP
+                {t('nav.shop')}
               </Link>
             </ListItemText>
           </ListItem>
@@ -54,7 +62,7 @@ function DrawerComponent() {
                   color: '#ffffff',
                 }}
               >
-                PAGES
+                {t('nav.pages')}
               </Link>
             </ListItemText>
           </ListItem>
@@ -68,7 +76,7 @@ function DrawerComponent() {
                   color: '#ffffff',
                 }}
               >
-                LOOKBOOK
+                {t('nav.lookbook')}
               </Link>
             </ListItemText>
           </ListItem>
@@ -82,7 +90,7 @@ function DrawerComponent() {
                   color: '#ffffff',
                 }}
               >
-                BRANDS
+                {t('nav.brands')}
               </Link>
             </ListItemText>
           </ListItem>

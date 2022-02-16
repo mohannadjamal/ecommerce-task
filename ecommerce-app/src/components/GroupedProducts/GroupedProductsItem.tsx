@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   Card,
   CardActionArea,
@@ -16,8 +18,10 @@ type Prop = {
   price: number;
   discount: number;
 };
-function GroupedItem(props: Prop) {
+function GroupedProductsItem(props: Prop) {
   const theme = useTheme();
+
+  const { i18n } = useTranslation();
 
   return (
     <Card
@@ -36,7 +40,12 @@ function GroupedItem(props: Prop) {
               sx={{
                 position: 'absolute',
                 top: '20%',
-                left: 0,
+                ...(i18n.dir() === 'ltr' && {
+                  left: 0,
+                }),
+                ...(i18n.dir() === 'rtl' && {
+                  right: 0,
+                }),
                 backgroundColor: '#ec1835',
                 display: 'flex',
                 justifyContent: 'center',
@@ -148,4 +157,4 @@ function GroupedItem(props: Prop) {
   );
 }
 
-export default GroupedItem;
+export default GroupedProductsItem;

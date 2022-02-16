@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   Card,
   CardActionArea,
@@ -17,8 +19,10 @@ type Prop = {
   discount: number;
 };
 
-function CarouselItem(props: Prop) {
+function ProductCarouselItem(props: Prop) {
   const theme = useTheme();
+
+  const { i18n } = useTranslation();
   return (
     <Card
       elevation={0}
@@ -40,7 +44,12 @@ function CarouselItem(props: Prop) {
               sx={{
                 position: 'absolute',
                 top: '20%',
-                left: 0,
+                ...(i18n.dir() === 'ltr' && {
+                  left: 0,
+                }),
+                ...(i18n.dir() === 'rtl' && {
+                  right: 0,
+                }),
                 backgroundColor: '#ec1835',
                 display: 'flex',
                 justifyContent: 'center',
@@ -131,4 +140,4 @@ function CarouselItem(props: Prop) {
   );
 }
 
-export default CarouselItem;
+export default ProductCarouselItem;

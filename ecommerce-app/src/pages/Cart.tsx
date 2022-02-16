@@ -23,7 +23,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import CartContext from '../store/cart-context';
 
 function Cart() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const theme = useTheme();
 
@@ -59,7 +59,16 @@ function Cart() {
         {t('cart.title')}
       </Typography>
       <Grid container>
-        <Grid item xs={12} lg={8} sx={{ paddingRight: { xs: 0, lg: '3rem' } }}>
+        <Grid
+          item
+          xs={12}
+          lg={8}
+          sx={
+            i18n.dir() === 'ltr'
+              ? { paddingRight: { xs: 0, lg: '3rem' } }
+              : { paddingLeft: { xs: 0, lg: '3rem' } }
+          }
+        >
           <TableContainer
             component={Paper}
             elevation={0}
@@ -69,6 +78,7 @@ function Cart() {
               <TableHead sx={{ borderTop: 'thin solid #dedede' }}>
                 <TableRow>
                   <TableCell
+                    align={i18n.dir() === 'ltr' ? 'left' : 'right'}
                     sx={{
                       width: '90%',
                       color: theme.palette.primary.main,
@@ -183,6 +193,7 @@ function Cart() {
                             </Box>
                           ) : (
                             <Typography
+                              dir='ltr'
                               variant='body1'
                               sx={{
                                 fontWeight: 500,
@@ -304,6 +315,7 @@ function Cart() {
               <TableHead>
                 <TableRow>
                   <TableCell
+                    align={i18n.dir() === 'ltr' ? 'left' : 'right'}
                     sx={{
                       paddingY: '1rem',
                       color: theme.palette.primary.main,
@@ -321,6 +333,7 @@ function Cart() {
                   <TableCell>
                     <Typography
                       variant='body2'
+                      align={i18n.dir() === 'ltr' ? 'left' : 'right'}
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
@@ -329,7 +342,7 @@ function Cart() {
                       {t('cart.checkout.subtotal')}
                     </Typography>
                   </TableCell>
-                  <TableCell align='right'>
+                  <TableCell align={i18n.dir() === 'ltr' ? 'right' : 'left'}>
                     <Typography
                       variant='body1'
                       sx={{
@@ -346,6 +359,7 @@ function Cart() {
                   <TableCell>
                     <Typography
                       variant='body2'
+                      align={i18n.dir() === 'ltr' ? 'left' : 'right'}
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
@@ -354,7 +368,7 @@ function Cart() {
                       {t('cart.checkout.shipping')}
                     </Typography>
                   </TableCell>
-                  <TableCell align='right'>
+                  <TableCell align={i18n.dir() === 'ltr' ? 'right' : 'left'}>
                     <Typography
                       variant='body1'
                       sx={{
@@ -371,6 +385,7 @@ function Cart() {
                   <TableCell sx={{ border: 0 }}>
                     <Typography
                       variant='body2'
+                      align={i18n.dir() === 'ltr' ? 'left' : 'right'}
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
@@ -379,7 +394,10 @@ function Cart() {
                       {t('cart.checkout.total')}
                     </Typography>
                   </TableCell>
-                  <TableCell align='right' sx={{ border: 0 }}>
+                  <TableCell
+                    align={i18n.dir() === 'ltr' ? 'right' : 'left'}
+                    sx={{ border: 0 }}
+                  >
                     <Typography
                       variant='body1'
                       sx={{

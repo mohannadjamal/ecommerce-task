@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import i18next from 'i18next';
+import cookies from 'js-cookie';
 
 import {
   Box,
@@ -32,10 +32,12 @@ function MainNavigation() {
     i18n.changeLanguage(lng);
     document.body.dir = i18n.dir();
     theme.direction = i18n.dir();
-    console.log(theme.direction);
   };
+  const currentLanguageCode = cookies.get('i18next') || 'en';
 
-  const [language, setLanguage] = useState('');
+  const [language, setLanguage] = useState(
+    currentLanguageCode === 'en' ? 'English' : 'العربية'
+  );
   const handleChange = (event: SelectChangeEvent) => {
     setLanguage(event.target.value);
   };
@@ -139,7 +141,7 @@ function MainNavigation() {
         variant='standard'
         sx={{ m: 1, minWidth: 120, backgroundColor: '#fff' }}
       >
-        <Select onChange={handleChange} value={language}>
+        <Select onChange={handleChange} value={language} sx={{ color: '#000' }}>
           {languages.map(({ code, name }) => (
             <MenuItem
               key={code}
