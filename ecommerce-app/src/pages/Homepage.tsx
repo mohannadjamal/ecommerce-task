@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 
+import { useQuery } from 'react-query';
+import apiClient from '../http-common';
+
 import { useTranslation } from 'react-i18next';
 
-import { Box, Grid, Typography, useTheme } from '@mui/material';
+import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
 import GroupedProducts from '../components/GroupedProducts/GroupedProducts';
@@ -14,16 +17,19 @@ import swatch from '../images/swatch.png';
 import asus from '../images/asus.png';
 import dell from '../images/dell.png';
 import toshiba from '../images/toshiba.png';
+import ImageSlider from '../components/ImageSlider/ImageSlider';
+
+const images = [startupSocks, hp, swatch, asus, dell, toshiba];
 
 function Homepage() {
   const { t } = useTranslation();
   const theme = useTheme();
 
-  const [isLoading, setIsLoading] = useState(true);
   const [loadedProducts, setLoadedProducts] = useState<any[]>([]);
 
-  useEffect(() => {
-    let mounted = true;
+  /* 
+   const [isLoading, setIsLoading] = useState(true);
+   useEffect(() => {
     setIsLoading(true);
     fetch(
       'https://ecommerce-app-57402-default-rtdb.europe-west1.firebasedatabase.app/product.json'
@@ -32,23 +38,59 @@ function Homepage() {
         return response.json();
       })
       .then((data) => {
-        if (mounted) {
-          const products: any[] = [];
+        const products: any[] = [];
 
-          for (const key in data) {
-            const product = {
-              id: key,
-              ...data[key],
-            };
-            products.push(product);
-          }
-
-          setLoadedProducts(products);
+        for (const key in data) {
+          const product = {
+            id: key,
+            ...data[key],
+          };
+          products.push(product);
         }
+
+        setLoadedProducts(products);
         setIsLoading(false);
-        return () => (mounted = false);
       });
   }, []);
+  */
+
+  const { isLoading: isLoadingProducts, refetch: getAllProducts } = useQuery(
+    'query-products',
+    async () => {
+      return await apiClient.get('/product.json');
+    },
+    {
+      enabled: false,
+      onSuccess: (res: {
+        status: string;
+        statusText: string;
+        headers: any;
+        data: any;
+      }) => {
+        const result = {
+          status: res.status + '-' + res.statusText,
+          headers: res.headers,
+          data: res.data,
+        };
+        const products: any[] = [];
+
+        for (const key in result.data) {
+          const product = {
+            id: key,
+            ...result.data[key],
+          };
+          products.push(product);
+          setLoadedProducts(products);
+        }
+      },
+      onError: (err: { response: { data: any } }) => {
+        console.log(err.response?.data || err);
+      },
+    }
+  );
+  useEffect(() => {
+    getAllProducts();
+  }, [isLoadingProducts, getAllProducts]);
 
   const laptopProducts = loadedProducts.filter(
     (product) => product.catalog === 'Laptop'
@@ -59,20 +101,24 @@ function Homepage() {
   const cameraProducts = loadedProducts.filter(
     (product) => product.catalog === 'Camera'
   );
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
+  const md = useMediaQuery(theme.breakpoints.down('md'));
+
   function firstCarouselQuery(): number {
-    if (window.innerWidth < 600) {
+    if (sm) {
       return 3;
-    } else if (window.innerWidth > 600 && window.innerWidth < 900) return 4;
+    } else if (md) return 4;
     return 6;
   }
   function secondCarouselQuery(): number {
-    if (window.innerWidth < 600) return 2;
-    else if (window.innerWidth > 600 && window.innerWidth < 900) return 3;
+    if (sm) return 2;
+    else if (md) return 3;
     return 4;
   }
   const firstCarouselItems = firstCarouselQuery();
   const secondCarouselItems = secondCarouselQuery();
-  if (isLoading) return <Box></Box>;
+
+  if (isLoadingProducts) return <Box></Box>;
   return (
     <Box
       sx={{
@@ -197,82 +243,12 @@ function Homepage() {
           </Box>
         </Box>
         <Box>
-          <GroupedProducts title={t('homepage.grouped')} items={cameraProducts} />
+          <GroupedProducts
+            title={t('homepage.grouped')}
+            items={cameraProducts}
+          />
         </Box>
-        <Grid container sx={{ paddingY: '5rem', textAlign: 'center' }}>
-          <Grid item xs={2}>
-            <Box
-              component='img'
-              sx={{
-                width: { xs: 50, sm: 100, md: 150 },
-                height: { xs: 25, sm: 50, md: 75 },
-                objectFit: 'contain',
-              }}
-              src={startupSocks}
-              alt='Starup Socks logo'
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <Box
-              component='img'
-              sx={{
-                width: { xs: 30, sm: 100, md: 150 },
-                height: { xs: 15, sm: 50, md: 75 },
-                objectFit: 'contain',
-              }}
-              src={hp}
-              alt='HP logo'
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <Box
-              component='img'
-              sx={{
-                width: { xs: 30, sm: 100, md: 150 },
-                height: { xs: 15, sm: 50, md: 75 },
-                objectFit: 'contain',
-              }}
-              src={swatch}
-              alt='Swatch logo'
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <Box
-              component='img'
-              sx={{
-                width: { xs: 30, sm: 100, md: 150 },
-                height: { xs: 15, sm: 50, md: 75 },
-                objectFit: 'contain',
-              }}
-              src={asus}
-              alt='Asus logo'
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <Box
-              component='img'
-              sx={{
-                width: { xs: 30, sm: 100, md: 150 },
-                height: { xs: 15, sm: 50, md: 75 },
-                objectFit: 'contain',
-              }}
-              src={toshiba}
-              alt='Toshiba logo'
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <Box
-              component='img'
-              sx={{
-                width: { xs: 30, sm: 100, md: 150 },
-                height: { xs: 15, sm: 50, md: 75 },
-                objectFit: 'contain',
-              }}
-              src={dell}
-              alt='Dell logo'
-            />
-          </Grid>
-        </Grid>
+        <ImageSlider images={images} />
       </Box>
     </Box>
   );

@@ -32,6 +32,10 @@ function GroupedProductsItem(props: Prop) {
         <Box
           sx={{
             display: 'inline-flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            justifyContent: { xs: 'center', sm: 'flex-start' },
+            alignItems: { xs: 'center', sm: 'flex-start' },
+            width: 1,
             position: 'relative',
           }}
         >
@@ -74,6 +78,12 @@ function GroupedProductsItem(props: Prop) {
             image={props.image}
             alt={props.title}
             sx={{
+              ...(i18n.dir() === 'ltr' && {
+                paddingLeft: '1rem',
+              }),
+              ...(i18n.dir() === 'rtl' && {
+                paddingRight: '1rem',
+              }),
               height: { xs: 50, sm: 50, md: 75, lg: 150 },
               width: { xs: 50, sm: 50, md: 75, lg: 150 },
               objectFit: 'contain',
@@ -97,6 +107,7 @@ function GroupedProductsItem(props: Prop) {
                   lg: 18,
                 },
                 color: theme.palette.primary.main,
+                paddingTop: { xs: 0, sm: '1rem' },
               }}
             >
               {props.title}

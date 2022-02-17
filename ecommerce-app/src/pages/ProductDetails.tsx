@@ -2,6 +2,9 @@ import { useState, useEffect, useContext } from 'react';
 
 import { useParams } from 'react-router-dom';
 
+import { useQuery } from 'react-query';
+import apiClient from '../http-common';
+
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -36,10 +39,11 @@ interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
+  dir?: string;
 }
 
 function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, dir, ...other } = props;
   const theme = useTheme();
 
   return (
@@ -57,6 +61,7 @@ function TabPanel(props: TabPanelProps) {
               fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
               color: theme.palette.primary.main,
             }}
+            dir={props.dir}
           >
             {children}
           </Typography>
@@ -79,7 +84,6 @@ function ProductDetails() {
 
   const { productId } = useParams();
 
-  const [isLoading, setIsLoading] = useState(true);
   const [currentImage, setCurrentImage] = useState(0);
   const [loadedProduct, setLoadedProduct] = useState<Product>({
     id: '',
@@ -91,6 +95,8 @@ function ProductDetails() {
     title: '',
     images: [],
   });
+  /*
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(true);
     
@@ -109,6 +115,39 @@ function ProductDetails() {
 
     setIsLoading(false);
   }, [productId]);
+
+*/
+  const { isLoading: isLoadingProduct, refetch: getProduct } = useQuery(
+    'query-product',
+    async () => {
+      return await apiClient.get(`/product/${productId}.json`);
+    },
+    {
+      enabled: false,
+      onSuccess: (res: {
+        status: string;
+        statusText: string;
+        headers: any;
+        data: any;
+      }) => {
+        const result = {
+          status: res.status + '-' + res.statusText,
+          headers: res.headers,
+          data: res.data,
+        };
+        const product: Product = result.data;
+        product.id = productId;
+        setLoadedProduct(product);
+        setCurrentImage(0);
+      },
+      onError: (err: { response: { data: any } }) => {
+        console.log(err.response?.data || err);
+      },
+    }
+  );
+  useEffect(() => {
+    getProduct();
+  }, [isLoadingProduct, getProduct]);
 
   const [amount, setAmount] = useState(1);
 
@@ -134,7 +173,7 @@ function ProductDetails() {
   function addToCart() {
     cartCtx.addProduct({ ...loadedProduct, amount: amount });
   }
-  if (isLoading) return <Box></Box>;
+  if (isLoadingProduct) return <Box></Box>;
   return (
     <Box
       sx={{
@@ -468,7 +507,7 @@ function ProductDetails() {
             />
           </Tabs>
         </Box>
-        <TabPanel value={value} index={0}>
+        <TabPanel value={value} index={0} dir='ltr'>
           {loadedProduct.description}
         </TabPanel>
         <TabPanel value={value} index={1}>

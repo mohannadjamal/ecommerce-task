@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 
 import { ThemeProvider } from '@mui/material';
 
+
+
 import Homepage from './pages/Homepage';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
@@ -32,7 +34,7 @@ function App() {
   //   document.body.dir = currentLanguage?.dir || 'ltr';
   // }, [currentLanguageCode]);
   // console.log(theme.direction);
-  
+
   return (
     <ThemeProvider
       theme={themeCtx.currentMode === 'light' ? lightTheme : darkTheme}

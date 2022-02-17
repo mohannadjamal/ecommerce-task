@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -52,15 +52,18 @@ function ProductCarousel(props: Prop) {
     clearInterval(paginateInterval);
   };
 
-  if (currentPage !== pageNumbers[pageNumbers.length - 1]) {
-    paginateInterval = setInterval(() => {
-      paginate(currentPage + 1);
-    }, 5000);
-  } else {
-    paginateInterval = setInterval(() => {
-      paginate(1);
-    }, 5000);
-  }
+  useEffect(() => {
+    if (currentPage !== pageNumbers[pageNumbers.length - 1]) {
+      paginateInterval = setInterval(() => {
+        paginate(currentPage + 1);
+      }, 5000);
+    } else {
+      paginateInterval = setInterval(() => {
+        paginate(1);
+      }, 5000);
+    }
+    return () => clearInterval(paginateInterval);
+  });
 
   return (
     <Box

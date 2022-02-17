@@ -3,6 +3,8 @@ import { Suspense } from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import HttpApi from 'i18next-http-backend';
@@ -35,15 +37,19 @@ i18next
   });
 const loadingMarkup = <></>;
 
+const queryClient = new QueryClient();
+
 ReactDOM.render(
   <Suspense fallback={loadingMarkup}>
-    <ThemeContextProvider>
-      <CartContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </CartContextProvider>
-    </ThemeContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeContextProvider>
+        <CartContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </CartContextProvider>
+      </ThemeContextProvider>
+    </QueryClientProvider>
   </Suspense>,
   document.getElementById('root')
 );
