@@ -202,7 +202,7 @@ function Footer() {
               xs: 'column',
               sm: 'row',
             },
-            paddingTop: 5,
+            paddingTop: 3,
             paddingBottom: 3,
           }}
         >
@@ -210,7 +210,7 @@ function Footer() {
             <Typography
               variant='h6'
               sx={{
-                marginBottom: '2rem',
+                marginBottom: { xs: '1rem', lg: '2rem' },
                 fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
               }}
             >
@@ -240,7 +240,7 @@ function Footer() {
               <Typography
                 variant='h6'
                 sx={{
-                  marginBottom: '2rem',
+                  marginBottom: { xs: '1rem', lg: '2rem' },
                   fontSize: { xs: 10, sm: 12, md: 16, lg: 20 },
                 }}
               >

@@ -170,9 +170,12 @@ function ProductDetails() {
 
   const cartCtx = useContext(CartContext);
 
-  function addToCart() {
-    cartCtx.addProduct({ ...loadedProduct, amount: amount });
-  }
+  const addToCart = () => {
+    const newProduct = () => ({ ...loadedProduct, amount: amount });
+
+    cartCtx.addProduct(newProduct());
+  };
+
   if (isLoadingProduct) return <Box></Box>;
   return (
     <Box
@@ -427,7 +430,7 @@ function ProductDetails() {
 
           <Button
             variant='contained'
-            onClick={addToCart}
+            onClick={() => addToCart()}
             sx={{
               width: 1,
               height: '3rem',

@@ -46,13 +46,12 @@ function ProductCarousel(props: Prop) {
     pageNumbers.push(i);
   }
 
-  let paginateInterval: NodeJS.Timer;
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    clearInterval(paginateInterval);
   };
 
   useEffect(() => {
+    let paginateInterval: NodeJS.Timer;
     if (currentPage !== pageNumbers[pageNumbers.length - 1]) {
       paginateInterval = setInterval(() => {
         paginate(currentPage + 1);

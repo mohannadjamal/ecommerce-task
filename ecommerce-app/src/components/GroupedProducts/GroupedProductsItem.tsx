@@ -102,8 +102,7 @@ function GroupedProductsItem(props: Prop) {
               sx={{
                 fontWeight: 700,
                 fontSize: {
-                  xs: 8,
-                  sm: 12,
+                  xs: 12,
                   lg: 18,
                 },
                 color: theme.palette.primary.main,
@@ -120,8 +119,7 @@ function GroupedProductsItem(props: Prop) {
                     color: theme.palette.secondary.main,
                     fontWeight: 700,
                     fontSize: {
-                      xs: 8,
-                      sm: 12,
+                      xs: 12,
                       lg: 18,
                     },
                   }}
@@ -136,8 +134,7 @@ function GroupedProductsItem(props: Prop) {
                     textDecoration: 'line-through',
                     marginLeft: '1rem',
                     fontSize: {
-                      xs: 6,
-                      sm: 10,
+                      xs: 10,
                       lg: 16,
                     },
                   }}
@@ -151,10 +148,8 @@ function GroupedProductsItem(props: Prop) {
                 sx={{
                   color: theme.palette.secondary.main,
                   fontSize: {
-                    xs: 8,
-                    sm: 12,
-                    md: 'initial',
-                    lg: 'intial',
+                    xs: 12,
+                    lg: 18,
                   },
                 }}
               >

@@ -9,12 +9,11 @@ type Prop = {
 function ImageSlider(props: Prop) {
   const [currentItem, setCurrentItem] = useState(0);
 
-  let slideInterval: NodeJS.Timeout;
   const slide = (itemNumber: number) => {
     setCurrentItem(itemNumber);
-    clearInterval(slideInterval);
   };
   useEffect(() => {
+    let slideInterval: NodeJS.Timeout;
     if (currentItem !== props.images.length - 1) {
       slideInterval = setInterval(() => {
         slide(currentItem + 1);

@@ -62,9 +62,7 @@ function ProductCarouselItem(props: Prop) {
                   color: '#ffffff',
                   fontWeight: 500,
                   fontSize: {
-                    xs: 8,
-                    sm: 12,
-                    md: 14,
+                    xs: 14,
                     lg: 16,
                   },
                 }}
@@ -91,7 +89,7 @@ function ProductCarouselItem(props: Prop) {
             variant='body2'
             sx={{
               fontWeight: 700,
-              fontSize: { xs: 8, sm: 12, md: 14, lg: 16 },
+              fontSize: { xs: 12, lg: 16 },
               color: theme.palette.primary.main,
             }}
           >
@@ -127,7 +125,7 @@ function ProductCarouselItem(props: Prop) {
               variant='subtitle1'
               sx={{
                 fontWeight: 700,
-                fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                fontSize: { xs: 14, lg: 16 },
                 color: theme.palette.secondary.light,
               }}
             >

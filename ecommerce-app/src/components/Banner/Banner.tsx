@@ -37,7 +37,7 @@ function Banner() {
         alignItems: 'center',
         backgroundColor: theme.palette.background.default,
         justifyContent: 'space-between',
-        padding: { xs: ' 0 1rem', md: '0 10%' },
+        padding: { xs: ' 0 0.5rem', md: '0 10%' },
       }}
     >
       <Link href='/'>
@@ -50,7 +50,6 @@ function Banner() {
             width: {
               xs: 100,
               sm: 200,
-              md: 'initial',
             },
           }}
         />
@@ -74,7 +73,6 @@ function Banner() {
             <AutorenewIcon
               sx={{
                 color: theme.palette.primary.main,
-                fontSize: { xs: 16, sm: 24, md: 32 },
               }}
             />
           </Badge>
@@ -84,7 +82,6 @@ function Banner() {
             <FavoriteBorderIcon
               sx={{
                 color: theme.palette.primary.main,
-                fontSize: { xs: 16, sm: 24, md: 32 },
               }}
             />
           </Badge>
@@ -94,7 +91,6 @@ function Banner() {
             <ShoppingCartOutlinedIcon
               sx={{
                 color: theme.palette.primary.main,
-                fontSize: { xs: 16, sm: 24, md: 32 },
               }}
             />
           </Badge>
@@ -112,7 +108,7 @@ function Banner() {
             sx={{
               color: theme.palette.primary.main,
               fontWeight: 700,
-              fontSize: { xs: 8, sm: 12, md: 18 },
+              fontSize: { xs: 12, sm: 18 },
             }}
           >
             {t('banner.cart')}
@@ -121,7 +117,7 @@ function Banner() {
             variant='body2'
             sx={{
               color: theme.palette.primary.main,
-              fontSize: { xs: 6, sm: 10, md: 16 },
+              fontSize: { xs: 10, sm: 16 },
             }}
           >
             ${cartCtx.totalPrice.toFixed(2)}

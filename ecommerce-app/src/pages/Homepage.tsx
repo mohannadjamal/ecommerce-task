@@ -5,7 +5,7 @@ import apiClient from '../http-common';
 
 import { useTranslation } from 'react-i18next';
 
-import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
 import GroupedProducts from '../components/GroupedProducts/GroupedProducts';
@@ -171,7 +171,7 @@ function Homepage() {
             sx={{
               height: 'auto',
               width: {
-                xs: '30%',
+                xs: '25%',
               },
             }}
           ></Box>

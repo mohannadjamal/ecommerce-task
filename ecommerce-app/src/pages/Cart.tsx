@@ -83,7 +83,7 @@ function Cart() {
                       width: '90%',
                       color: theme.palette.primary.main,
                       fontWeight: 700,
-                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      fontSize: { sm: 12, lg: 14 },
                     }}
                   >
                     {t('cart.table.product')}
@@ -93,7 +93,7 @@ function Cart() {
                     sx={{
                       color: theme.palette.primary.main,
                       fontWeight: 700,
-                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      fontSize: { xs: 12, lg: 14 },
                     }}
                   >
                     {t('cart.table.price')}
@@ -103,7 +103,7 @@ function Cart() {
                     sx={{
                       color: theme.palette.primary.main,
                       fontWeight: 700,
-                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      fontSize: { xs: 12, lg: 14 },
                     }}
                   >
                     {t('cart.table.quantity')}
@@ -113,7 +113,7 @@ function Cart() {
                     sx={{
                       color: theme.palette.primary.main,
                       fontWeight: 700,
-                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      fontSize: { xs: 12, lg: 14 },
                     }}
                   >
                     {t('cart.table.total')}
@@ -320,7 +320,7 @@ function Cart() {
                       paddingY: '1rem',
                       color: theme.palette.primary.main,
                       fontWeight: 700,
-                      fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                      fontSize: { xs: 12, lg: 14 },
                     }}
                   >
                     {t('cart.checkout.summary')}
@@ -336,7 +336,7 @@ function Cart() {
                       align={i18n.dir() === 'ltr' ? 'left' : 'right'}
                       sx={{
                         color: theme.palette.primary.main,
-                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                        fontSize: { xs: 12, lg: 14 },
                       }}
                     >
                       {t('cart.checkout.subtotal')}
@@ -347,7 +347,7 @@ function Cart() {
                       variant='body1'
                       sx={{
                         fontWeight: 500,
-                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                        fontSize: { xs: 12, lg: 14 },
                         color: theme.palette.primary.main,
                       }}
                     >
@@ -362,7 +362,7 @@ function Cart() {
                       align={i18n.dir() === 'ltr' ? 'left' : 'right'}
                       sx={{
                         color: theme.palette.primary.main,
-                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                        fontSize: { xs: 12, lg: 14 },
                       }}
                     >
                       {t('cart.checkout.shipping')}
@@ -373,7 +373,7 @@ function Cart() {
                       variant='body1'
                       sx={{
                         fontWeight: 500,
-                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                        fontSize: { xs: 12, lg: 14 },
                         color: theme.palette.primary.main,
                       }}
                     >
@@ -388,7 +388,7 @@ function Cart() {
                       align={i18n.dir() === 'ltr' ? 'left' : 'right'}
                       sx={{
                         color: theme.palette.primary.main,
-                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                        fontSize: { xs: 12, lg: 14 },
                       }}
                     >
                       {t('cart.checkout.total')}
@@ -403,7 +403,7 @@ function Cart() {
                       sx={{
                         color: theme.palette.primary.main,
                         fontWeight: 500,
-                        fontSize: { xs: 8, sm: 10, md: 12, lg: 14 },
+                        fontSize: { xs: 12, lg: 14 },
                       }}
                     >
                       ${(cartCtx.totalPrice + 5).toFixed(2)}
@@ -441,7 +441,7 @@ function Cart() {
             <Typography
               variant='subtitle1'
               sx={{
-                fontSize: { xs: 10, sm: 12, md: 14, lg: 16 },
+                fontSize: { xs: 14, lg: 16 },
                 color: theme.palette.primary.main,
               }}
             >
