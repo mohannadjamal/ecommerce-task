@@ -4,8 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 
 import { ThemeProvider } from '@mui/material';
 
-
-
 import Homepage from './pages/Homepage';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
@@ -14,6 +12,7 @@ import Newsletter from './components/Newsletter/Newsletter';
 import Footer from './components/Footer/Footer';
 import Banner from './components/Banner/Banner';
 import MainNavigation from './components/MainNavigation/MainNavigation';
+import NotFound from './components/NotFound/NotFound';
 
 import lightTheme from './theme/light-theme';
 import darkTheme from './theme/dark-theme';
@@ -45,6 +44,7 @@ function App() {
         <Route path='/' element={<Homepage />} />
         <Route path='/product/:productId' element={<ProductDetails />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       <Newsletter />
       <Footer />

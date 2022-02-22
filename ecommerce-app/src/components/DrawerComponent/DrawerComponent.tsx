@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -7,8 +9,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  Link,
   IconButton,
+  Box,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -26,8 +28,9 @@ function DrawerComponent() {
         <List sx={{ backgroundColor: '#1c252e', height: 1 }}>
           <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-              <Link
-                href='/'
+              <Box
+                component={Link}
+                to='/'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -35,13 +38,14 @@ function DrawerComponent() {
                 }}
               >
                 {t('nav.home')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
           <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-              <Link
-                href='/shop'
+              <Box
+                component={Link}
+                to='/shop'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -49,13 +53,14 @@ function DrawerComponent() {
                 }}
               >
                 {t('nav.shop')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
           <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-              <Link
-                href='/pages'
+              <Box
+                component={Link}
+                to='/pages'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -63,13 +68,14 @@ function DrawerComponent() {
                 }}
               >
                 {t('nav.pages')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
           <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-              <Link
-                href='/lookbook'
+              <Box
+                component={Link}
+                to='/lookbook'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -77,13 +83,14 @@ function DrawerComponent() {
                 }}
               >
                 {t('nav.lookbook')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
           <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-              <Link
-                href='/brands'
+              <Box
+                component={Link}
+                to='/brands'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -91,7 +98,7 @@ function DrawerComponent() {
                 }}
               >
                 {t('nav.brands')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
         </List>

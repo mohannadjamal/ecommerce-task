@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
 import cookies from 'js-cookie';
 
@@ -8,7 +10,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  Link,
   useTheme,
   useMediaQuery,
   Select,
@@ -67,8 +68,9 @@ function MainNavigation() {
         >
           <ListItem>
             <ListItemText>
-              <Link
-                href='/'
+              <Box
+                component={Link}
+                to='/'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -76,13 +78,14 @@ function MainNavigation() {
                 }}
               >
                 {t('nav.home')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText>
-              <Link
-                href='/shop'
+              <Box
+                component={Link}
+                to='/shop'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -90,13 +93,14 @@ function MainNavigation() {
                 }}
               >
                 {t('nav.shop')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText>
-              <Link
-                href='/pages'
+              <Box
+                component={Link}
+                to='/pages'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -104,13 +108,14 @@ function MainNavigation() {
                 }}
               >
                 {t('nav.pages')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText>
-              <Link
-                href='/lookbook'
+              <Box
+                component={Link}
+                to='/lookbook'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -118,13 +123,14 @@ function MainNavigation() {
                 }}
               >
                 {t('nav.lookbook')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText>
-              <Link
-                href='/brands'
+              <Box
+                component={Link}
+                to='/brands'
                 sx={{
                   textDecoration: 'none',
                   fontWeight: 700,
@@ -132,7 +138,7 @@ function MainNavigation() {
                 }}
               >
                 {t('nav.brands')}
-              </Link>
+              </Box>
             </ListItemText>
           </ListItem>
         </List>

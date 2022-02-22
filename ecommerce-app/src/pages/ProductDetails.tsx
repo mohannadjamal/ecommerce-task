@@ -23,6 +23,7 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import CartContext from '../store/cart-context';
+import NotFound from '../components/NotFound/NotFound';
 
 type Product = {
   id: string | undefined;
@@ -95,6 +96,8 @@ function ProductDetails() {
     title: '',
     images: [],
   });
+  const [nullData, setNullData] = useState(false);
+
   /*
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -117,6 +120,9 @@ function ProductDetails() {
   }, [productId]);
 
 */
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { isLoading: isLoadingProduct, refetch: getProduct } = useQuery(
     'query-product',
     async () => {
@@ -135,10 +141,14 @@ function ProductDetails() {
           headers: res.headers,
           data: res.data,
         };
-        const product: Product = result.data;
-        product.id = productId;
-        setLoadedProduct(product);
-        setCurrentImage(0);
+        if (result.data !== null) {
+          const product: Product = result.data;
+          product.id = productId;
+          setLoadedProduct(product);
+          setCurrentImage(0);
+        } else {
+          setNullData(true);
+        }
       },
       onError: (err: { response: { data: any } }) => {
         console.log(err.response?.data || err);
@@ -177,6 +187,8 @@ function ProductDetails() {
   };
 
   if (isLoadingProduct) return <Box></Box>;
+  if (nullData) return <NotFound />;
+
   return (
     <Box
       sx={{
@@ -470,7 +482,7 @@ function ProductDetails() {
           </Typography>
         </Grid>
       </Grid>
-      <Box sx={{ width: '100%', padding: { md: '5%', lg: '10%' } }}>
+      <Box sx={{ width: '100%', padding: { md: '5%', lg: '15%' } }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
             value={value}

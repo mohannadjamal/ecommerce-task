@@ -1,15 +1,10 @@
 import { useContext } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
 
-import {
-  IconButton,
-  Badge,
-  Box,
-  Typography,
-  Link,
-  useTheme,
-} from '@mui/material';
+import { IconButton, Badge, Box, Typography, useTheme } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -40,7 +35,7 @@ function Banner() {
         padding: { xs: ' 0 0.5rem', md: '0 10%' },
       }}
     >
-      <Link href='/'>
+      <Link to='/'>
         <Box
           component='img'
           src={themeCtx.currentMode === 'light' ? logo : logoDark}
@@ -86,7 +81,7 @@ function Banner() {
             />
           </Badge>
         </IconButton>
-        <IconButton component={Link} href='/cart'>
+        <IconButton component={Link} to='/cart'>
           <Badge badgeContent={cartCtx.totalProducts} color='error' showZero>
             <ShoppingCartOutlinedIcon
               sx={{

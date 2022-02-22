@@ -1,6 +1,9 @@
-import { Box, Divider, Grid, Typography, useTheme } from '@mui/material';
 import { useContext } from 'react';
+
 import { useTranslation } from 'react-i18next';
+
+import { Box, Divider, Grid, Typography, useTheme } from '@mui/material';
+
 import ThemeContext from '../../theme/theme-context';
 
 import GroupedProductsItem from './GroupedProductsItem';
@@ -11,7 +14,6 @@ type Prop = {
 };
 
 function GroupedProducts(props: Prop) {
-  
   const themeCtx = useContext(ThemeContext);
   const theme = useTheme();
 
