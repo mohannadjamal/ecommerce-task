@@ -1,15 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
 
-const CartContext = createContext({
-  products: [] as any[],
-  totalProducts: 0,
-  totalPrice: 0,
-  addProduct: (product: any): any => {},
-  removeProduct: (productId: string): any => {},
-  incrementAmount: (productId: string): any => {},
-  decrementAmount: (productId: string): any => {},
-});
-
 type Prop = {
   children?: JSX.Element;
 };
@@ -23,6 +13,16 @@ type CartItem = {
   title: string;
   amount: number;
 };
+const CartContext = createContext({
+  products: [] as CartItem[],
+  totalProducts: 0,
+  totalPrice: 0,
+  addProduct: (product: any): any => {},
+  removeProduct: (productId: string): any => {},
+  incrementAmount: (productId: string): any => {},
+  decrementAmount: (productId: string): any => {},
+});
+
 export function CartContextProvider(props: Prop) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 

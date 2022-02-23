@@ -75,7 +75,7 @@ function GroupedProductsItem(props: Prop) {
           )}
           <CardMedia
             component='img'
-            image={props.image}
+            src={props.image}
             alt={props.title}
             sx={{
               ...(i18n.dir() === 'ltr' && {

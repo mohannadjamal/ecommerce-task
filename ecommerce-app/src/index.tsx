@@ -16,6 +16,7 @@ import './index.scss';
 
 import { CartContextProvider } from './store/cart-context';
 import { ThemeContextProvider } from './theme/theme-context';
+import { ProductsContextProvider } from './store/products-context';
 
 i18next
   .use(HttpApi)
@@ -37,18 +38,26 @@ i18next
   });
 const loadingMarkup = <></>;
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 ReactDOM.render(
   <Suspense fallback={loadingMarkup}>
     <QueryClientProvider client={queryClient}>
-      <ThemeContextProvider>
-        <CartContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </CartContextProvider>
-      </ThemeContextProvider>
+      <ProductsContextProvider>
+        <ThemeContextProvider>
+          <CartContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </CartContextProvider>
+        </ThemeContextProvider>
+      </ProductsContextProvider>
     </QueryClientProvider>
   </Suspense>,
   document.getElementById('root')

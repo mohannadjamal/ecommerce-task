@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react';
-
-import { useQuery } from 'react-query';
-import apiClient from '../http-common';
+import { useContext } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 
 import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
 import GroupedProducts from '../components/GroupedProducts/GroupedProducts';
+import ImageSlider from '../components/ImageSlider/ImageSlider';
+import ProductsContext from '../store/products-context';
 
 import ad from '../images/JBLAd.png';
 import startupSocks from '../images/startupsocks.png';
@@ -17,15 +22,14 @@ import swatch from '../images/swatch.png';
 import asus from '../images/asus.png';
 import dell from '../images/dell.png';
 import toshiba from '../images/toshiba.png';
-import ImageSlider from '../components/ImageSlider/ImageSlider';
 
 const images = [startupSocks, hp, swatch, asus, dell, toshiba];
 
 function Homepage() {
   const { t } = useTranslation();
   const theme = useTheme();
-
-  const [loadedProducts, setLoadedProducts] = useState<any[]>([]);
+  //const [loadedProducts, setLoadedProducts] = useState<any[]>([]);
+  const productsCtx = useContext(ProductsContext);
 
   /* 
    const [isLoading, setIsLoading] = useState(true);
@@ -53,14 +57,14 @@ function Homepage() {
       });
   }, []);
   */
-
-  const { isLoading: isLoadingProducts, refetch: getAllProducts } = useQuery(
+  /*
+  const { isFetching } = useQuery(
     'query-products',
     async () => {
       return await apiClient.get('/product.json');
     },
     {
-      enabled: false,
+      enabled: true,
       onSuccess: (res: {
         status: string;
         statusText: string;
@@ -88,17 +92,14 @@ function Homepage() {
       },
     }
   );
-  useEffect(() => {
-    getAllProducts();
-  }, [isLoadingProducts, getAllProducts]);
-
-  const laptopProducts = loadedProducts.filter(
+*/
+  const laptopProducts = productsCtx.products.filter(
     (product) => product.catalog === 'Laptop'
   );
-  const audioProducts = loadedProducts.filter(
+  const audioProducts = productsCtx.products.filter(
     (product) => product.catalog === 'Audio'
   );
-  const cameraProducts = loadedProducts.filter(
+  const cameraProducts = productsCtx.products.filter(
     (product) => product.catalog === 'Camera'
   );
   const sm = useMediaQuery(theme.breakpoints.down('sm'));
@@ -118,7 +119,20 @@ function Homepage() {
   const firstCarouselItems = firstCarouselQuery();
   const secondCarouselItems = secondCarouselQuery();
 
-  if (isLoadingProducts) return <Box></Box>;
+  if (productsCtx.isFetchingProducts)
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+
   return (
     <Box
       sx={{

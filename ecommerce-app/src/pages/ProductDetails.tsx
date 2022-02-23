@@ -18,6 +18,7 @@ import {
   Tabs,
   Tab,
   useTheme,
+  CircularProgress,
 } from '@mui/material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -123,13 +124,13 @@ function ProductDetails() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const { isLoading: isLoadingProduct, refetch: getProduct } = useQuery(
+  const { isFetching } = useQuery(
     'query-product',
     async () => {
       return await apiClient.get(`/product/${productId}.json`);
     },
     {
-      enabled: false,
+      enabled: true,
       onSuccess: (res: {
         status: string;
         statusText: string;
@@ -145,7 +146,6 @@ function ProductDetails() {
           const product: Product = result.data;
           product.id = productId;
           setLoadedProduct(product);
-          setCurrentImage(0);
         } else {
           setNullData(true);
         }
@@ -155,18 +155,14 @@ function ProductDetails() {
       },
     }
   );
-  useEffect(() => {
-    getProduct();
-  }, [isLoadingProduct, getProduct]);
 
   const [amount, setAmount] = useState(1);
 
-  function handleDecrement() {
+  const handleDecrement = () => {
     if (amount > 1) setAmount(amount - 1);
-  }
-  function handleIncrement() {
-    setAmount(amount + 1);
-  }
+  };
+
+  const handleIncrement = () => setAmount(amount + 1);
 
   const [value, setValue] = useState(0);
 
@@ -185,8 +181,20 @@ function ProductDetails() {
 
     cartCtx.addProduct(newProduct());
   };
+  if (isFetching)
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
 
-  if (isLoadingProduct) return <Box></Box>;
   if (nullData) return <NotFound />;
 
   return (
@@ -219,25 +227,17 @@ function ProductDetails() {
               component='img'
               onClick={() => clickImage(index)}
               src={image}
-              sx={
-                currentImage === index
-                  ? {
-                      border: 'thin solid',
-                      borderColor: theme.palette.secondary.main,
-                      height: { xs: 40, sm: 40, md: 75, lg: 150 },
-                      width: { xs: 40, sm: 40, md: 75, lg: 150 },
-                      objectFit: 'contain',
-                      borderRadius: 0,
-                    }
-                  : {
-                      border: 'thin solid',
-                      borderColor: theme.palette.grey[400],
-                      height: { xs: 40, sm: 40, md: 75, lg: 150 },
-                      width: { xs: 40, sm: 40, md: 75, lg: 150 },
-                      objectFit: 'contain',
-                      borderRadius: 0,
-                    }
-              }
+              sx={{
+                border: 'thin solid',
+                borderColor:
+                  currentImage === index
+                    ? theme.palette.secondary.main
+                    : theme.palette.grey[400],
+                height: { xs: 40, sm: 40, md: 75, lg: 150 },
+                width: { xs: 40, sm: 40, md: 75, lg: 150 },
+                objectFit: 'contain',
+                borderRadius: 0,
+              }}
             />
           ))}
         </Grid>

@@ -19,6 +19,7 @@ import darkTheme from './theme/dark-theme';
 import ThemeContext from './theme/theme-context';
 
 import './App.scss';
+import Shop from './pages/Shop';
 
 function App() {
   const themeCtx = useContext(ThemeContext);
@@ -44,6 +45,7 @@ function App() {
         <Route path='/' element={<Homepage />} />
         <Route path='/product/:productId' element={<ProductDetails />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/shop' element={<Shop />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Newsletter />
