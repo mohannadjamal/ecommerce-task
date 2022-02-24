@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -14,7 +14,10 @@ import {
   Typography,
   useTheme,
   TextField,
+  IconButton,
+  Paper,
 } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 import ProductsContext from '../store/products-context';
 
@@ -22,7 +25,7 @@ function Shop() {
   const [searchTerm, setSearchTerm] = useState('');
   const theme = useTheme();
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const productsCtx = useContext(ProductsContext);
 
@@ -47,6 +50,7 @@ function Shop() {
         term.catalog.toLowerCase().includes(searchTerm.toLowerCase())
       )
         return term;
+      return null;
     });
   };
   const searchArray = searchFilter(productsCtx.products);
@@ -57,29 +61,44 @@ function Shop() {
         backgroundColor: theme.palette.background.default,
         display: 'flex',
         flexDirection: 'column',
+        minHeight: '50vh',
+        rowGap: '3rem',
       }}
     >
       <Typography
         variant='h3'
-        sx={{ marginBottom: '3rem', alignSelf: 'center' }}
+        sx={{
+          alignSelf: 'center',
+          color: theme.palette.primary.main,
+        }}
       >
-        All Products
+        {t('shop.title')}
       </Typography>
-      <Box component='form' sx={{ marginBottom: '1rem', width: 1 }}>
-        <TextField
-          size='small'
-          placeholder='Search for product'
-          onChange={(event) => setSearchTerm(event.target.value)}
-          sx={{
-            '& fieldset': {
-              borderRadius: '0px',
-            },
-            width: { xs: 1, sm: 0.5, md: 0.4, lg: 0.2 },
-          }}
-        />
-      </Box>
 
       <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Paper
+            component='form'
+            sx={{ marginBottom: '1rem', display: 'flex', position: 'relative' }}
+          >
+            <IconButton>
+              <SearchIcon />
+            </IconButton>
+            <TextField
+              size='small'
+              placeholder={t('shop.search-placeholder')}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              sx={{
+                '& fieldset': {
+                  borderRadius: '0px',
+                  border: 'none',
+                },
+                width: 1,
+              }}
+            />
+          </Paper>
+        </Grid>
+        <Grid item xs={0} sm={6} md={8} lg={9}></Grid>
         {searchArray.length > 0 ? (
           searchArray.map((item) => (
             <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
@@ -200,7 +219,7 @@ function Shop() {
           ))
         ) : (
           <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Typography variant='body1'>No products found!</Typography>
+            <Typography variant='body1'>{t('shop.search-notfound')}</Typography>
           </Grid>
         )}
       </Grid>
