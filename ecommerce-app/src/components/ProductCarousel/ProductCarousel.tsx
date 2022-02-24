@@ -79,8 +79,7 @@ function ProductCarousel(props: Prop) {
           width: 1,
           margin: 0,
           paddingTop: '1rem',
-          paddingBottom: '0.5rem',
-
+          paddingBottom: '0.5rem', 
           '&::after': {
             content: '""',
             position: 'absolute',
