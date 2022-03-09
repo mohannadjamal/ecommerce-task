@@ -51,17 +51,16 @@ function ProductCarousel(props: Prop) {
   };
 
   useEffect(() => {
-    let paginateInterval: NodeJS.Timer;
+    let paginateTimeout: NodeJS.Timer;
     if (currentPage !== pageNumbers[pageNumbers.length - 1]) {
-      paginateInterval = setInterval(() => {
+      paginateTimeout = setTimeout(() => {
         paginate(currentPage + 1);
       }, 5000);
     } else {
-      paginateInterval = setInterval(() => {
+      paginateTimeout = setTimeout(() => {
         paginate(1);
       }, 5000);
     }
-    return () => clearInterval(paginateInterval);
   });
 
   return (
@@ -79,7 +78,7 @@ function ProductCarousel(props: Prop) {
           width: 1,
           margin: 0,
           paddingTop: '1rem',
-          paddingBottom: '0.5rem', 
+          paddingBottom: '0.5rem',
           '&::after': {
             content: '""',
             position: 'absolute',

@@ -13,17 +13,16 @@ function ImageSlider(props: Prop) {
     setCurrentItem(itemNumber);
   };
   useEffect(() => {
-    let slideInterval: NodeJS.Timeout;
+    let slideTimeout: NodeJS.Timeout;
     if (currentItem !== props.images.length - 1) {
-      slideInterval = setInterval(() => {
+      slideTimeout = setTimeout(() => {
         slide(currentItem + 1);
       }, 5000);
     } else {
-      slideInterval = setInterval(() => {
+      slideTimeout = setTimeout(() => {
         slide(0);
       }, 5000);
     }
-    return () => clearInterval(slideInterval);
   });
 
   return (
